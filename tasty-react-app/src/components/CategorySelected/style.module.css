@@ -1,0 +1,28 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+}
+.container {
+  padding-top: 50px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 70px;
+  row-gap: 40px;
+  margin-bottom: 50px;
+}
+
+.wrapper {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+.darkContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px 15px;
+  color: white;
+}

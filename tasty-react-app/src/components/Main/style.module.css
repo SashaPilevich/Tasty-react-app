@@ -1,0 +1,35 @@
+.container {
+  background-image: url("./back.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 850px;
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  /* font-family: "Kaushan Script", "sans-serif"; */
+  font-family: "Poppins", "sans-serif";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 74px;
+  /* color: #ffffff; */
+  color: rgb(234, 172, 16);
+  margin-bottom: 50px;
+  padding-top: 240px;
+  margin-left: 280px;
+  text-align: left;
+}
+.textAbout {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  /* or 162% */
+  width: 500px;
+  margin-left: 280px;
+  text-align: left;
+  color: #ffffff;
+  margin-bottom: 50px;
+}

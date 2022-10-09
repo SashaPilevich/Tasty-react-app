@@ -1,0 +1,138 @@
+.container,
+.selectedItem {
+  width: 250px;
+  height: 400px;
+  padding: 0 0px 0px 0px;
+  margin-bottom: 30px;
+  margin-right: 20px;
+  /* background-color: #edeade; */
+  background-color: #faf9f6;
+  box-shadow: 1px 1px 5px 2px rgb(92, 64, 51, 0.3);
+  border-radius: 13px;
+  position: relative;
+}
+.selectedItem {
+  height: 510px;
+  padding: 0 0px 10px 0px;
+}
+.container:hover {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: pallette 1s linear 1;
+}
+.selectedItem:hover {
+  cursor: pointer;
+  transition: none;
+  animation: none;
+}
+.image,
+.selectedImage {
+  width: 250px;
+  height: 350px;
+  margin: 0 auto;
+  border-radius: 10px 10px 0px 0px;
+}
+.selectedImage:hover {
+  transition: opacity 2s linear;
+  animation: img 0.7s linear 1;
+}
+.title {
+  font-family: "Raleway";
+  font-weight: 600;
+  font-size: 20px;
+  text-align: left;
+  line-height: 23px;
+  color: #4f4f4f;
+  padding: 0 24px;
+}
+.text,
+.selectedText {
+  height: 30px;
+  font-family: "Raleway";
+  line-height: 19px;
+  text-align: left;
+  padding: 10px 24px 0;
+  color: goldenrod;
+  font-size: 28px;
+  font-weight: 900;
+  text-align: center;
+  margin: 0;
+}
+.selectedText {
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
+  padding: 7px 0px 5px 5px;
+  color: #4f4f4f;
+  margin-bottom: 20px;
+}
+
+.info {
+  display: flex;
+}
+.icons,
+.about {
+  display: flex;
+  flex-direction: column;
+}
+.ico {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 10px;
+  margin-left: 30px;
+  margin-right: 40px;
+}
+.time,
+.kcal {
+  font-family: "Raleway";
+  font-weight: 400;
+  font-size: 14px;
+  text-align: right;
+  line-height: 23px;
+  color: #4f4f4f;
+  margin-bottom: 10px;
+}
+@keyframes pallette {
+  0% {
+    transform: scale(1);
+    transition: all 0.5s ease-in-out;
+  }
+  25% {
+    transform: scale(1.1);
+    transition: all 0.5s ease-in-out;
+  }
+  50% {
+    transform: scale(1.1);
+    transition: all 0.5s ease-in-out;
+  }
+  75% {
+    transform: scale(1.1);
+    transition: all 0.5s ease-in-out;
+  }
+  100% {
+    transform: scale(1);
+    transition: all 0.5s ease-in-out;
+  }
+}
+@keyframes img {
+  0% {
+    opacity: 0.3;
+    transition: all 0.4s ease-in-out;
+  }
+  25% {
+    opacity: 0.5;
+    transition: all 0.6s ease-in-out;
+  }
+  50% {
+    opacity: 0.7;
+    transition: all 0.8s ease-in-out;
+  }
+  75% {
+    opacity: 0.9;
+    transition: all 0.9s ease-in-out;
+  }
+  100% {
+    opacity: 1;
+    transition: all 1s ease-in-out;
+  }
+}

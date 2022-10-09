@@ -1,0 +1,15 @@
+.container {
+  width: 1440px;
+  height: 1157px;
+  padding: 20px 15px;
+}
+/* .wrapper {
+  display: flex;
+} */
+.darkContainer {
+  width: 1440px;
+  height: 1157px;
+  background: black;
+  border-radius: 25px;
+  padding: 20px 15px;
+}
