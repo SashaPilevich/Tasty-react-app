@@ -54,13 +54,6 @@ export const ItemOfCategory = (props: IProps) => {
               <span className={style.kcal}>{props.kcal}</span>
             </div>
           </div>
-          <Button
-            label={"Готовить"}
-            onClick={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-            type="btnShowMore"
-          />
         </>
       ) : (
         ""

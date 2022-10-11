@@ -11,12 +11,9 @@
 .tabContainer {
   display: flex;
   width: 200px;
-
   margin-left: 10px;
 }
-/* .tabContainer:not(:last-child) {
-  border-right: 1px solid gray;
-} */
+
 .ico {
   width: 32px;
   height: 32px;

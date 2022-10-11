@@ -12,7 +12,6 @@ export const CategorySelected = (props: IProps) => {
   const navigate = useNavigate();
   const backToAllPost = () => {
     navigate("/category");
-    // setShowLoadMore(true);
   };
   return (
     <div className={style.mainContainer}>
@@ -30,7 +29,7 @@ export const CategorySelected = (props: IProps) => {
               {/* //с помощью этой функции сохраняется и передаётся нужный id
               //clickPost вызовет onClickPost и он отработает как
               navigateToFullPost */}
-              <div className={style.wrapper} onClick={clickPost}>
+              <div className={style.wrapper}>
                 <ItemOfCategory
                   isSelected={true}
                   isCategory={true}
@@ -40,6 +39,11 @@ export const CategorySelected = (props: IProps) => {
                   title={item.title}
                   time={item.time}
                   kcal={item.kcal}
+                />
+                <Button
+                  label={"Готовить"}
+                  onClick={clickPost}
+                  type="btnShowMore"
                 />
               </div>
             </>
