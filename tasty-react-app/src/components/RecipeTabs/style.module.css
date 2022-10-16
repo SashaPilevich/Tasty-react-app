@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  /* background-color: goldenrod; */
+  width: 632px;
+  height: 40px;
+  margin-left: 70px;
+  border-radius: 2px;
+  border: 1px solid gray;
+  margin-top: 50px;
+}
+.tabContainer {
+  display: flex;
+  width: 200px;
+  margin-left: 10px;
+}
+
+.ico {
+  width: 32px;
+  height: 32px;
+  margin-right: 0px;
+  margin-top: 5px;
+}

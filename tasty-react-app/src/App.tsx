@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createContext, useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+import "./App.css";
+import { RootRouter } from "./router";
+
+export const Context = createContext<{
+  isDark: boolean;
+  setIsDark: (value: boolean) => void;
+}>({
+  isDark: false,
+  setIsDark: () => {},
+});
 
 function App() {
+  const [isDark, setIsDark] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <BrowserRouter>
+        <Context.Provider
+          value={{
+            isDark: isDark,
+            setIsDark: setIsDark,
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          <RootRouter />
+        </Context.Provider>
+      </BrowserRouter>
     </div>
   );
 }
