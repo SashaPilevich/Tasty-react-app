@@ -13,6 +13,7 @@ import { ResetPassword } from "../pages/ResetPassword";
 import { ConfirmPassword } from "../pages/ConfirmPassword";
 import { SavedRecipe } from "../components/SavedRecipe";
 import { ShoppingList } from "../components/ShoppingList";
+import { Error } from "../pages/Error";
 
 export const RootRouter = () => {
   return (
@@ -35,6 +36,7 @@ export const RootRouter = () => {
         path="/password/reset/confirm/:uid/:token"
         element={<ConfirmPassword />}
       />
+      <Route path="*" element={<Error />} />
     </Routes>
   );
 };
