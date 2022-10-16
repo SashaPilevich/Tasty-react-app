@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  margin-bottom: 30px;
+  height: 1200px;
+}
+.inputContainer {
+  margin-bottom: 20px;
+}
+.inputPasswordShow {
+  margin-bottom: 20px;
+  position: relative;
+}
+.inputPasswordShow::before {
+  content: "";
+  position: absolute;
+  top: 70px;
+  right: 30px;
+  margin: auto 0;
+  width: 25px;
+  height: 25px;
+  background: url("show.png") no-repeat;
+  background-position: right;
+  background-size: cover;
+  cursor: pointer;
+}
+.inputPasswordClose {
+  margin-bottom: 20px;
+  position: relative;
+}
+.inputPasswordClose::before {
+  content: "";
+  position: absolute;
+  top: 70px;
+  right: 30px;
+  margin: auto 0;
+  width: 25px;
+  height: 25px;
+  background: url("close.png") no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.text,
+.textError,
+.darkText {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 134%;
+  letter-spacing: 0.03em;
+  color: #254050;
+}
+.darkText {
+  color: white;
+}
+.linkLogin,
+.darkLinkLogin {
+  text-decoration: none;
+  font-family: "Raleway";
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 134%;
+  letter-spacing: 0.03em;
+  color: goldenrod;
+}
+.darkLinkLogin {
+  color: goldenrod;
+}
+.textError,
+.darkTextError {
+  color: #254050;
+  font-weight: 700;
+  /* margin-bottom: 40px; */
+}
+.darkTextError {
+  color: goldenrod;
+}

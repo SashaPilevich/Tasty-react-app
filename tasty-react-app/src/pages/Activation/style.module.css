@@ -1,0 +1,15 @@
+.textActivation,
+.darkTextActivation {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 134%;
+  text-align: center;
+  letter-spacing: 0.03em;
+  color: #254050;
+  margin: 10px;
+}
+.darkTextActivation {
+  color: white;
+}

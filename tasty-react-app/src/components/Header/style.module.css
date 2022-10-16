@@ -138,3 +138,7 @@ img {
 .hiddenNav {
   display: none;
 }
+.visibleNavDark {
+  background-color: #254050;
+  border-bottom: 2px solid goldenrod;
+}

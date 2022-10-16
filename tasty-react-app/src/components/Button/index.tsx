@@ -1,10 +1,10 @@
-import { useContext } from "react";
+import { MouseEventHandler, useContext } from "react";
 import { Context } from "../../App";
 import style from "./style.module.css";
 
 interface IButton {
   label: string;
-  onClick: () => void;
+  onClick: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   type:
     | "logOut"
@@ -14,7 +14,8 @@ interface IButton {
     | "btnShowMore"
     | "btnTabActive"
     | "btnTabUnactive"
-    | "btnCategory";
+    | "btnCategory"
+    | "btnDelete";
   className?: string;
 }
 
@@ -28,6 +29,7 @@ const getButtonStyle = (
     | "btnTabActive"
     | "btnTabUnactive"
     | "btnCategory"
+    | "btnDelete"
 ) => {
   if (type === "logOut") {
     return style.logOut;
@@ -52,6 +54,9 @@ const getButtonStyle = (
   }
   if (type === "btnCategory") {
     return style.btnCategory;
+  }
+  if (type === "btnDelete") {
+    return style.btnDelete;
   }
 };
 

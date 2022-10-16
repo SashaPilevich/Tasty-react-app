@@ -4,9 +4,12 @@ import { picture1 } from "../../assets/";
 import { ReactEventHandler, useState } from "react";
 import { IRecipe } from "../../types/post";
 import { Button } from "../Button";
-import { RecipeTabs } from "../RecipeTabs";
 
-export const Recipe = (props: IRecipe) => {
+interface IProps extends IRecipe {
+  onClickDelete?: (ingr: string) => void;
+}
+
+export const Recipe = (props: IProps) => {
   const [image, setImage] = useState(props.name);
   const [ingredients, setIngredients] = useState(props.ingredients);
   const [instructions, setInstructions] = useState(props.instructions);
@@ -15,6 +18,16 @@ export const Recipe = (props: IRecipe) => {
   const handleError: ReactEventHandler<HTMLImageElement> = () => {
     setImage(picture1);
   };
+  const clickDelete = (ingr: string) => {
+    const newList: string[] | undefined = ingredients?.filter((item) => {
+      if (item === ingr) {
+        return false;
+      }
+      return true;
+    });
+    setIngredients(newList);
+  };
+
   return (
     <>
       <h2 className={style.recipeTitle}>{props.title}</h2>
@@ -28,31 +41,35 @@ export const Recipe = (props: IRecipe) => {
           />
         ) : (
           ""
-          // <img className={style.recipeImage} src={picture1} alt={props.title} />
         )}
 
         {ingredients ? (
           <div className={style.containerIngredients}>
             <div className={style.ingredients}>
-              {ingredients ? (
-                <h3 className={style.titleIngredients}>Ингредиенты</h3>
-              ) : (
-                ""
-              )}
-              {ingredients
+              {props.onClickDelete
                 ? ingredients.map((item) => {
-                    return <p className={style.itemIngredients}>{item}</p>;
+                    const deleteItem = () => {
+                      clickDelete(item);
+                    };
+
+                    return (
+                      <div className={style.controlIngredient}>
+                        <p className={style.itemIngredientsInShop}>{item}</p>
+                        <Button
+                          label="X"
+                          onClick={deleteItem}
+                          type="btnDelete"
+                        />
+                      </div>
+                    );
                   })
-                : ""}
-              {ingredients ? (
-                <Button
-                  label={"Add shopping list"}
-                  onClick={() => {}}
-                  type="btnShop"
-                />
-              ) : (
-                ""
-              )}
+                : ingredients?.map((item) => {
+                    return (
+                      <div className={style.ingredients}>
+                        <p className={style.itemIngredients}>{item}</p>
+                      </div>
+                    );
+                  })}
             </div>
             <div className={style.quantity}>
               {quantity

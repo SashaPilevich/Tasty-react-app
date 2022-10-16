@@ -2,8 +2,13 @@
   display: flex;
   margin-left: 100px;
 }
+.container {
+  display: flex;
+  align-items: center;
+}
 .postsPanel {
   display: flex;
+  flex-direction: column;
   font-family: "Raleway";
   font-style: normal;
   font-weight: 500;
@@ -11,18 +16,15 @@
   line-height: 29px;
   letter-spacing: 0.05em;
   color: #ffffff;
-  padding-top: 135px;
+  padding-top: 115px;
+  margin-right: 250px;
+  margin-left: 50px;
 }
-.allPosts {
-  width: 166px;
-  margin-right: 15px;
-}
+.allPosts,
 .privatePosts {
-  display: flex;
-  flex-direction: column;
-  width: 273px;
-  margin-right: 205px;
+  margin-bottom: 40px;
 }
+
 a {
   margin-bottom: 30px;
   text-decoration: none;
@@ -69,7 +71,7 @@ li {
   margin-right: 495px;
 }
 .logoutImage {
-  padding-top: 50px;
+  padding-top: 70px;
 }
 .logOut {
   width: 120px;
@@ -86,11 +88,12 @@ li {
   letter-spacing: 0.05em;
   color: #ffffff;
   text-align: left;
-  padding-top: 135px;
+  padding-top: 100px;
   margin-bottom: 55px;
 }
 .loginToggle {
   margin-right: 110px;
+  padding-top: 70px;
 }
 .dark {
   padding-top: 110px;

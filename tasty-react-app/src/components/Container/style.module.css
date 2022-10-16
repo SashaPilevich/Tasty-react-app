@@ -1,8 +1,8 @@
 .container {
   background-color: #f9f6ee;
-  padding: 0 0 100px 0;
-  /* background-color: #072e39; */
+  padding: 0 0 350px 0;
 }
 .darkContainer {
-  background: black;
+  background: #254050;
+  padding: 0 0 350px 0;
 }

@@ -1,40 +1,39 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { fetchSelectedCategory } from "../../api/recipe";
 import { Context } from "../../App";
 import { CategorySelected } from "../../components/CategorySelected";
 import { Container } from "../../components/Container";
 import { Header } from "../../components/Header";
+import { UsersTabs } from "../../components/UsersTab";
 import { IPost } from "../../types/post";
+import { useSelector, useDispatch } from "react-redux";
+import { TState } from "../../redux/store";
+import { setSelectedCategory } from "../../redux/actions/category";
 
 export const SelectedCategory = () => {
-  const { isDark } = useContext(Context);
-  const [posts, setPosts] = useState<IPost[]>([]);
-  const navigate = useNavigate();
-  //принимает в себя id айтема из PostList (когда проходимся map) по которому кликнули
-  const navigateToFullPost = (id: number) => {
-    //тут мы передаём этот id в url и так происходит переход на selectedpost и показывает нужный пост по id
-    navigate(`/selected_recipe/${id}`);
-  };
-
-  const params: any = useParams(); //показывает какие параметры переданы через url-т.е. то что в роуте написано после двоеточия
-
+  const selectedCategory = useSelector(
+    (state: TState) => state.categoryReducer.selectedCategory
+  );
+  const dispatch = useDispatch();
+  const params: any = useParams();
   useEffect(() => {
-    const promise = fetch(
-      `https://62b0c0c4e460b79df04c901b.mockapi.io/api/selected/${params.id}` //тут запрашиваем всю инфу по переданному id из item и потом navigatetofullpost
-    );
-    promise
-      .then((response) => {
-        return response.json();
-      })
-      .then((values) => {
-        setPosts(values[params.id]);
-      });
+    fetchSelectedCategory(params.id).then((values) => {
+      dispatch(setSelectedCategory(values[params.id]));
+    });
   }, []);
+  // const [selectedCategory, setSelectedCategory] = useState<IPost[]>([]);
+
+  // useEffect(() => {
+  //   fetchSelectedCategory(params.id).then((values) => {
+  //     setSelectedCategory(values[params.id]);
+  //   });
+  // }, []);
 
   return (
     <Container>
       <Header />
-      <CategorySelected posts={posts} onClickPost={navigateToFullPost} />
+      <CategorySelected posts={selectedCategory} />
     </Container>
   );
 };

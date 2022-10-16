@@ -7,30 +7,44 @@
   display: flex;
   flex-direction: column;
 }
-.quantity {
-  padding-top: 70px;
-}
+/* .quantity {
+  padding-top: 30px;
+} */
 .titleIngredients {
   font-family: "Raleway";
   font-weight: 500;
   font-size: 22px;
   color: gray;
   text-align: left;
-  margin-bottom: 20px;
+  margin: 0px;
 }
 .itemIngredients,
-.itemQuantity {
+.itemQuantity,
+.itemIngredientsInShop {
   font-family: "Raleway";
   font-weight: 400;
   font-size: 18px;
   color: black;
   text-align: left;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
+}
+.itemIngredientsInShop {
+  margin: 0px;
+}
+.controlIngredient {
+  margin-left: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 400px;
+  height: 50px;
+  border: 1px solid gray;
+  margin-bottom: 10px;
 }
 .itemQuantity {
   color: gray;
   font-size: 16px;
-  margin-bottom: 25px;
+  margin-bottom: 19px;
 }
 .instructionsContainer {
   display: flex;

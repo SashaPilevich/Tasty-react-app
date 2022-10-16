@@ -5,6 +5,7 @@ import { NavBar } from "../NavBar";
 import { Context } from "../../App";
 
 export const Header = () => {
+  const { isDark } = useContext(Context);
   const [clickMenu, setClickMenu] = useState(false);
   const [headerStyle, setHeaderStyle] = useState("header");
   const [menuStyle, setMenuStyle] = useState("visible");
@@ -42,7 +43,11 @@ export const Header = () => {
         </div>
       </div>
       {clickMenu ? (
-        <div className={style[navStyle]}>
+        <div
+          className={`${style[navStyle]} ${
+            isDark ? style.visibleNavDark : style[navStyle]
+          } }`}
+        >
           <NavBar onClose={closeNavBar} />
         </div>
       ) : null}
