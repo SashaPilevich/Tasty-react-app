@@ -5,12 +5,12 @@ import { Container } from "../Container";
 import { Header } from "../Header";
 
 export const SavedRecipe = () => {
-  const recipe = useSelector(
-    (state: TState) => state.categoryReducer.savedRecipe
+  const recipes = useSelector(
+    (state: TState) => state.categoryReducer.savedRecipes
   );
   return (
     <Container>
-      <CategorySelected posts={recipe} isLikeSave={true} />;
+      <CategorySelected posts={recipes} isLikeSave={true} />;
     </Container>
   );
 };

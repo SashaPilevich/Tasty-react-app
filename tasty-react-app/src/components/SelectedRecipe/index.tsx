@@ -44,7 +44,7 @@ export const SelectedRecipe = () => {
                     quantity={item.quantity}
                   />
                   <Button
-                    label={"Add shopping list"}
+                    label={"Add to shopping list"}
                     onClick={clickPost}
                     type="btnShop"
                   />

@@ -22,12 +22,12 @@ export const setIsLoading = (isLoading: boolean) => {
     isLoading,
   };
 };
-export const likeRecipe = (recipe: IPost) => {
-  return { type: ACTIONS.SET_LIKED_RECIPE, recipe };
+export const likeRecipes = (recipes: IPost) => {
+  return { type: ACTIONS.SET_LIKED_RECIPE, recipes };
 };
 
-export const saveRecipe = (recipe: IPost) => {
-  return { type: ACTIONS.SET_SAVE_RECIPE, recipe };
+export const saveRecipes = (recipes: IPost) => {
+  return { type: ACTIONS.SET_SAVE_RECIPE, recipes };
 };
 
 export const loadAppCategories = () => {

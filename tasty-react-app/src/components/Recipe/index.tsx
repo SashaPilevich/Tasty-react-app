@@ -1,9 +1,10 @@
 import style from "./style.module.css";
 import { picture1 } from "../../assets/";
-
 import { ReactEventHandler, useState } from "react";
 import { IRecipe } from "../../types/post";
 import { Button } from "../Button";
+import { useNavigate } from "react-router-dom";
+import { NotificationManager } from "react-notifications";
 
 interface IProps extends IRecipe {
   onClickDelete?: (ingr: string) => void;
@@ -15,17 +16,33 @@ export const Recipe = (props: IProps) => {
   const [instructions, setInstructions] = useState(props.instructions);
   const [video, setVideo] = useState(props.video);
   const [quantity, setQuantity] = useState(props.quantity);
+  const navigate = useNavigate();
   const handleError: ReactEventHandler<HTMLImageElement> = () => {
     setImage(picture1);
   };
-  const clickDelete = (ingr: string) => {
+  const clickDelete = (ingredient: string) => {
     const newList: string[] | undefined = ingredients?.filter((item) => {
-      if (item === ingr) {
-        return false;
-      }
-      return true;
+      return item !== ingredient;
     });
     setIngredients(newList);
+  };
+
+  let myShopList: string[] = [];
+  let shopList = localStorage.getItem("shopList");
+  if (shopList) {
+    myShopList = JSON.parse(shopList);
+  }
+
+  const clickSave = () => {
+    ingredients?.map((item) => {
+      myShopList.push(item);
+      return myShopList;
+    });
+    NotificationManager.success(
+      "Все ингредиенты сохранены в вашем шоппинг листе"
+    );
+    navigate("/myshoplist");
+    localStorage.setItem("shopList", JSON.stringify(myShopList));
   };
 
   return (
@@ -46,8 +63,9 @@ export const Recipe = (props: IProps) => {
         {ingredients ? (
           <div className={style.containerIngredients}>
             <div className={style.ingredients}>
-              {props.onClickDelete
-                ? ingredients.map((item) => {
+              {props.onClickDelete ? (
+                <>
+                  {ingredients.map((item) => {
                     const deleteItem = () => {
                       clickDelete(item);
                     };
@@ -62,14 +80,24 @@ export const Recipe = (props: IProps) => {
                         />
                       </div>
                     );
-                  })
-                : ingredients?.map((item) => {
-                    return (
-                      <div className={style.ingredients}>
-                        <p className={style.itemIngredients}>{item}</p>
-                      </div>
-                    );
                   })}
+                  <div className={style.btnContainer}>
+                    <Button
+                      label={"Save to my shopping list"}
+                      onClick={clickSave}
+                      type="btnSave"
+                    />
+                  </div>
+                </>
+              ) : (
+                ingredients?.map((item) => {
+                  return (
+                    <div className={style.ingredients}>
+                      <p className={style.itemIngredients}>{item}</p>
+                    </div>
+                  );
+                })
+              )}
             </div>
             <div className={style.quantity}>
               {quantity

@@ -13,7 +13,8 @@
 .btnShowMore,
 .btnTabActive,
 .btnTabUnactive,
-.btnDelete {
+.btnDelete,
+.btnSave {
   width: 150px;
   height: 40px;
   background-color: goldenrod;
@@ -30,6 +31,10 @@
   margin: 0px;
   border-radius: 0px;
   margin-right: 10px;
+}
+.btnSave {
+  margin-left: 133%;
+  height: 50px;
 }
 .btnTabActive {
   margin-left: 0;

@@ -11,7 +11,7 @@ import time from "./time.png";
 import kcal from "./kcal.png";
 import { Context } from "../../../App";
 import { useDispatch } from "react-redux";
-import { likeRecipe, saveRecipe } from "../../../redux/actions/category";
+import { likeRecipes, saveRecipes } from "../../../redux/actions/category";
 
 interface IProps extends IPost {
   isLarge?: boolean;
@@ -29,11 +29,11 @@ export const ItemOfCategory = (props: IProps) => {
   };
   const handleLikeItem: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
-    dispatch(likeRecipe(post));
+    dispatch(likeRecipes(post));
   };
   const handleSaveItem: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
-    dispatch(saveRecipe(post));
+    dispatch(saveRecipes(post));
   };
 
   return (

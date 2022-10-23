@@ -10,7 +10,7 @@ import { CategorySelected } from "../CategorySelected";
 import style from "./style.module.css";
 import save from "./save.svg";
 import like from "./like.svg";
-import { LikedRecipe } from "../LikedRecipe";
+import { LikedRecipes } from "../LikedRecipes";
 import { useSelector, useDispatch } from "react-redux";
 import { Like } from "../../assets";
 import {
@@ -18,7 +18,7 @@ import {
   setSelectedCategory,
 } from "../../redux/actions/category";
 import { TState } from "../../redux/store";
-import { SavedRecipe } from "../SavedRecipe";
+import { SavedRecipe } from "../SavedRecipes";
 import { Container } from "../Container";
 
 type UsersTabs = "Selected Category" | "Saved Recipies" | "Liked Recipies";
@@ -30,7 +30,7 @@ export const getUsersTabList = (tab: UsersTabs) => {
     return <SavedRecipe />;
   }
   if (tab === "Liked Recipies") {
-    return <LikedRecipe />;
+    return <LikedRecipes />;
   }
 };
 

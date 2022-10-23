@@ -11,9 +11,10 @@ import { ReactNode, useContext } from "react";
 import { Context } from "../App";
 import { ResetPassword } from "../pages/ResetPassword";
 import { ConfirmPassword } from "../pages/ConfirmPassword";
-import { SavedRecipe } from "../components/SavedRecipe";
+import { SavedRecipe } from "../components/SavedRecipes";
 import { ShoppingList } from "../components/ShoppingList";
 import { Error } from "../pages/Error";
+import { MyShoppingList } from "../components/MyShoppingList";
 
 export const RootRouter = () => {
   return (
@@ -27,6 +28,7 @@ export const RootRouter = () => {
       />
       <Route path="/saverecipe" element={<SavedRecipe />} />
       <Route path="/shoppinglist/:id" element={<ShoppingList />} />
+      <Route path="/myshoplist" element={<MyShoppingList />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/registration" element={<RegistrationPage />} />
       <Route path="/registersuccess" element={<RegisterSuccess />} />

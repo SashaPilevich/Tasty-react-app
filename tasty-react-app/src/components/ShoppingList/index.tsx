@@ -16,9 +16,7 @@ export const ShoppingList = () => {
   const [post, setPost] = useState<IRecipe[]>([]);
   useEffect(() => {
     fetchSelectedRecipe(params.id).then((values) => {
-      const linked = params.id;
-      Number(linked);
-      setPost(values[Number(linked)]);
+      setPost(values[Number(params.id)]);
     });
   }, []);
 
@@ -36,7 +34,6 @@ export const ShoppingList = () => {
                   ingredients={item.ingredients}
                   onClickDelete={() => {}}
                 />
-                <Button label={"BUY"} onClick={() => {}} type="btnShop" />
               </Container>
             );
           })
