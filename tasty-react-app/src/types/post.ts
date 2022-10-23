@@ -1,16 +1,19 @@
 export interface IPost {
-  id: number;
+  id: string | undefined;
   name: string;
   title: string;
   time?: string;
   kcal?: string;
+  liked?: boolean;
+  saved?: boolean;
 }
 export interface IRecipe {
-  id: number;
+  id: string | undefined;
   name?: string;
-  title: string;
+  title?: string;
   ingredients?: string[];
   video?: string;
   instructions?: string[];
   quantity?: string[];
+  delete?: boolean;
 }

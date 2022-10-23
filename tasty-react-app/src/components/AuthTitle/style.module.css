@@ -1,0 +1,39 @@
+.container {
+  margin-bottom: 50px;
+}
+span {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 145.2%;
+  letter-spacing: 0.03em;
+  color: #254050;
+}
+.active_link,
+.darkActiveLink {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 145.2%;
+  letter-spacing: 0.03em;
+  color: goldenrod;
+  text-decoration: underline;
+}
+.darkActiveLink {
+  color: goldenrod;
+}
+.unactive,
+.darkUnactive {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 145.2%;
+  letter-spacing: 0.03em;
+  color: #75869b;
+}
+.darkUnactive {
+  color: darkgrey;
+}

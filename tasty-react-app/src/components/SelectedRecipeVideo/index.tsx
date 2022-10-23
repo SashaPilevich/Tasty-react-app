@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { fetchSelectedRecipe } from "../../api/recipe";
 import { Context } from "../../App";
 import { Button } from "../../components/Button";
 import { IPost, IRecipe } from "../../types/post";
@@ -14,18 +15,10 @@ export const SelectedRecipeVideo = () => {
   const [post, setPost] = useState<IRecipe[]>([]);
 
   useEffect(() => {
-    const promise = fetch(
-      `https://62b0c0c4e460b79df04c901b.mockapi.io/api/selected/${params.id}/category` //тут запрашиваем всю инфу по переданному id из item и потом navigatetofullpost
-    );
-
-    promise
-      .then((response) => {
-        return response.json();
-      })
-      .then((values) => {
-        console.log(values[params.id]);
-        setPost(values[params.id]);
-      });
+    fetchSelectedRecipe(params.id).then((values) => {
+      console.log(values[params.id]);
+      setPost(values[params.id]);
+    });
   }, []);
 
   return (
@@ -34,14 +27,12 @@ export const SelectedRecipeVideo = () => {
         {post
           ? post.map((item) => {
               return (
-                <>
-                  <Recipe
-                    key={item.id}
-                    id={item.id}
-                    title={item.title}
-                    video={item.video}
-                  />
-                </>
+                <Recipe
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  video={item.video}
+                />
               );
             })
           : ""}

@@ -1,0 +1,16 @@
+.link {
+  color: #016efc;
+  display: block;
+}
+.text,
+.darkText {
+  font-family: "Raleway";
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 134%;
+  letter-spacing: 0.03em;
+  color: #254050;
+}
+.darkText {
+  color: white;
+}

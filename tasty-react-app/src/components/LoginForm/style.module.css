@@ -1,0 +1,43 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  padding-top: 20px;
+  height: 800px;
+}
+.inputContainer {
+  margin-bottom: 30px;
+  text-align: left;
+}
+.text,
+.darkText {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 134%;
+  letter-spacing: 0.03em;
+  color: #254050;
+}
+.darkText {
+  color: white;
+}
+.linkLogin,
+.darkLinkLogin {
+  text-decoration: none;
+  font-family: "Raleway";
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 134%;
+  letter-spacing: 0.03em;
+  color: goldenrod;
+}
+.darkLinkLogin {
+  color: goldenrod;
+}
+.textError {
+  color: #254050;
+  font-weight: 700;
+  /* margin-bottom: 40px; */
+}

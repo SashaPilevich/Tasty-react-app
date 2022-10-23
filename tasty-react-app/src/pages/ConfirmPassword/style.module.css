@@ -1,0 +1,57 @@
+.link {
+  color: #016efc;
+}
+.darkLinkLogin {
+  color: goldenrod;
+}
+.text,
+.darkText {
+  font-family: "Raleway";
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 134%;
+  letter-spacing: 0.03em;
+  color: #254050;
+  margin-bottom: 30px;
+}
+.darkText {
+  color: whitesmoke;
+}
+.inputContainer {
+  text-align: left;
+}
+.inputPasswordShow {
+  margin-bottom: 20px;
+  position: relative;
+  text-align: left;
+}
+.inputPasswordShow::before {
+  content: "";
+  position: absolute;
+  top: 70px;
+  right: 30px;
+  margin: auto 0;
+  width: 25px;
+  height: 25px;
+  background: url("show.png") no-repeat;
+  background-position: right;
+  background-size: cover;
+  cursor: pointer;
+}
+.inputPasswordClose {
+  margin-bottom: 20px;
+  position: relative;
+  text-align: left;
+}
+.inputPasswordClose::before {
+  content: "";
+  position: absolute;
+  top: 70px;
+  right: 30px;
+  margin: auto 0;
+  width: 25px;
+  height: 25px;
+  background: url("close.png") no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}

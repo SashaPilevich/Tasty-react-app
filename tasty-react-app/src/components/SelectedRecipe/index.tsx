@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { fetchSelectedRecipe } from "../../api/recipe";
 import { Context } from "../../App";
 import { Button } from "../../components/Button";
 import { IPost, IRecipe } from "../../types/post";
@@ -10,28 +11,28 @@ import style from "./style.module.css";
 export const SelectedRecipe = () => {
   const { isDark } = useContext(Context);
 
-  const params: any = useParams(); //показывает какие параметры переданы через url-т.е. то что в роуте написано после двоеточия
+  const params = useParams(); //показывает какие параметры переданы через url-т.е. то что в роуте написано после двоеточия
   const [post, setPost] = useState<IRecipe[]>([]);
 
   useEffect(() => {
-    const promise = fetch(
-      `https://62b0c0c4e460b79df04c901b.mockapi.io/api/selected/${params.id}/category` //тут запрашиваем всю инфу по переданному id из item и потом navigatetofullpost
-    );
-
-    promise
-      .then((response) => {
-        return response.json();
-      })
-      .then((values) => {
-        setPost(values[params.id]);
-      });
+    fetchSelectedRecipe(params.id).then((values) => {
+      const linked = params.id;
+      Number(linked);
+      setPost(values[Number(linked)]);
+    });
   }, []);
-
+  const navigate = useNavigate();
+  const navigateToShopList = (id: string | undefined) => {
+    navigate(`/shoppinglist/${id}`);
+  };
   return (
     <div className={`${style.container} ${isDark ? style.darkContainer : ""}`}>
       <div className={style.wrapper}>
         {post
           ? post.map((item) => {
+              const clickPost = () => {
+                navigateToShopList(item.id);
+              };
               return (
                 <>
                   <Recipe
@@ -41,6 +42,11 @@ export const SelectedRecipe = () => {
                     title={item.title}
                     ingredients={item.ingredients}
                     quantity={item.quantity}
+                  />
+                  <Button
+                    label={"Add shopping list"}
+                    onClick={clickPost}
+                    type="btnShop"
                   />
                 </>
               );

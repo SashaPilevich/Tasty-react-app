@@ -1,10 +1,17 @@
 import style from "./style.module.css";
-import { picture1 } from "../../../assets";
+import { Like, picture1, Save } from "../../../assets";
 import { IPost } from "../../../types/post";
-import { ReactEventHandler, useState } from "react";
-import { Button } from "../../Button";
+import {
+  MouseEventHandler,
+  ReactEventHandler,
+  useContext,
+  useState,
+} from "react";
 import time from "./time.png";
 import kcal from "./kcal.png";
+import { Context } from "../../../App";
+import { useDispatch } from "react-redux";
+import { likeRecipe, saveRecipe } from "../../../redux/actions/category";
 
 interface IProps extends IPost {
   isLarge?: boolean;
@@ -14,9 +21,21 @@ interface IProps extends IPost {
 export const ItemOfCategory = (props: IProps) => {
   const [image, setImage] = useState(props.name);
 
+  const { user } = useContext(Context);
+  const dispatch = useDispatch();
+  const { isLarge, ...post } = props;
   const handleError: ReactEventHandler<HTMLImageElement> = () => {
     setImage(picture1);
   };
+  const handleLikeItem: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.stopPropagation();
+    dispatch(likeRecipe(post));
+  };
+  const handleSaveItem: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.stopPropagation();
+    dispatch(saveRecipe(post));
+  };
+
   return (
     <div
       className={`${style.container} ${
@@ -53,6 +72,29 @@ export const ItemOfCategory = (props: IProps) => {
               <span className={style.time}>{props.time}</span>
               <span className={style.kcal}>{props.kcal}</span>
             </div>
+            {user ? (
+              <div className={style.likeAndSave}>
+                <button onClick={handleSaveItem}>
+                  <Save
+                    fill={
+                      props.saved
+                        ? "red"
+                        : "rgb(94.509804%,76.862746%,5.882353%)"
+                    }
+                  />
+                </button>
+
+                <button onClick={handleLikeItem}>
+                  <Like
+                    fill={
+                      props.liked
+                        ? "red"
+                        : "rgb(94.509804%,76.862746%,5.882353%)"
+                    }
+                  />
+                </button>
+              </div>
+            ) : null}
           </div>
         </>
       ) : (
