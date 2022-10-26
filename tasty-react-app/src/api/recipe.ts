@@ -21,3 +21,10 @@ export const fetchSelectedRecipe = (id: string | undefined) => {
     return response.json();
   });
 };
+export const fetchIngredientsFromShop = () => {
+  return fetch("https://62b0c0c4e460b79df04c901b.mockapi.io/api/shop").then(
+    (response) => {
+      return response.json();
+    }
+  );
+};

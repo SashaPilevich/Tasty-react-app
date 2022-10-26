@@ -32,7 +32,9 @@ export const Recipe = (props: IProps) => {
   if (shopList) {
     myShopList = JSON.parse(shopList);
   }
-
+  function unique(arr: string[]) {
+    return Array.from(new Set(arr));
+  }
   const clickSave = () => {
     ingredients?.map((item) => {
       myShopList.push(item);
@@ -42,7 +44,7 @@ export const Recipe = (props: IProps) => {
       "Все ингредиенты сохранены в вашем шоппинг листе"
     );
     navigate("/myshoplist");
-    localStorage.setItem("shopList", JSON.stringify(myShopList));
+    localStorage.setItem("shopList", JSON.stringify(unique(myShopList)));
   };
 
   return (

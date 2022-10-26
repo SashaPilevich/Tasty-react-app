@@ -1,11 +1,21 @@
 import { SetStateAction, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setLocalItem } from "../../redux/actions/category";
+import { TState } from "../../redux/store";
 import { Button } from "../Button";
 import { Container } from "../Container";
 import { Header } from "../Header";
 import style from "./style.module.css";
 
 export const MyShoppingList = () => {
-  const [shopList, setShopList] = useState<string[]>([]);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const localItem = useSelector(
+    (state: TState) => state.categoryReducer.localItem
+  );
+
   let shopArray = [];
   let isList = localStorage.getItem("shopList");
 
@@ -15,27 +25,26 @@ export const MyShoppingList = () => {
       shopArray = shopArray.map((item: string[]) => {
         return item;
       });
-      setShopList(shopArray);
+      dispatch(setLocalItem(shopArray));
     }
   }, []);
-  const clickDelete = (ingredient: string) => {
-    const newList: string[] | undefined = shopList?.filter((item) => {
-      return item !== ingredient;
-    });
-    setShopList(newList);
-    localStorage.setItem("shopList", JSON.stringify(newList));
+
+  const clickBuy = () => {
+    navigate("/shop");
   };
 
-  let myShopList: string[] = [];
-  let itemForShopList = localStorage.getItem("shopList");
-  if (itemForShopList) {
-    myShopList = JSON.parse(itemForShopList);
-  }
+  const clickDelete = (ingredient: string) => {
+    const newList: string[] | undefined = localItem?.filter((item) => {
+      return item !== ingredient;
+    });
+    dispatch(setLocalItem(newList));
+    localStorage.setItem("shopList", JSON.stringify(newList));
+  };
   return (
     <Container>
       <Header />
       <h2 className={style.title}>My shopping list</h2>
-      {shopList.map((item) => {
+      {localItem.map((item) => {
         const deleteItem = () => {
           clickDelete(item);
         };
@@ -46,7 +55,7 @@ export const MyShoppingList = () => {
           </div>
         );
       })}
-      <Button label={"BUY"} onClick={() => {}} type="btnShop" />
+      <Button label={"BUY"} onClick={clickBuy} type="btnShop" />
     </Container>
   );
 };

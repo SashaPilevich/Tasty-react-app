@@ -1,4 +1,4 @@
-import { IPost, IRecipe } from "./../../types/post";
+import { IPost, IRecipe, IShop } from "./../../types/post";
 import { AnyAction } from "redux";
 import { ACTIONS } from "../constans";
 
@@ -8,6 +8,8 @@ export interface ICategoryState {
   likedRecipes: IPost[];
   savedRecipes: IPost[];
   selectedCategory: IPost[];
+  shopItem: IShop[];
+  localItem: string[];
 }
 export const defaultState: ICategoryState = {
   allCategories: [],
@@ -15,6 +17,8 @@ export const defaultState: ICategoryState = {
   likedRecipes: [],
   savedRecipes: [],
   selectedCategory: [],
+  shopItem: [],
+  localItem: [],
 };
 
 export const categoryReducer = (state = defaultState, action: AnyAction) => {
@@ -29,6 +33,28 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
       return {
         ...state,
         isLoading: action.isLoading,
+      };
+    case ACTIONS.SET_LOCAL_ITEM:
+      return {
+        ...state,
+        localItem: action.products,
+      };
+
+    case ACTIONS.SET_SHOP_ITEM:
+      const selectShopItem = action.product;
+      const newShopItem = state.localItem.map((ingredient: string) => {
+        console.log(ingredient);
+        const newselectShopItem = selectShopItem.find((item: IShop) => {
+          if (item.title === ingredient) {
+            return item;
+          }
+        });
+
+        return newselectShopItem;
+      });
+      return {
+        ...state,
+        shopItem: newShopItem,
       };
 
     case ACTIONS.SET_SELECTED_CATEGORY:

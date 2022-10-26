@@ -17,3 +17,9 @@ export interface IRecipe {
   quantity?: string[];
   delete?: boolean;
 }
+export interface IShop {
+  title: string;
+  price: number;
+  quantity: string;
+  image: string;
+}

@@ -1,0 +1,62 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 60px;
+  margin-left: 100px;
+  padding-top: 50px;
+  margin-bottom: 40px;
+}
+.containerItem {
+  width: 270px;
+  border: 1px solid gray;
+  border-radius: 13px;
+  box-shadow: 1px 1px 5px 2px rgb(92, 64, 51, 0.3);
+}
+.productItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.productTitle {
+  font-family: "Raleway";
+  font-weight: 500;
+  font-size: 22px;
+  color: goldenrod;
+  text-align: left;
+  margin: 0px;
+  margin-bottom: 8px;
+}
+.imgProduct {
+  width: 150px;
+  height: 150px;
+  padding-top: 20px;
+  margin-bottom: 10px;
+  margin-right: 0px;
+}
+.productQuantity,
+.productPrice,
+.byn,
+.sum,
+.sumByn {
+  font-family: "Open sans";
+  font-weight: 500;
+  font-size: 18px;
+  color: gray;
+  text-align: left;
+  margin-bottom: 8px;
+  margin-top: 0px;
+}
+.productPrice,
+.sum {
+  font-size: 20px;
+}
+.containerPrice {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.fullSum {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 80px;
+}

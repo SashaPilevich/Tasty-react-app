@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
-import { fetchAllCategory } from "../../api/recipe";
-import { IPost, IRecipe } from "../../types/post";
+import { fetchAllCategory, fetchIngredientsFromShop } from "../../api/recipe";
+import { IPost, IRecipe, IShop } from "../../types/post";
 import { ACTIONS } from "../constans";
 import { TState } from "../store";
 
@@ -29,6 +29,13 @@ export const likeRecipes = (recipes: IPost) => {
 export const saveRecipes = (recipes: IPost) => {
   return { type: ACTIONS.SET_SAVE_RECIPE, recipes };
 };
+export const setShopItem = (product: IShop) => {
+  return { type: ACTIONS.SET_SHOP_ITEM, product };
+};
+
+export const setLocalItem = (products: string[]) => {
+  return { type: ACTIONS.SET_LOCAL_ITEM, products };
+};
 
 export const loadAppCategories = () => {
   return (dispatch: Dispatch, getState: () => TState) => {
@@ -40,5 +47,12 @@ export const loadAppCategories = () => {
       .finally(() => {
         dispatch(setIsLoading(false));
       });
+  };
+};
+export const loadShop = () => {
+  return (dispatch: Dispatch, getState: () => TState) => {
+    fetchIngredientsFromShop().then((values) => {
+      dispatch(setShopItem(values));
+    });
   };
 };
