@@ -62,9 +62,9 @@ export const Input = (props: Input) => {
       >
         {props.label}
         <input
-          className={`${style.input} ${
-            isDark ? style.darkInput : getInputStyle(props.uniqType)
-          } ${props.error ? style.error : ""}`}
+          className={`${style.input} ${getInputStyle(props.uniqType)} ${
+            props.error ? style.error : ""
+          }`}
           value={props.value}
           placeholder={props.placeholder}
           onChange={props.onChange}
@@ -75,7 +75,13 @@ export const Input = (props: Input) => {
           onBlur={props.onBlur}
           name={props.name}
         ></input>
-        <span className={style.forRadio}>{props.forRadio}</span>
+        <span
+          className={`${style.forRadio} ${
+            isDark ? style.darkForRadio : style.forRadio
+          }`}
+        >
+          {props.forRadio}
+        </span>
         <div
           className={`${style.textError} ${isDark ? style.darkTextError : ""}`}
         >

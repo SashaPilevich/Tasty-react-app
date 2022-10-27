@@ -20,7 +20,9 @@
 }
 .itemIngredients,
 .itemQuantity,
-.itemIngredientsInShop {
+.itemIngredientsInShop,
+.darkItem,
+.darkItemInShop {
   font-family: "Raleway";
   font-weight: 400;
   font-size: 18px;
@@ -28,7 +30,8 @@
   text-align: left;
   margin-bottom: 0px;
 }
-.itemIngredientsInShop {
+.itemIngredientsInShop,
+.darkItemInShop {
   margin: 0px;
 }
 .controlIngredient {
@@ -54,13 +57,18 @@
   margin-left: 30px;
   overflow-y: auto;
 }
-.itemInstructions {
+.itemInstructions,
+.darkItem {
   font-family: "Raleway";
   font-weight: 400;
   font-size: 18px;
   color: black;
   text-align: left;
   margin-bottom: 15px;
+}
+.darkItem,
+.darkItemInShop {
+  color: white;
 }
 .recipeItem {
   width: 100%;

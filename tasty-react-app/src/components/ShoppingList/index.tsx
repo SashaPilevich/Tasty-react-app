@@ -1,6 +1,6 @@
 import { MouseEvent, MouseEventHandler, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchSelectedRecipe } from "../../api/recipe";
 
 import { TState } from "../../redux/store";
@@ -12,14 +12,17 @@ import { Recipe } from "../Recipe";
 import style from "./style.module.css";
 
 export const ShoppingList = () => {
-  const params = useParams(); //показывает какие параметры переданы через url-т.е. то что в роуте написано после двоеточия
+  const navigate = useNavigate();
+  const params = useParams();
   const [post, setPost] = useState<IRecipe[]>([]);
   useEffect(() => {
     fetchSelectedRecipe(params.id).then((values) => {
       setPost(values[Number(params.id)]);
     });
   }, []);
-
+  const goBack = () => {
+    navigate(-1);
+  };
   return (
     <div>
       {post.length !== 0
@@ -27,6 +30,9 @@ export const ShoppingList = () => {
             return (
               <Container>
                 <Header />
+                <div className={style.btnContainer}>
+                  <Button label={"Back"} onClick={goBack} type={"btnBack"} />
+                </div>
                 <h2 className={style.title}>Shopping list</h2>
                 <Recipe
                   key={item.id}

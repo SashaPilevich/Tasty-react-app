@@ -1,10 +1,11 @@
 import style from "./style.module.css";
 import { picture1 } from "../../assets/";
-import { ReactEventHandler, useState } from "react";
+import { ReactEventHandler, useContext, useState } from "react";
 import { IRecipe } from "../../types/post";
 import { Button } from "../Button";
 import { useNavigate } from "react-router-dom";
 import { NotificationManager } from "react-notifications";
+import { Context } from "../../App";
 
 interface IProps extends IRecipe {
   onClickDelete?: (ingr: string) => void;
@@ -16,6 +17,7 @@ export const Recipe = (props: IProps) => {
   const [instructions, setInstructions] = useState(props.instructions);
   const [video, setVideo] = useState(props.video);
   const [quantity, setQuantity] = useState(props.quantity);
+  const { isDark } = useContext(Context);
   const navigate = useNavigate();
   const handleError: ReactEventHandler<HTMLImageElement> = () => {
     setImage(picture1);
@@ -74,7 +76,15 @@ export const Recipe = (props: IProps) => {
 
                     return (
                       <div className={style.controlIngredient}>
-                        <p className={style.itemIngredientsInShop}>{item}</p>
+                        <p
+                          className={`${style.itemIngredientsInShop} ${
+                            isDark
+                              ? style.darkItemInShop
+                              : style.itemIngredientsInShop
+                          }`}
+                        >
+                          {item}
+                        </p>
                         <Button
                           label="X"
                           onClick={deleteItem}
@@ -95,7 +105,13 @@ export const Recipe = (props: IProps) => {
                 ingredients?.map((item) => {
                   return (
                     <div className={style.ingredients}>
-                      <p className={style.itemIngredients}>{item}</p>
+                      <p
+                        className={`${style.itemIngredients} ${
+                          isDark ? style.darkItem : style.itemIngredients
+                        }`}
+                      >
+                        {item}
+                      </p>
                     </div>
                   );
                 })
@@ -116,7 +132,15 @@ export const Recipe = (props: IProps) => {
           <div className={style.instructionsContainer}>
             {instructions
               ? instructions.map((item) => {
-                  return <p className={style.itemInstructions}>{item}</p>;
+                  return (
+                    <p
+                      className={`${style.itemInstructions} ${
+                        isDark ? style.darkItem : style.itemInstructions
+                      }`}
+                    >
+                      {item}
+                    </p>
+                  );
                 })
               : ""}
           </div>

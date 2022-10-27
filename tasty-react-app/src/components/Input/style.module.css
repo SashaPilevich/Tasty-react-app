@@ -98,11 +98,15 @@
   width: 20px;
   height: 20px;
 }
-.forRadio {
+.forRadio,
+.darkForRadio {
   color: #254050;
   font-family: "Raleway";
   font-weight: 500;
   font-size: 22px;
   line-height: 29px;
   letter-spacing: 0.05em;
+}
+.darkForRadio {
+  color: white;
 }

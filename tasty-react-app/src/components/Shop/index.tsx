@@ -1,6 +1,7 @@
-import { MouseEvent, useEffect } from "react";
+import { MouseEvent, useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../../App";
 import { loadShop } from "../../redux/actions/category";
 import { TState } from "../../redux/store";
 import { IShop } from "../../types/post";
@@ -12,6 +13,7 @@ import style from "./style.module.css";
 export const Shop = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isDark } = useContext(Context);
   const product = useSelector(
     (state: TState) => state.categoryReducer.shopItem
   );
@@ -33,9 +35,13 @@ export const Shop = () => {
   return (
     <div>
       <div className={style.fullSum}>
-        <p className={style.sum}>
+        <p className={`${style.sum} ${isDark ? style.darkItem : style.sum}`}>
           Общая сумма {sum()}
-          <span className={style.sumByn}>руб.</span>
+          <span
+            className={`${style.sum} ${isDark ? style.darkItem : style.sum}`}
+          >
+            руб.
+          </span>
         </p>
       </div>
       {product ? (
@@ -49,9 +55,19 @@ export const Shop = () => {
                   <p className={style.productQuantity}>{item.quantity}</p>
                 </div>
                 <div className={style.containerPrice}>
-                  <p className={style.productPrice}>
+                  <p
+                    className={`${style.productPrice} ${
+                      isDark ? style.darkItem : style.productPrice
+                    }`}
+                  >
                     {item.price}
-                    <span className={style.byn}>руб.</span>
+                    <span
+                      className={`${style.sum} ${
+                        isDark ? style.darkItem : style.sum
+                      }`}
+                    >
+                      руб.
+                    </span>
                   </p>
                 </div>
               </div>

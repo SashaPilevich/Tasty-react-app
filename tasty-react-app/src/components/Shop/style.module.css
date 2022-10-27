@@ -37,7 +37,8 @@
 .productPrice,
 .byn,
 .sum,
-.sumByn {
+.sumByn,
+.darkItem {
   font-family: "Open sans";
   font-weight: 500;
   font-size: 18px;
@@ -47,8 +48,12 @@
   margin-top: 0px;
 }
 .productPrice,
-.sum {
+.sum,
+.darkItem {
   font-size: 20px;
+}
+.darkItem {
+  color: white;
 }
 .containerPrice {
   display: flex;

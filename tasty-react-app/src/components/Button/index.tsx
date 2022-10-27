@@ -17,7 +17,6 @@ interface IButton {
     | "btnCategory"
     | "btnDelete"
     | "btnSave";
-  className?: string;
 }
 
 const getButtonStyle = (
@@ -69,9 +68,7 @@ export const Button = (props: IButton) => {
   const { isDark } = useContext(Context);
   return (
     <button
-      className={`${props.className} ${style.button} ${
-        isDark ? style.buttonDark : getButtonStyle(props.type)
-      } `}
+      className={`${style.button} ${getButtonStyle(props.type)}`}
       disabled={props.disabled}
       onClick={props.onClick}
     >

@@ -1,6 +1,7 @@
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../../App";
 import { setLocalItem } from "../../redux/actions/category";
 import { TState } from "../../redux/store";
 import { Button } from "../Button";
@@ -11,6 +12,7 @@ import style from "./style.module.css";
 export const MyShoppingList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { isDark } = useContext(Context);
 
   const localItem = useSelector(
     (state: TState) => state.categoryReducer.localItem
@@ -32,7 +34,9 @@ export const MyShoppingList = () => {
   const clickBuy = () => {
     navigate("/shop");
   };
-
+  const goBack = () => {
+    navigate(-1);
+  };
   const clickDelete = (ingredient: string) => {
     const newList: string[] | undefined = localItem?.filter((item) => {
       return item !== ingredient;
@@ -43,6 +47,9 @@ export const MyShoppingList = () => {
   return (
     <Container>
       <Header />
+      <div className={style.btnContainer}>
+        <Button label={"Back"} onClick={goBack} type={"btnBack"} />
+      </div>
       <h2 className={style.title}>My shopping list</h2>
       {localItem.map((item) => {
         const deleteItem = () => {
@@ -50,7 +57,13 @@ export const MyShoppingList = () => {
         };
         return (
           <div className={style.container}>
-            <p className={style.ingredientsItem}>{item}</p>
+            <p
+              className={`${style.ingredientsItem} ${
+                isDark ? style.darkItem : style.ingredientsItem
+              }`}
+            >
+              {item}
+            </p>
             <Button label="X" onClick={deleteItem} type="btnDelete" />
           </div>
         );
