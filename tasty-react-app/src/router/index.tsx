@@ -48,7 +48,6 @@ export const RootRouter = () => {
 };
 const useLoginGuard = (component: ReactNode) => {
   const { user } = useContext(Context);
-  console.log(user);
   if (user) {
     return component;
   } else {

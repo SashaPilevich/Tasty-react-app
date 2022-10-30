@@ -10,6 +10,7 @@ export interface ICategoryState {
   selectedCategory: IPost[];
   shopItem: IShop[];
   localItem: string[];
+  showLoadMore: boolean;
 }
 export const defaultState: ICategoryState = {
   allCategories: [],
@@ -19,6 +20,7 @@ export const defaultState: ICategoryState = {
   selectedCategory: [],
   shopItem: [],
   localItem: [],
+  showLoadMore: true,
 };
 
 export const categoryReducer = (state = defaultState, action: AnyAction) => {
@@ -33,6 +35,11 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
       return {
         ...state,
         isLoading: action.isLoading,
+      };
+    case ACTIONS.SET_SHOW_LOAD_MORE:
+      return {
+        ...state,
+        showLoadMore: action.showLoadMore,
       };
     case ACTIONS.SET_LOCAL_ITEM:
       return {

@@ -1,9 +1,9 @@
-export const fetchAllCategory = () => {
-  return fetch("https://62b0c0c4e460b79df04c901b.mockapi.io/api/selected").then(
-    (response) => {
-      return response.json();
-    }
-  );
+export const fetchAllCategory = (offset: number) => {
+  return fetch(
+    `https://62b0c0c4e460b79df04c901b.mockapi.io/api/selected?page=1&limit=3&offset=${offset}`
+  ).then((response) => {
+    return response.json();
+  });
 };
 
 export const fetchSelectedCategory = (id: string | undefined) => {
