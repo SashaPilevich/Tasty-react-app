@@ -15,8 +15,8 @@ interface IButton {
     | "btnTabActive"
     | "btnTabUnactive"
     | "btnCategory"
-    | "btnDelete";
-  className?: string;
+    | "btnDelete"
+    | "btnSave";
 }
 
 const getButtonStyle = (
@@ -30,6 +30,7 @@ const getButtonStyle = (
     | "btnTabUnactive"
     | "btnCategory"
     | "btnDelete"
+    | "btnSave"
 ) => {
   if (type === "logOut") {
     return style.logOut;
@@ -58,15 +59,16 @@ const getButtonStyle = (
   if (type === "btnDelete") {
     return style.btnDelete;
   }
+  if (type === "btnSave") {
+    return style.btnSave;
+  }
 };
 
 export const Button = (props: IButton) => {
   const { isDark } = useContext(Context);
   return (
     <button
-      className={`${props.className} ${style.button} ${
-        isDark ? style.buttonDark : getButtonStyle(props.type)
-      } `}
+      className={`${style.button} ${getButtonStyle(props.type)}`}
       disabled={props.disabled}
       onClick={props.onClick}
     >

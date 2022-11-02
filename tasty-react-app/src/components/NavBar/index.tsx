@@ -47,6 +47,7 @@ export const NavBar = ({ onClose }: IProps) => {
           <div className={style.postsPanel}>
             <div className={style.allPosts}>
               <Link to="/category">All categories</Link>
+              <Link to="/myshoplist">My shopping list</Link>
             </div>
           </div>
           <button className={style.logOut} onClick={logOut}>

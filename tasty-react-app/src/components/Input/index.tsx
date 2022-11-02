@@ -11,32 +11,32 @@ interface Input {
   id?: string;
   uniqType:
     | "burgerMenu"
-    | "inputForConverter"
     | "primary"
     | "inputForRegistration"
     | "checkbox"
-    | "search";
+    | "delivery"
+    | "radio";
   refObj?: any;
   error?: string;
   onFocus?: () => void;
   onBlur?: () => void;
   pattern?: string;
+  name?: string;
+  forRadio?: string;
 }
 const getInputStyle = (
   uniqType:
     | "burgerMenu"
-    | "inputForConverter"
     | "primary"
     | "inputForRegistration"
     | "checkbox"
-    | "search"
+    | "delivery"
+    | "radio"
 ) => {
   if (uniqType === "burgerMenu") {
     return style.burgerMenu;
   }
-  if (uniqType === "inputForConverter") {
-    return style.inputForConverter;
-  }
+
   if (uniqType === "primary") {
     return style.primary;
   }
@@ -46,8 +46,11 @@ const getInputStyle = (
   if (uniqType === "checkbox") {
     return style.checkbox;
   }
-  if (uniqType === "search") {
-    return style.search;
+  if (uniqType === "delivery") {
+    return style.delivery;
+  }
+  if (uniqType === "radio") {
+    return style.radio;
   }
 };
 export const Input = (props: Input) => {
@@ -59,9 +62,9 @@ export const Input = (props: Input) => {
       >
         {props.label}
         <input
-          className={`${style.input} ${
-            isDark ? style.darkInput : getInputStyle(props.uniqType)
-          } ${props.error ? style.error : ""}`}
+          className={`${style.input} ${getInputStyle(props.uniqType)} ${
+            props.error ? style.error : ""
+          }`}
           value={props.value}
           placeholder={props.placeholder}
           onChange={props.onChange}
@@ -70,7 +73,15 @@ export const Input = (props: Input) => {
           required={true}
           onFocus={props.onFocus}
           onBlur={props.onBlur}
+          name={props.name}
         ></input>
+        <span
+          className={`${style.forRadio} ${
+            isDark ? style.darkForRadio : style.forRadio
+          }`}
+        >
+          {props.forRadio}
+        </span>
         <div
           className={`${style.textError} ${isDark ? style.darkTextError : ""}`}
         >

@@ -33,7 +33,7 @@ const getInitialTheme = () => {
 };
 
 function App() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(getInitialTheme());
   const [user, setUser] = useState<IUser | null>(null);
   const [isReady, setIsReady] = useState(!access);
 

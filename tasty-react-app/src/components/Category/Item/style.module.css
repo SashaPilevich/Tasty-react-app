@@ -1,9 +1,9 @@
 .container,
 .selectedItem {
-  width: 250px;
-  height: 400px;
+  width: 300px;
+  height: 450px;
   padding: 0 0px 0px 0px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   margin-right: 20px;
   /* background-color: #edeade; */
   background-color: #faf9f6;
@@ -12,8 +12,9 @@
   position: relative;
 }
 .selectedItem {
+  width: 250px;
+  height: 460px;
   background-color: transparent;
-  height: 450px;
   box-shadow: 0px 0px 0px 0px rgb(92, 64, 51, 0.3);
   border-radius: 0px;
   margin-right: 0px;
@@ -28,7 +29,12 @@
   transition: none;
   animation: none;
 }
-.image,
+.image {
+  width: 300px;
+  height: 400px;
+  margin: 0 auto;
+  border-radius: 10px 10px 0px 0px;
+}
 .selectedImage {
   width: 250px;
   height: 350px;

@@ -11,9 +11,12 @@ import { ReactNode, useContext } from "react";
 import { Context } from "../App";
 import { ResetPassword } from "../pages/ResetPassword";
 import { ConfirmPassword } from "../pages/ConfirmPassword";
-import { SavedRecipe } from "../components/SavedRecipe";
+import { SavedRecipe } from "../components/SavedRecipes";
 import { ShoppingList } from "../components/ShoppingList";
 import { Error } from "../pages/Error";
+import { MyShoppingList } from "../components/MyShoppingList";
+import { ShopPage } from "../pages/ShopPage";
+import { DeliveryPage } from "../pages/DeliveryPage";
 
 export const RootRouter = () => {
   return (
@@ -27,6 +30,9 @@ export const RootRouter = () => {
       />
       <Route path="/saverecipe" element={<SavedRecipe />} />
       <Route path="/shoppinglist/:id" element={<ShoppingList />} />
+      <Route path="/myshoplist" element={<MyShoppingList />} />
+      <Route path="/shop" element={<ShopPage />} />
+      <Route path="/delivery" element={<DeliveryPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/registration" element={<RegistrationPage />} />
       <Route path="/registersuccess" element={<RegisterSuccess />} />
@@ -42,7 +48,6 @@ export const RootRouter = () => {
 };
 const useLoginGuard = (component: ReactNode) => {
   const { user } = useContext(Context);
-  console.log(user);
   if (user) {
     return component;
   } else {

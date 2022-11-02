@@ -86,18 +86,18 @@ export const Login = () => {
   };
 
   const handleEmail: ChangeEventHandler<HTMLInputElement> = (event) => {
-    const error = validateEmail(event.target.value); //if error TRUE
+    const error = validateEmail(event.target.value);
     if (error) {
-      setEmailError(error); //return description of error
+      setEmailError(error);
     } else {
       setEmailError("");
     }
     setEmail(event.target.value);
   };
   const handlePassword: ChangeEventHandler<HTMLInputElement> = (event) => {
-    const error = validatePassword(event.target.value); //if error TRUE
+    const error = validatePassword(event.target.value);
     if (error) {
-      setPasswordError(error); //return description of error
+      setPasswordError(error);
     } else {
       setPasswordError("");
     }

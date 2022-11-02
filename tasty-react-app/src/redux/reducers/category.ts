@@ -1,20 +1,26 @@
-import { IPost, IRecipe } from "./../../types/post";
+import { IPost, IRecipe, IShop } from "./../../types/post";
 import { AnyAction } from "redux";
 import { ACTIONS } from "../constans";
 
 export interface ICategoryState {
   allCategories: IPost[];
   isLoading: boolean;
-  likedRecipe: IPost[];
-  savedRecipe: IPost[];
+  likedRecipes: IPost[];
+  savedRecipes: IPost[];
   selectedCategory: IPost[];
+  shopItem: IShop[];
+  localItem: string[];
+  showLoadMore: boolean;
 }
 export const defaultState: ICategoryState = {
   allCategories: [],
   isLoading: false,
-  likedRecipe: [],
-  savedRecipe: [],
+  likedRecipes: [],
+  savedRecipes: [],
   selectedCategory: [],
+  shopItem: [],
+  localItem: [],
+  showLoadMore: true,
 };
 
 export const categoryReducer = (state = defaultState, action: AnyAction) => {
@@ -30,11 +36,38 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
         ...state,
         isLoading: action.isLoading,
       };
+    case ACTIONS.SET_SHOW_LOAD_MORE:
+      return {
+        ...state,
+        showLoadMore: action.showLoadMore,
+      };
+    case ACTIONS.SET_LOCAL_ITEM:
+      return {
+        ...state,
+        localItem: action.products,
+      };
+
+    case ACTIONS.SET_SHOP_ITEM:
+      const selectShopItem = action.product;
+      const newShopItem = state.localItem.map((ingredient: string) => {
+        console.log(ingredient);
+        const newselectShopItem = selectShopItem.find((item: IShop) => {
+          if (item.title === ingredient) {
+            return item;
+          }
+        });
+
+        return newselectShopItem;
+      });
+      return {
+        ...state,
+        shopItem: newShopItem,
+      };
 
     case ACTIONS.SET_SELECTED_CATEGORY:
       const newSelectedCategories = action.selectedCategory.map(
         (post: IPost) => {
-          const likedRecipes = state.likedRecipe.find((item) => {
+          const likedRecipes = state.likedRecipes.find((item) => {
             if (item.id === post.id) {
               return item;
             }
@@ -44,7 +77,7 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
             post.liked = true;
           }
 
-          const savedRecipes = state.savedRecipe.find((item) => {
+          const savedRecipes = state.savedRecipes.find((item) => {
             if (item.id === post.id) {
               return item;
             }
@@ -63,52 +96,52 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
       };
 
     case ACTIONS.SET_LIKED_RECIPE:
-      const recipeLike = action.recipe;
+      const recipeLike = action.recipes;
 
       const newLikedRecipe = recipeLike.liked
-        ? state.likedRecipe.filter((item) => {
+        ? state.likedRecipes.filter((item) => {
             if (item.id === recipeLike.id) {
               return false;
             } else {
               return true;
             }
           })
-        : state.likedRecipe.concat([{ ...recipeLike, liked: true }]);
+        : state.likedRecipes.concat([{ ...recipeLike, liked: true }]);
 
       const newAllRecipeLike = state.selectedCategory.map((recipe) => {
-        if (recipe.id === action.recipe.id) {
+        if (recipe.id === action.recipes.id) {
           recipe.liked = !recipe.liked;
         }
         return recipe;
       });
       return {
         ...state,
-        likedRecipe: newLikedRecipe,
+        likedRecipes: newLikedRecipe,
         selectedCategory: newAllRecipeLike,
       };
 
     case ACTIONS.SET_SAVE_RECIPE:
-      const recipeSave = action.recipe;
+      const recipeSave = action.recipes;
 
       const newSaveRecipe = recipeSave.saved
-        ? state.savedRecipe.filter((item) => {
+        ? state.savedRecipes.filter((item) => {
             if (item.id === recipeSave.id) {
               return false;
             } else {
               return true;
             }
           })
-        : state.savedRecipe.concat([{ ...recipeSave, saved: true }]);
+        : state.savedRecipes.concat([{ ...recipeSave, saved: true }]);
 
       const newAllRecipeSave = state.selectedCategory.map((recipe) => {
-        if (recipe.id === action.recipe.id) {
+        if (recipe.id === action.recipes.id) {
           recipe.saved = !recipe.saved;
         }
         return recipe;
       });
       return {
         ...state,
-        savedRecipe: newSaveRecipe,
+        savedRecipes: newSaveRecipe,
         selectedCategory: newAllRecipeSave,
       };
 

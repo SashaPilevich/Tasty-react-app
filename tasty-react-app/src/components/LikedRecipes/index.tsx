@@ -6,13 +6,13 @@ import { CategoryList } from "../Category/List";
 import { CategorySelected } from "../CategorySelected";
 import { Container } from "../Container";
 
-export const LikedRecipe = () => {
-  const recipe = useSelector(
-    (state: TState) => state.categoryReducer.likedRecipe
+export const LikedRecipes = () => {
+  const recipes = useSelector(
+    (state: TState) => state.categoryReducer.likedRecipes
   );
   return (
     <Container>
-      <CategorySelected posts={recipe} isLikeSave={true} />
+      <CategorySelected posts={recipes} isLikeSave={true} />
     </Container>
   );
 };
