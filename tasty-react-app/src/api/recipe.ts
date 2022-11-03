@@ -1,6 +1,6 @@
-export const fetchAllCategory = (offset: number) => {
+export const fetchAllCategory = (page?: number) => {
   return fetch(
-    `https://62b0c0c4e460b79df04c901b.mockapi.io/api/selected?page=1&limit=3&offset=${offset}`
+    `https://62b0c0c4e460b79df04c901b.mockapi.io/api/selected?page=${page}&limit=3`
   ).then((response) => {
     return response.json();
   });

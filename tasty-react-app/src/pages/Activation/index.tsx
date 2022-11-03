@@ -42,7 +42,7 @@ export const Activation = () => {
           </>
         }
         title={"Активация прошла успешно"}
-        labelBtn={"Login"}
+        labelBtn={"Войти"}
         onClick={navigateToLogin}
       />
     </Container>

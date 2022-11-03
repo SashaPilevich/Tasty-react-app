@@ -90,7 +90,6 @@ export const Registration = () => {
     setConfirmPassword(event.target.value);
   };
 
-  ///регистрация по клику
   const onClickLogin = () => {
     dispatch(setError(""));
     errors = {
@@ -135,7 +134,7 @@ export const Registration = () => {
         <>
           <div className={style.inputContainer}>
             <Input
-              label="UserName"
+              label="Имя"
               onChange={handleUser}
               value={user}
               uniqType={"inputForRegistration"}
@@ -158,7 +157,7 @@ export const Registration = () => {
             <div className={style.inputPasswordShow} onClick={openPassword}>
               <Input
                 uniqType="inputForRegistration"
-                label="Password"
+                label="Пароль"
                 onChange={handlePassword}
                 value={password}
                 error={passwordError}
@@ -171,7 +170,7 @@ export const Registration = () => {
             <div className={style.inputPasswordClose} onClick={closePassword}>
               <Input
                 uniqType="inputForRegistration"
-                label="Password"
+                label="Пароль"
                 onChange={handlePassword}
                 value={password}
                 error={passwordError}
@@ -184,7 +183,7 @@ export const Registration = () => {
 
           <div className={style.inputContainer}>
             <Input
-              label="Confirm Password"
+              label="Подтвердить пароль"
               onChange={handleConfirmPassword}
               value={confirmPassword}
               uniqType={"inputForRegistration"}
@@ -201,16 +200,16 @@ export const Registration = () => {
           >
             {error}
           </p>
-          <Button label="Register" onClick={onClickLogin} type="btnCategory" />
+          <Button label="Отправить" onClick={onClickLogin} type="btnCategory" />
           <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
-            If you have account, you can{" "}
+            Если у вас уже есть аккаунт вы можете{" "}
             <Link
               className={`${style.linkLogin} ${
                 isDark ? style.darkLinkLogin : ""
               }`}
               to="/login"
             >
-              Login
+              Войти
             </Link>
           </p>
         </>

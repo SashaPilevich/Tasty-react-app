@@ -20,7 +20,6 @@ interface IProps extends IPost {
 }
 export const ItemOfCategory = (props: IProps) => {
   const [image, setImage] = useState(props.name);
-
   const { user } = useContext(Context);
   const dispatch = useDispatch();
   const { isLarge, ...post } = props;
@@ -39,7 +38,7 @@ export const ItemOfCategory = (props: IProps) => {
   return (
     <div
       className={`${style.container} ${
-        props.isSelected ? style.selectedItem : ""
+        props.isSelected ? style.selectedItem : style.item
       }`}
     >
       {image ? (
@@ -66,7 +65,7 @@ export const ItemOfCategory = (props: IProps) => {
           <div className={style.info}>
             <div className={style.icons}>
               <img className={style.ico} src={time} alt="timeToCook"></img>
-              <img className={style.ico} src={kcal} alt="timeToCook"></img>
+              <img className={style.ico} src={kcal} alt="kcal"></img>
             </div>
             <div className={style.about}>
               <span className={style.time}>{props.time}</span>
@@ -83,7 +82,6 @@ export const ItemOfCategory = (props: IProps) => {
                     }
                   />
                 </button>
-
                 <button onClick={handleLikeItem}>
                   <Like
                     fill={

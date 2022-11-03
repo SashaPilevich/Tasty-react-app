@@ -1,6 +1,6 @@
 .listContainer {
   display: flex;
-  margin-left: 100px;
+  margin-left: 30px;
 }
 .container {
   display: flex;
@@ -16,9 +16,8 @@
   line-height: 29px;
   letter-spacing: 0.05em;
   color: #ffffff;
-  padding-top: 115px;
-  margin-right: 250px;
-  margin-left: 50px;
+  padding-top: 100px;
+  margin-right: 150px;
 }
 .allPosts,
 .privatePosts {
@@ -27,7 +26,6 @@
   flex-direction: column;
   align-items: flex-start;
 }
-
 a {
   margin-bottom: 30px;
   text-decoration: none;
@@ -74,7 +72,7 @@ li {
   margin-right: 495px;
 }
 .logoutImage {
-  padding-top: 100px;
+  padding-top: 90px;
 }
 .logOut {
   width: 120px;
@@ -91,14 +89,111 @@ li {
   letter-spacing: 0.05em;
   color: #ffffff;
   text-align: left;
-  padding-top: 130px;
+  padding-top: 115px;
   margin-bottom: 55px;
 }
 .loginToggle {
   margin-right: 110px;
-  padding-top: 100px;
+  padding-top: 90px;
 }
 .dark {
   padding-top: 110px;
   margin-left: 100px;
+}
+@media (max-width: 1200px) {
+  ul {
+    margin-left: 20px;
+  }
+  li {
+    margin-right: 200px;
+  }
+}
+
+@media (max-width: 965px) {
+  .burgerMenuNav {
+    margin-right: 10px;
+  }
+  li {
+    margin-right: 150px;
+  }
+}
+@media (max-width: 840px) {
+  .postsPanel {
+    margin-right: 100px;
+  }
+  .loginToggle {
+    margin-right: 50px;
+  }
+}
+@media (max-width: 730px) {
+  .postsPanel {
+    margin-right: 50px;
+    margin-left: 10px;
+  }
+  .loginToggle {
+    margin-right: 20px;
+  }
+  .allPosts,
+  .logOut,
+  ul,
+  li {
+    font-size: 18px;
+  }
+
+  .listContainer {
+    display: flex;
+    margin-left: 10px;
+  }
+}
+@media (max-width: 670px) {
+  ul {
+    padding: 40px 0px 0px 0px;
+  }
+  li {
+    margin-right: 50px;
+  }
+  .dark {
+    padding-top: 40px;
+    margin-left: 30px;
+  }
+  .logoutImage {
+    display: none;
+  }
+}
+@media (max-width: 560px) {
+  .postsPanel {
+    margin-right: 30px;
+    margin-left: 10px;
+  }
+}
+@media (max-width: 475px) {
+  .postsPanel {
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  .allPosts,
+  .logOut,
+  ul,
+  li {
+    font-size: 16px;
+  }
+}
+@media (max-width: 435px) {
+  .logOut {
+    width: 80px;
+  }
+  .listContainer {
+    display: flex;
+    margin-left: 0px;
+  }
+  .postsPanel {
+    margin-right: 5px;
+    margin-left: 0px;
+  }
+  .allPosts,
+  .logOut,
+  ul,
+  li {
+    font-size: 14px;
+  }
 }

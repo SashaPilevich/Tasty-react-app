@@ -2,7 +2,6 @@ import {
   ChangeEventHandler,
   FormEventHandler,
   useContext,
-  useRef,
   useState,
 } from "react";
 import style from "./style.module.css";
@@ -18,17 +17,22 @@ import { setError } from "../../redux/actions/auth";
 import { setIsLoading } from "../../redux/actions/category";
 
 export const Login = () => {
-  const isLoading = useSelector(
-    (state: TState) => state.categoryReducer.isLoading
-  );
   const error = useSelector((state: TState) => state.authReducer.setError);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isDark, setUser } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const navigate = useNavigate();
-  const { isDark, setUser } = useContext(Context);
+  const [showPassword, setShowPassword] = useState(true);
+
+  const openPassword = () => {
+    setShowPassword(false);
+  };
+  const closePassword = () => {
+    setShowPassword(true);
+  };
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -134,29 +138,44 @@ export const Login = () => {
             error={emailError}
           />
         </div>
-        <div className={style.inputContainer}>
-          <Input
-            label="Password"
-            value={password}
-            onChange={handlePassword}
-            uniqType={"inputForRegistration"}
-            type="password"
-            onBlur={handlePasswordBlur}
-            onFocus={handlePasswordFocus}
-            error={passwordError}
-          />
-        </div>
+        {showPassword ? (
+          <div className={style.inputPasswordShow} onClick={openPassword}>
+            <Input
+              uniqType="inputForRegistration"
+              label="Пароль"
+              onChange={handlePassword}
+              value={password}
+              error={passwordError}
+              onBlur={handlePasswordBlur}
+              onFocus={handlePasswordFocus}
+              type="password"
+            />
+          </div>
+        ) : (
+          <div className={style.inputPasswordClose} onClick={closePassword}>
+            <Input
+              uniqType="inputForRegistration"
+              label="Пароль"
+              onChange={handlePassword}
+              value={password}
+              error={passwordError}
+              onBlur={handlePasswordBlur}
+              onFocus={handlePasswordFocus}
+              type="text"
+            />
+          </div>
+        )}
         <p className={style.textError}>{error}</p>
-        <Button type="btnCategory" onClick={() => {}} label={"Login"} />
+        <Button type="btnCategory" onClick={() => {}} label={"Войти"} />
         <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
-          Forgot your password?{" "}
+          Забыли пароль?{" "}
           <Link
             to="/resetpassword"
             className={`${style.linkLogin} ${
               isDark ? style.darkLinkLogin : ""
             }`}
           >
-            Reset Password
+            Сбросить пароль
           </Link>
         </p>
       </div>

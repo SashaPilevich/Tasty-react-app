@@ -1,6 +1,5 @@
 .container {
   display: flex;
-  /* background-color: goldenrod; */
   width: 1175px;
   height: 40px;
   margin-left: 140px;
@@ -10,13 +9,65 @@
 }
 .tabContainer {
   display: flex;
-  /* width: 220px; */
-  /* margin-left: 10px; */
 }
-
 .ico {
   width: 32px;
   height: 32px;
   margin-right: 0px;
   margin-top: 5px;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    width: 93%;
+    margin-left: 30px;
+  }
+}
+@media (max-width: 1024px) {
+  .container {
+    width: 90%;
+    margin-left: 70px;
+    border-bottom: none;
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    margin-left: 50px;
+  }
+}
+@media (max-width: 630px) {
+  .container {
+    margin-left: 30px;
+  }
+}
+@media (max-width: 480px) {
+  .container {
+    width: 80%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: none;
+    margin-left: 50px;
+    margin-bottom: 30px;
+  }
+  .tabContainer {
+    flex-direction: column;
+  }
+  .ico {
+    display: none;
+  }
+  .like {
+    display: none;
+  }
+}
+@media (max-width: 410px) {
+  .container {
+    width: 90%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: none;
+    margin-left: 20px;
+    margin-bottom: 30px;
+  }
 }

@@ -1,10 +1,7 @@
-import { MouseEvent, MouseEventHandler, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchSelectedRecipe } from "../../api/recipe";
-
-import { TState } from "../../redux/store";
-import { IPost, IRecipe } from "../../types/post";
+import { IRecipe } from "../../types/post";
 import { Button } from "../Button";
 import { Container } from "../Container";
 import { Header } from "../Header";
@@ -24,16 +21,16 @@ export const ShoppingList = () => {
     navigate(-1);
   };
   return (
-    <div>
+    <div className={style.container}>
       {post.length !== 0
         ? post.map((item) => {
             return (
-              <Container>
+              <Container key={item.id}>
                 <Header />
                 <div className={style.btnContainer}>
-                  <Button label={"Back"} onClick={goBack} type={"btnBack"} />
+                  <Button label={"Назад"} onClick={goBack} type={"btnBack"} />
                 </div>
-                <h2 className={style.title}>Shopping list</h2>
+                <h2 className={style.title}>Шоппинг лист</h2>
                 <Recipe
                   key={item.id}
                   id={item.id}

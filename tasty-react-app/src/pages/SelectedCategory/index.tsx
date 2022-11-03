@@ -13,22 +13,16 @@ import { setSelectedCategory } from "../../redux/actions/category";
 
 export const SelectedCategory = () => {
   const selectedCategory = useSelector(
-    (state: TState) => state.categoryReducer.selectedCategory
+    (state: TState) => state.categoryReducer.selectCategory
   );
   const dispatch = useDispatch();
   const params: any = useParams();
   useEffect(() => {
+    dispatch(setSelectedCategory([]));
     fetchSelectedCategory(params.id).then((values) => {
       dispatch(setSelectedCategory(values[params.id]));
     });
   }, []);
-  // const [selectedCategory, setSelectedCategory] = useState<IPost[]>([]);
-
-  // useEffect(() => {
-  //   fetchSelectedCategory(params.id).then((values) => {
-  //     setSelectedCategory(values[params.id]);
-  //   });
-  // }, []);
 
   return (
     <Container>

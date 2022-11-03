@@ -14,7 +14,7 @@ export const RecipePage = () => {
     <Container>
       <Header />
       <div className={style.btnContainer}>
-        <Button label={"Back"} onClick={navigateBack} type="btnBack" />
+        <Button label={"Назад"} onClick={navigateBack} type="btnBack" />
       </div>
       <RecipeTabs />
     </Container>

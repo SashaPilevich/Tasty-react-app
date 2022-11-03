@@ -15,16 +15,19 @@ export const validateEmail = (value: string): any => {
   if (value === "") {
     return "Обязательное поле";
   }
-  if (!emailRegExp.test(value)) {
-    return "Неправильный формат email";
-  }
   if (!latinSymbol.test(value)) {
     return "Используйте латинские символы";
+  }
+  if (!emailRegExp.test(value)) {
+    return "Неправильный формат email";
   }
   return "";
 };
 
 export const validatePassword = (value: string) => {
+  if (value === "") {
+    return "Обязательное поле";
+  }
   if (!passwordRegExp.test(value)) {
     return "Пароль должен содержать цифры и буквы в разных регистрах";
   }

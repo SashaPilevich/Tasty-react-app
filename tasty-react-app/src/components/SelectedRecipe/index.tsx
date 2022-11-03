@@ -3,15 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchSelectedRecipe } from "../../api/recipe";
 import { Context } from "../../App";
 import { Button } from "../../components/Button";
-import { IPost, IRecipe } from "../../types/post";
+import { IRecipe } from "../../types/post";
 import { Recipe } from "../Recipe";
-import { RecipeTabs } from "../RecipeTabs";
 import style from "./style.module.css";
 
 export const SelectedRecipe = () => {
   const { isDark } = useContext(Context);
-
-  const params = useParams(); //показывает какие параметры переданы через url-т.е. то что в роуте написано после двоеточия
+  const params = useParams();
   const [post, setPost] = useState<IRecipe[]>([]);
 
   useEffect(() => {
@@ -34,7 +32,7 @@ export const SelectedRecipe = () => {
                 navigateToShopList(item.id);
               };
               return (
-                <>
+                <div key={item.id}>
                   <Recipe
                     key={item.id}
                     id={item.id}
@@ -44,11 +42,11 @@ export const SelectedRecipe = () => {
                     quantity={item.quantity}
                   />
                   <Button
-                    label={"Add to shopping list"}
+                    label={"Добавить в шоппинг лист"}
                     onClick={clickPost}
                     type="btnShop"
                   />
-                </>
+                </div>
               );
             })
           : ""}

@@ -8,13 +8,11 @@
   flex-direction: column;
 }
 .title {
-  /* font-family: "Kaushan Script", "sans-serif"; */
   font-family: "Poppins", "sans-serif";
   font-style: normal;
   font-weight: 700;
   font-size: 60px;
   line-height: 74px;
-  /* color: #ffffff; */
   color: rgb(234, 172, 16);
   margin-bottom: 50px;
   padding-top: 240px;
@@ -26,10 +24,31 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 26px;
-  /* or 162% */
   width: 500px;
   margin-left: 280px;
   text-align: left;
   color: #ffffff;
   margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+  .title,
+  .textAbout {
+    margin-left: 150px;
+  }
+  .textAbout {
+    width: 300px;
+  }
+}
+@media (max-width: 600px) {
+  .textAbout {
+    width: 200px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 425px) {
+  .title,
+  .textAbout {
+    margin-left: 50px;
+  }
 }

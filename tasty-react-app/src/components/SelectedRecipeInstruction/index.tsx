@@ -2,16 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchSelectedRecipe } from "../../api/recipe";
 import { Context } from "../../App";
-import { Button } from "../../components/Button";
-import { IPost, IRecipe } from "../../types/post";
+import { IRecipe } from "../../types/post";
 import { Recipe } from "../Recipe";
-import { RecipeTabs } from "../RecipeTabs";
 import style from "./style.module.css";
 
 export const SelectedRecipeInstruction = () => {
   const { isDark } = useContext(Context);
 
-  const params: any = useParams(); //показывает какие параметры переданы через url-т.е. то что в роуте написано после двоеточия
+  const params: any = useParams();
   const [post, setPost] = useState<IRecipe[]>([]);
 
   useEffect(() => {

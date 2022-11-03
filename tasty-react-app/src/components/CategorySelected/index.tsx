@@ -21,7 +21,9 @@ export const CategorySelected = (props: IProps) => {
   return (
     <div className={style.mainContainer}>
       {props.isLikeSave ? null : (
-        <Button label={"Back"} onClick={backToAllPost} type="btnBack" />
+        <div className={style.forBtnBack}>
+          <Button label={"Назад"} onClick={backToAllPost} type="btnBack" />
+        </div>
       )}
 
       <div className={style.container}>
@@ -30,7 +32,7 @@ export const CategorySelected = (props: IProps) => {
             navigateToSelectedRecipe(item.id);
           };
           return (
-            <div className={style.wrapper}>
+            <div className={style.wrapper} key={item.id}>
               <ItemOfCategory
                 isSelected={true}
                 isCategory={true}

@@ -39,5 +39,52 @@
 .textError {
   color: #254050;
   font-weight: 700;
-  /* margin-bottom: 40px; */
+}
+.inputPasswordShow {
+  margin-bottom: 20px;
+  position: relative;
+}
+.inputPasswordShow::before {
+  content: "";
+  position: absolute;
+  top: 45px;
+  right: 20px;
+  margin: auto 0;
+  width: 25px;
+  height: 25px;
+  background: url("show.png") no-repeat;
+  background-position: right;
+  background-size: cover;
+  cursor: pointer;
+}
+.inputPasswordClose {
+  margin-bottom: 20px;
+  position: relative;
+}
+.inputPasswordClose::before {
+  content: "";
+  position: absolute;
+  top: 45px;
+  right: 20px;
+  margin: auto 0;
+  width: 25px;
+  height: 25px;
+  background: url("close.png") no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .inputPasswordShow::before,
+  .inputPasswordClose::before {
+    top: 43px;
+    right: 40px;
+    width: 20px;
+    height: 20px;
+  }
+}
+@media (max-width: 630px) {
+  .inputPasswordShow::before,
+  .inputPasswordClose::before {
+    right: 60px;
+  }
 }

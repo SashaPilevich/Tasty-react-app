@@ -6,9 +6,36 @@
   letter-spacing: 0.03em;
   color: rgb(241, 178, 16);
   text-align: center;
-  margin-bottom: 30px;
+  margin: 0px 0px 20px 0px;
 }
 .btnContainer {
   padding-top: 17px;
-  margin-right: 17%;
+}
+@media (max-width: 1200px) {
+  .container {
+    width: 100%;
+  }
+}
+@media (max-width: 700px) {
+  .btnContainer {
+    margin-left: 30px;
+  }
+}
+@media (max-width: 520px) {
+  .btnContainer {
+    padding-top: 17px;
+    margin-left: 40px;
+  }
+}
+@media (max-width: 450px) {
+  .btnContainer {
+    padding-top: 17px;
+    margin-left: 60px;
+  }
+}
+@media (max-width: 375px) {
+  .btnContainer {
+    padding-top: 17px;
+    margin-left: 80px;
+  }
 }

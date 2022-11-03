@@ -3,19 +3,45 @@
   flex-direction: column;
   align-items: center;
 }
-.title,
-.userTitle {
+.title {
   font-family: "Raleway";
   font-weight: 700;
   font-size: 45px;
   line-height: 145.2%;
   letter-spacing: 0.03em;
   color: rgb(241, 178, 16);
-
-  text-align: center;
-  margin-bottom: 30px;
-}
-.userTitle {
   text-align: left;
+  margin: 10px 0px 30px 0px;
   margin-left: 140px;
+}
+
+.forInput {
+  margin-left: 57%;
+}
+@media (max-width: 1200px) {
+  .title {
+    margin: 10px 0px 30px 30px;
+  }
+  .forInput {
+    margin-left: 57%;
+  }
+}
+@media (max-width: 1024px) {
+  .title {
+    margin: 10px 0px 30px 60px;
+  }
+}
+@media (max-width: 768px) {
+  .forInput {
+    margin-left: 45%;
+  }
+}
+@media (max-width: 630px) {
+  .forInput {
+    margin-left: 0%;
+  }
+  .title {
+    margin: 10px 0px 30px 0px;
+    text-align: center;
+  }
 }

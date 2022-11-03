@@ -7,20 +7,22 @@ export interface ICategoryState {
   isLoading: boolean;
   likedRecipes: IPost[];
   savedRecipes: IPost[];
-  selectedCategory: IPost[];
+  selectCategory: IPost[];
   shopItem: IShop[];
   localItem: string[];
   showLoadMore: boolean;
+  setPage: number;
 }
 export const defaultState: ICategoryState = {
   allCategories: [],
   isLoading: false,
   likedRecipes: [],
   savedRecipes: [],
-  selectedCategory: [],
+  selectCategory: [],
   shopItem: [],
   localItem: [],
   showLoadMore: true,
+  setPage: 1,
 };
 
 export const categoryReducer = (state = defaultState, action: AnyAction) => {
@@ -46,26 +48,20 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
         ...state,
         localItem: action.products,
       };
-
-    case ACTIONS.SET_SHOP_ITEM:
-      const selectShopItem = action.product;
-      const newShopItem = state.localItem.map((ingredient: string) => {
-        console.log(ingredient);
-        const newselectShopItem = selectShopItem.find((item: IShop) => {
-          if (item.title === ingredient) {
-            return item;
-          }
-        });
-
-        return newselectShopItem;
-      });
+    case ACTIONS.SET_PAGE:
       return {
         ...state,
-        shopItem: newShopItem,
+        setPage: action.page,
+      };
+
+    case ACTIONS.SET_SHOP_ITEM:
+      return {
+        ...state,
+        shopItem: action.product,
       };
 
     case ACTIONS.SET_SELECTED_CATEGORY:
-      const newSelectedCategories = action.selectedCategory.map(
+      const newSelectedCategories = action.selectedCategory?.map(
         (post: IPost) => {
           const likedRecipes = state.likedRecipes.find((item) => {
             if (item.id === post.id) {
@@ -92,7 +88,7 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
 
       return {
         ...state,
-        selectedCategory: newSelectedCategories,
+        selectCategory: newSelectedCategories,
       };
 
     case ACTIONS.SET_LIKED_RECIPE:
@@ -108,7 +104,7 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
           })
         : state.likedRecipes.concat([{ ...recipeLike, liked: true }]);
 
-      const newAllRecipeLike = state.selectedCategory.map((recipe) => {
+      const newAllRecipeLike = state.selectCategory.map((recipe) => {
         if (recipe.id === action.recipes.id) {
           recipe.liked = !recipe.liked;
         }
@@ -117,7 +113,7 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
       return {
         ...state,
         likedRecipes: newLikedRecipe,
-        selectedCategory: newAllRecipeLike,
+        selectCategory: newAllRecipeLike,
       };
 
     case ACTIONS.SET_SAVE_RECIPE:
@@ -133,7 +129,7 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
           })
         : state.savedRecipes.concat([{ ...recipeSave, saved: true }]);
 
-      const newAllRecipeSave = state.selectedCategory.map((recipe) => {
+      const newAllRecipeSave = state.selectCategory.map((recipe) => {
         if (recipe.id === action.recipes.id) {
           recipe.saved = !recipe.saved;
         }
@@ -142,7 +138,7 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
       return {
         ...state,
         savedRecipes: newSaveRecipe,
-        selectedCategory: newAllRecipeSave,
+        selectCategory: newAllRecipeSave,
       };
 
     default:

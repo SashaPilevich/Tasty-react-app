@@ -41,16 +41,14 @@ export const ResetPassword = () => {
     <Container>
       <Header />
       <InfoTemplate
-        title={"Reset password"}
-        labelBtn="Reset"
+        title={"Сброс пароля"}
+        labelBtn="Сменить"
         onClick={sendEmail}
       >
         <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
-          Please enter the email
+          Пожалуйста введите email
         </p>
-        <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
-          for your account
-        </p>
+
         <div className={style.inputContainer}>
           <Input
             value={email}
@@ -62,12 +60,12 @@ export const ResetPassword = () => {
         </div>
       </InfoTemplate>
       <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
-        Return to{" "}
+        Вернуться к{" "}
         <Link
           className={`${style.linkLogin} ${isDark ? style.darkLinkLogin : ""}`}
           to="/login"
         >
-          Login
+          авторизации
         </Link>
       </p>
     </Container>

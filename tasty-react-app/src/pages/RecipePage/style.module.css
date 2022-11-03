@@ -1,4 +1,32 @@
 .btnContainer {
   padding-top: 30px;
-  margin-right: 20%;
+  margin-right: 17%;
+}
+@media (max-width: 700px) {
+  .btnContainer {
+    margin-left: 30px;
+  }
+}
+@media (max-width: 520px) {
+  .btnContainer {
+    padding-top: 17px;
+    margin-left: 40px;
+  }
+}
+@media (max-width: 450px) {
+  .btnContainer {
+    padding-top: 17px;
+    margin-left: 60px;
+  }
+}
+@media (max-width: 375px) {
+  .btnContainer {
+    padding-top: 17px;
+    margin-left: 80px;
+  }
+}
+@media (max-width: 450px) {
+  .containerIngredient {
+    width: 90%;
+  }
 }

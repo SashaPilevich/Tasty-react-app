@@ -18,18 +18,18 @@ export const RegisterSuccess = () => {
     <Container>
       <Header />
       <InfoTemplate
-        title={"Registration Confirmation"}
+        title={"Регистрация прошла успешно"}
         onClick={navigateToHome}
-        labelBtn={"Home"}
+        labelBtn={"На главную"}
       >
         <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
-          Please activate your account with
+          Пожалуйста активируйте ваш аккаунт
         </p>
         <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
-          the activation link in the email{" "}
+          по ссылке на почте{" "}
         </p>
         <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
-          Please, check your email
+          Пожалуйста,проверьте ваш email
         </p>
       </InfoTemplate>
     </Container>

@@ -5,3 +5,33 @@
   border: 1px solid gray;
   margin-left: 70px;
 }
+@media (max-width: 1200px) {
+  .container,
+  .darkContainer {
+    width: 90%;
+    margin-left: 30px;
+  }
+}
+@media (max-width: 1200px) {
+  .container,
+  .darkContainer {
+    width: 90%;
+    padding: 0px;
+    margin-left: 30px;
+  }
+}
+@media (max-width: 700px) {
+  .container,
+  .darkContainer {
+    width: 90%;
+    margin-left: 30px;
+  }
+}
+@media (max-width: 525px) {
+  .container,
+  .darkContainer {
+    width: 90%;
+    margin-left: 20px;
+    height: 600px;
+  }
+}

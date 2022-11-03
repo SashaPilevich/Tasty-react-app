@@ -36,7 +36,6 @@ const getInputStyle = (
   if (uniqType === "burgerMenu") {
     return style.burgerMenu;
   }
-
   if (uniqType === "primary") {
     return style.primary;
   }

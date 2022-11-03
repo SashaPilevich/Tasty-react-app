@@ -6,9 +6,11 @@ import { Button } from "../Button";
 import { useNavigate } from "react-router-dom";
 import { NotificationManager } from "react-notifications";
 import { Context } from "../../App";
+import { useDispatch } from "react-redux";
+import { loadShop } from "../../redux/actions/category";
 
 interface IProps extends IRecipe {
-  onClickDelete?: (ingr: string) => void;
+  onClickDelete?: (ingredient: string) => void;
 }
 
 export const Recipe = (props: IProps) => {
@@ -19,6 +21,7 @@ export const Recipe = (props: IProps) => {
   const [quantity, setQuantity] = useState(props.quantity);
   const { isDark } = useContext(Context);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleError: ReactEventHandler<HTMLImageElement> = () => {
     setImage(picture1);
   };
@@ -47,10 +50,50 @@ export const Recipe = (props: IProps) => {
     );
     navigate("/myshoplist");
     localStorage.setItem("shopList", JSON.stringify(unique(myShopList)));
+    dispatch(loadShop() as any);
   };
 
   return (
     <>
+      {ingredients ? (
+        <div className={style.ingredientsShop}>
+          {props.onClickDelete ? (
+            <>
+              {ingredients.map((item) => {
+                const deleteItem = () => {
+                  clickDelete(item);
+                };
+
+                return (
+                  <div className={style.controlIngredient}>
+                    <p
+                      className={`${style.itemIngredientsInShop} ${
+                        isDark
+                          ? style.darkItemInShop
+                          : style.itemIngredientsInShop
+                      }`}
+                    >
+                      {item}
+                    </p>
+                    <Button label="X" onClick={deleteItem} type="btnDelete" />
+                  </div>
+                );
+              })}
+              <div className={style.btnContainer}>
+                <Button
+                  label={"Сохранить в мой шоппинг лист"}
+                  onClick={clickSave}
+                  type="btnSave"
+                />
+              </div>
+            </>
+          ) : (
+            ""
+          )}
+        </div>
+      ) : (
+        ""
+      )}
       <h2 className={style.recipeTitle}>{props.title}</h2>
       <div className={style.recipeItem}>
         {image ? (
@@ -67,55 +110,21 @@ export const Recipe = (props: IProps) => {
         {ingredients ? (
           <div className={style.containerIngredients}>
             <div className={style.ingredients}>
-              {props.onClickDelete ? (
-                <>
-                  {ingredients.map((item) => {
-                    const deleteItem = () => {
-                      clickDelete(item);
-                    };
-
+              {props.onClickDelete
+                ? ""
+                : ingredients?.map((item) => {
                     return (
-                      <div className={style.controlIngredient}>
+                      <div className={style.ingredientsItem}>
                         <p
-                          className={`${style.itemIngredientsInShop} ${
-                            isDark
-                              ? style.darkItemInShop
-                              : style.itemIngredientsInShop
+                          className={`${style.itemIngredients} ${
+                            isDark ? style.darkItem : style.itemIngredients
                           }`}
                         >
                           {item}
                         </p>
-                        <Button
-                          label="X"
-                          onClick={deleteItem}
-                          type="btnDelete"
-                        />
                       </div>
                     );
                   })}
-                  <div className={style.btnContainer}>
-                    <Button
-                      label={"Save to my shopping list"}
-                      onClick={clickSave}
-                      type="btnSave"
-                    />
-                  </div>
-                </>
-              ) : (
-                ingredients?.map((item) => {
-                  return (
-                    <div className={style.ingredients}>
-                      <p
-                        className={`${style.itemIngredients} ${
-                          isDark ? style.darkItem : style.itemIngredients
-                        }`}
-                      >
-                        {item}
-                      </p>
-                    </div>
-                  );
-                })
-              )}
             </div>
             <div className={style.quantity}>
               {quantity

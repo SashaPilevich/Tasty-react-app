@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useContext, useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button";
 import { Input } from "../Input";
@@ -29,7 +29,6 @@ export const Delivery = () => {
   const [dateError, setDateError] = useState("");
   const [telNumberError, setTelNumberError] = useState("");
 
-  //cityStreet
   const handleCityStreet: ChangeEventHandler<HTMLInputElement> = (event) => {
     const error = validateRequired(event.target.value);
     if (error) {
@@ -47,7 +46,6 @@ export const Delivery = () => {
     setCityStError("");
   };
 
-  //houseAppart
   const handleHouseApartment: ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
@@ -67,7 +65,6 @@ export const Delivery = () => {
     setHouseApartmentError("");
   };
 
-  //entranceFloor
   const handleEntranceFloor: ChangeEventHandler<HTMLInputElement> = (event) => {
     const error = validateAddress(event.target.value);
     if (error) {
@@ -85,7 +82,6 @@ export const Delivery = () => {
     setEntranceFloorError("");
   };
 
-  //date
   const handleDate: ChangeEventHandler<HTMLInputElement> = (event) => {
     const error = validateRequired(event.target.value);
     if (error) {
@@ -103,7 +99,6 @@ export const Delivery = () => {
     setDateError("");
   };
 
-  //phoneNumber
   const handleTelNumber: ChangeEventHandler<HTMLInputElement> = (event) => {
     const error = validatePhoneNumber(event.target.value);
     if (error) {
@@ -201,7 +196,7 @@ export const Delivery = () => {
           />
         </div>
       </div>
-      <Button label={"Отправить"} onClick={submit} type={"btnShop"} />
+      <Button label={"Отправить"} onClick={submit} type={"btnBuy"} />
     </div>
   );
 };

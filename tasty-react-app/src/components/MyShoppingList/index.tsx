@@ -1,4 +1,4 @@
-import { SetStateAction, useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
@@ -20,7 +20,6 @@ export const MyShoppingList = () => {
 
   let shopArray = [];
   let isList = localStorage.getItem("shopList");
-
   useEffect(() => {
     if (isList) {
       shopArray = JSON.parse(isList);
@@ -48,27 +47,29 @@ export const MyShoppingList = () => {
     <Container>
       <Header />
       <div className={style.btnContainer}>
-        <Button label={"Back"} onClick={goBack} type={"btnBack"} />
+        <Button label={"Назад"} onClick={goBack} type={"btnBack"} />
       </div>
-      <h2 className={style.title}>My shopping list</h2>
-      {localItem.map((item) => {
-        const deleteItem = () => {
-          clickDelete(item);
-        };
-        return (
-          <div className={style.container}>
-            <p
-              className={`${style.ingredientsItem} ${
-                isDark ? style.darkItem : style.ingredientsItem
-              }`}
-            >
-              {item}
-            </p>
-            <Button label="X" onClick={deleteItem} type="btnDelete" />
-          </div>
-        );
-      })}
-      <Button label={"BUY"} onClick={clickBuy} type="btnShop" />
+      <h2 className={style.title}>Мой шоппинг лист</h2>
+      <div className={style.container}>
+        {localItem.map((item) => {
+          const deleteItem = () => {
+            clickDelete(item);
+          };
+          return (
+            <div className={style.containerIngredient}>
+              <p
+                className={`${style.ingredientsItem} ${
+                  isDark ? style.darkItem : style.ingredientsItem
+                }`}
+              >
+                {item}
+              </p>
+              <Button label="X" onClick={deleteItem} type="btnDelete" />
+            </div>
+          );
+        })}
+        <Button label={"Купить"} onClick={clickBuy} type="btnBuy" />
+      </div>
     </Container>
   );
 };
