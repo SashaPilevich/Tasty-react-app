@@ -181,5 +181,56 @@ describe("Category Reducer:", () => {
       shopItem: undefined,
     });
   });
+  test("ACTIONS.SET_LIKED_RECIPE:при нажатии на like возвращает like true", () => {
+    expect(
+      categoryReducer(defaultState, {
+        type: ACTIONS.SET_LIKED_RECIPE,
+        recipes: {
+          isSelected: true,
+          isCategory: true,
+          id: 1,
+          name: "https://i.ibb.co/GMwZdBW/pancakes.jpg",
+          title: "Блинчики с кленовым сиропом",
+          time: "40 минут",
+          kcal: "733 ккал",
+          liked: false,
+        },
+      })
+    ).toEqual({
+      ...defaultState,
+      likedRecipes: [
+        {
+          isSelected: true,
+          isCategory: true,
+          id: 1,
+          name: "https://i.ibb.co/GMwZdBW/pancakes.jpg",
+          title: "Блинчики с кленовым сиропом",
+          time: "40 минут",
+          kcal: "733 ккал",
+          liked: true,
+        },
+      ],
+    });
+  });
+  test("ACTIONS.SET_SAVE_RECIPE:при нажатии на save,на рецепт который уже сохранен возвращает false", () => {
+    expect(
+      categoryReducer(defaultState, {
+        type: ACTIONS.SET_SAVE_RECIPE,
+        recipes: {
+          isSelected: true,
+          isCategory: true,
+          id: 1,
+          name: "https://i.ibb.co/GMwZdBW/pancakes.jpg",
+          title: "Блинчики с кленовым сиропом",
+          time: "40 минут",
+          kcal: "733 ккал",
+          saved: true,
+        },
+      })
+    ).toEqual({
+      ...defaultState,
+      savedRecipes: [],
+    });
+  });
 });
 export {};
