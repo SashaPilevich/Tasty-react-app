@@ -1,22 +1,19 @@
-import { ChangeEventHandler, useContext, useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button";
 import { CategoryList } from "../Category/List";
 import { Preloader } from "../Preloader";
 import { useDispatch, useSelector } from "react-redux";
 import { TState } from "../../redux/store";
-import { Context } from "../../App";
 import { loadMorePosts } from "../../redux/actions/category";
 import { IPost } from "../../types/post";
 import { fetchSelectedCategory } from "../../api/recipe";
-import { SelectedCategory } from "../../pages/SelectedCategory";
 import { Input } from "../Input";
+import { NotificationManager } from "react-notifications";
 import style from "./style.module.css";
 
 export const AllCategory = () => {
   const [searchText, setSearchText] = useState("");
-  const [search, setSearch] = useState(false);
-  const { user } = useContext(Context);
 
   const categories = useSelector(
     (state: TState) => state.categoryReducer.allCategories
@@ -49,61 +46,50 @@ export const AllCategory = () => {
       });
     }
     arrList.filter((item: IPost) => {
-      if (text === item.title.toLowerCase()) {
+      if (text === item.title.toLowerCase().substring(0, 3)) {
         fetchSelectedCategory(item.id).then((values) => {
           if (item.id) {
-            setSearch(true);
             searchItems.push(values[item.id]);
             navigate(`/selected_category/${item.id}`);
           }
           return searchItems;
         });
-        setSearch(true);
         return searchItems;
-      } else {
-        setSearch(false);
+      }
+      if (text.length >= 4 && searchItems.length === 0) {
+        navigate("/recipenotfound");
       }
     });
   };
 
   return (
     <>
-      {search ? (
-        <SelectedCategory />
-      ) : (
-        <>
-          <div className={style.infoPanel}>
-            <div className={style.forInput}>
-              <Input
-                value={searchText}
-                onChange={hangleSearchText}
-                uniqType="delivery"
-                placeholder="Найди свой рецепт..."
-              />
-            </div>
-            <h2 className={style.title}>КАТЕГОРИИ РЕЦЕПТОВ</h2>
-          </div>
-          {!isLoading ? (
-            <div className={style.container}>
-              <CategoryList posts={categories} />
-              {showLoadMore ? (
-                <Button
-                  label={"Загрузить ещё"}
-                  onClick={loadMore}
-                  type="btnCategory"
-                />
-              ) : (
-                <Button
-                  label={"Выйти"}
-                  onClick={backToMain}
-                  type="btnCategory"
-                />
-              )}
-            </div>
+      <div className={style.infoPanel}>
+        <div className={style.forInput}>
+          <Input
+            value={searchText}
+            onChange={hangleSearchText}
+            uniqType="delivery"
+            placeholder="Найди свой рецепт..."
+          />
+        </div>
+        <h2 className={style.title}>КАТЕГОРИИ РЕЦЕПТОВ</h2>
+      </div>
+      {!isLoading ? (
+        <div className={style.container}>
+          <CategoryList posts={categories} />
+          {showLoadMore ? (
+            <Button
+              label={"Загрузить ещё"}
+              onClick={loadMore}
+              type="btnCategory"
+            />
           ) : (
-            <Preloader />
+            <Button label={"Выйти"} onClick={backToMain} type="btnCategory" />
           )}
-        </>
+        </div>
+      ) : (
+        <Preloader />
       )}
     </>
   );
