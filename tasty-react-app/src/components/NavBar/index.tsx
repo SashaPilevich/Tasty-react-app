@@ -5,10 +5,7 @@ import { DarkModeToggle } from "../DarkModeToggle";
 import img from "./Iconlogout.svg";
 import style from "./style.module.css";
 
-interface IProps {
-  onClose: () => void;
-}
-export const NavBar = ({ onClose }: IProps) => {
+export const NavBar = () => {
   const { isDark, setIsDark, user, setUser } = useContext(Context);
   const navigate = useNavigate();
   const handleOnChange = () => {
@@ -25,45 +22,45 @@ export const NavBar = ({ onClose }: IProps) => {
   };
 
   return (
-    <div className={style.listContainer}>
-      <div className={style.burgerMenuNav} onClick={onClose}>
-        <span className={style.linearNav1}></span>
-        <span className={style.linearNav2}></span>
-      </div>
+    <>
       {user ? (
         <div className={style.container}>
           <div className={style.postsPanel}>
             <div className={style.allPosts}>
-              <Link to="/category">Все категории</Link>
-              <Link to="/myshoplist">Мой шоппинг лист</Link>
+              <Link to="/category">All categories</Link>
+              <Link to="/myshoplist">My shopping list</Link>
             </div>
           </div>
-          <button className={style.logOut} onClick={logOut}>
-            Выйти
-          </button>
-          <img className={style.logoutImage} src={img} alt="icon logout"></img>
           <div className={style.loginToggle}>
             <DarkModeToggle inputChecked={isDark} onChange={handleOnChange} />
+            <button className={style.logOut} onClick={logOut}>
+              Log out
+            </button>
+            <img
+              className={style.logoutImage}
+              src={img}
+              alt="icon logout"
+            ></img>
           </div>
         </div>
       ) : (
-        <>
+        <div className={style.linkContainer}>
           <ul>
-            <li>
-              <Link to="/category">Все категории</Link>
+            <li className={style.link}>
+              <Link to="/category">All Categories</Link>
             </li>
-            <li>
-              <Link to="/login">Войти</Link>
+            <li className={style.link}>
+              <Link to="/login">Login</Link>
             </li>
-            <li>
-              <Link to="/registration">Регистрация</Link>
+            <li className={style.link}>
+              <Link to="/registration">Registration</Link>
             </li>
           </ul>
           <div className={style.dark}>
             <DarkModeToggle inputChecked={isDark} onChange={handleOnChange} />
           </div>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 };

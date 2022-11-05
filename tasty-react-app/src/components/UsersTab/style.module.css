@@ -30,24 +30,15 @@
     border-bottom: none;
   }
 }
+
 @media (max-width: 768px) {
   .container {
-    margin-left: 50px;
-  }
-}
-@media (max-width: 630px) {
-  .container {
-    margin-left: 30px;
-  }
-}
-@media (max-width: 480px) {
-  .container {
-    width: 80%;
+    width: 90%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-bottom: none;
-    margin-left: 50px;
+    margin-left: 20px;
     margin-bottom: 30px;
   }
   .tabContainer {
@@ -58,16 +49,5 @@
   }
   .like {
     display: none;
-  }
-}
-@media (max-width: 410px) {
-  .container {
-    width: 90%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-bottom: none;
-    margin-left: 20px;
-    margin-bottom: 30px;
   }
 }

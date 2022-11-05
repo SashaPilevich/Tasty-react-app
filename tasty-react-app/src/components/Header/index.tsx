@@ -1,55 +1,48 @@
 import style from "./style.module.css";
-import img from "./ico.svg";
 import { useContext, useState } from "react";
 import { NavBar } from "../NavBar";
 import { Context } from "../../App";
 
 export const Header = () => {
-  const { isDark } = useContext(Context);
   const [clickMenu, setClickMenu] = useState(false);
-  const [headerStyle, setHeaderStyle] = useState("header");
-  const [menuStyle, setMenuStyle] = useState("visible");
-  const [navStyle, setNavStyle] = useState("hiddenNav");
   const [linearStyle, setLinearStyle] = useState("linear");
-  const styleHiddenMenu = () => {
-    setMenuStyle("hidden");
-  };
-  const styleVisibleNav = () => {
-    setNavStyle("visibleNav");
-    setHeaderStyle("headerMax");
+  const [headerStyle, setHeaderStyle] = useState("header");
+  const [navStyle, setNavStyle] = useState("navBar");
+
+  const handleOpen = () => {
+    if (!clickMenu) {
+      openNavBar();
+    } else {
+      closeNavBar();
+    }
   };
   const openNavBar = () => {
-    if (!clickMenu) {
-      setLinearStyle("open");
-      setTimeout(styleHiddenMenu, 500);
-      setTimeout(styleVisibleNav, 500);
-    }
+    setLinearStyle("open");
     setClickMenu(true);
+    setHeaderStyle("headerMax");
+    setNavStyle("navOpen");
   };
   const closeNavBar = () => {
-    if (clickMenu) {
-      setMenuStyle("visible");
-      setNavStyle("hiddenNav");
-      setHeaderStyle("header");
+    setNavStyle("navbar");
+    setHeaderStyle("header");
+    setLinearStyle("linear");
+
+    setTimeout(() => {
       setClickMenu(false);
-      setLinearStyle("linear");
-    }
+    }, 500);
   };
+
   return (
     <header className={style[headerStyle]}>
-      <div className={style[menuStyle]}>
-        <div className={style.burgerMenu} onClick={openNavBar}>
+      <div className={style.visible}>
+        <div className={style.burgerMenu} onClick={handleOpen}>
           <div className={style[linearStyle]}></div>
         </div>
       </div>
       {clickMenu ? (
-        <div
-          className={`${style[navStyle]} ${
-            isDark ? style.visibleNavDark : style[navStyle]
-          } }`}
-        >
-          <NavBar onClose={closeNavBar} />
-        </div>
+        <nav className={style[navStyle]}>
+          <NavBar />{" "}
+        </nav>
       ) : null}
     </header>
   );
