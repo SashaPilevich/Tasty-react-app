@@ -25,6 +25,7 @@ export const CategoryList = (props: IProps) => {
               id={item.id}
               name={item.name}
               title={item.title}
+              back={item.back}
             />
           </div>
         );

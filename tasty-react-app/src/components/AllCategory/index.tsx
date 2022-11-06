@@ -70,7 +70,7 @@ export const AllCategory = () => {
             value={searchText}
             onChange={hangleSearchText}
             uniqType="delivery"
-            placeholder="Найди свой рецепт..."
+            placeholder=" Найди свой рецепт..."
           />
         </div>
         <h2 className={style.title}>КАТЕГОРИИ РЕЦЕПТОВ</h2>

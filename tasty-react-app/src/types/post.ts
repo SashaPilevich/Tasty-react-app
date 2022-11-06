@@ -2,6 +2,7 @@ export interface IPost {
   id: string | undefined;
   name: string;
   title: string;
+  back: string[];
   time?: string;
   kcal?: string;
   liked?: boolean;
