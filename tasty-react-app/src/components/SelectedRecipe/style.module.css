@@ -1,10 +1,9 @@
 .container,
 .darkContainer {
-  width: 1000px;
+  width: 100%;
   height: 700px;
   padding: 20px 15px;
-  border: 1px solid gray;
-  margin-left: 70px;
+  margin-left: 40px;
 }
 .darkContainer {
   background-color: #282c34;

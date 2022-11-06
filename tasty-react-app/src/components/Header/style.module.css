@@ -89,6 +89,7 @@
   left: 0;
   background-color: goldenrod;
   animation: checked-anim 1s ease both;
+  z-index: 50;
 }
 
 @keyframes checked-anim {

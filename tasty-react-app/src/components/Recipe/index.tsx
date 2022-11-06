@@ -81,7 +81,8 @@ export const Recipe = (props: IProps) => {
               })}
               <div className={style.btnContainer}>
                 <Button
-                  label={"Сохранить в мой шоппинг лист"}
+                  // label={"Сохранить в мой шоппинг лист"}
+                  label={"Сохранить"}
                   onClick={clickSave}
                   type="btnSave"
                 />

@@ -5,6 +5,7 @@ import { Context } from "../../App";
 import { loadShop } from "../../redux/actions/category";
 import { TState } from "../../redux/store";
 import { Button } from "../Button";
+import { MainContainer } from "../MainContainer";
 import style from "./style.module.css";
 
 export const Shop = () => {
@@ -29,12 +30,16 @@ export const Shop = () => {
     navigate("/delivery");
   };
   return (
-    <div className={style.mainContainer}>
+    <>
       <div className={style.fullSum}>
-        <p className={`${style.sum} ${isDark ? style.darkItem : style.sum}`}>
+        <p
+          className={`${style.summa} ${isDark ? style.darkItem : style.summa}`}
+        >
           Общая сумма {sum()}
           <span
-            className={`${style.sum} ${isDark ? style.darkItem : style.sum}`}
+            className={`${style.summa} ${
+              isDark ? style.darkItem : style.summa
+            }`}
           >
             руб.
           </span>
@@ -44,7 +49,12 @@ export const Shop = () => {
         <div className={style.container}>
           {product.map((item) => {
             return (
-              <div className={style.containerItem} key={item.id}>
+              <div
+                className={`${
+                  isDark ? style.darkContainerItem : style.containerItem
+                }`}
+                key={item.id}
+              >
                 <div className={style.productItem}>
                   <img className={style.imgProduct} src={item.image}></img>
                   <h4 className={style.productTitle}>{item.title}</h4>
@@ -76,6 +86,6 @@ export const Shop = () => {
         onClick={navigateToDelivery}
         type="btnShop"
       />
-    </div>
+    </>
   );
 };

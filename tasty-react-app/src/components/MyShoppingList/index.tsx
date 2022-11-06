@@ -5,7 +5,6 @@ import { Context } from "../../App";
 import { setLocalItem } from "../../redux/actions/category";
 import { TState } from "../../redux/store";
 import { Button } from "../Button";
-import { Container } from "../Container";
 import { Header } from "../Header";
 import style from "./style.module.css";
 
@@ -44,7 +43,7 @@ export const MyShoppingList = () => {
     localStorage.setItem("shopList", JSON.stringify(newList));
   };
   return (
-    <Container>
+    <div className={style.mainContainer}>
       <Header />
       <div className={style.btnContainer}>
         <Button label={"Назад"} onClick={goBack} type={"btnBack"} />
@@ -70,6 +69,6 @@ export const MyShoppingList = () => {
         })}
         <Button label={"Купить"} onClick={clickBuy} type="btnBuy" />
       </div>
-    </Container>
+    </div>
   );
 };

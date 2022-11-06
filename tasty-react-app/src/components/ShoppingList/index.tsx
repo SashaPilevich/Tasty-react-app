@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchSelectedRecipe } from "../../api/recipe";
 import { IRecipe } from "../../types/post";
 import { Button } from "../Button";
-import { Container } from "../Container";
 import { Header } from "../Header";
 import { Recipe } from "../Recipe";
 import style from "./style.module.css";
@@ -25,7 +24,7 @@ export const ShoppingList = () => {
       {post.length !== 0
         ? post.map((item) => {
             return (
-              <Container key={item.id}>
+              <>
                 <Header />
                 <div className={style.btnContainer}>
                   <Button label={"Назад"} onClick={goBack} type={"btnBack"} />
@@ -37,7 +36,7 @@ export const ShoppingList = () => {
                   ingredients={item.ingredients}
                   onClickDelete={() => {}}
                 />
-              </Container>
+              </>
             );
           })
         : ""}

@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../Button";
 import style from "./style.module.css";
-import food from "./food.png";
+import food from "./shop.png";
 import note from "./note.png";
 import movie from "./movie.png";
+import shopList from "./shoplist.png";
 import { SelectedRecipe } from "../SelectedRecipe";
 import { SelectedRecipeInstruction } from "../SelectedRecipeInstruction";
 import { SelectedRecipeVideo } from "../SelectedRecipeVideo";
+import { useParams, useNavigate } from "react-router-dom";
+import { fetchSelectedRecipe } from "../../api/recipe";
+import { IRecipe } from "../../types/post";
+import { ShoppingList } from "../ShoppingList";
 
-type Tabs = "Ingredients" | "Instruction" | "Video";
+type Tabs = "Ingredients" | "Instruction" | "Video" | "Shop";
 export const getTabList = (tab: Tabs) => {
   if (tab === "Ingredients") {
     return <SelectedRecipe />;
@@ -19,9 +24,26 @@ export const getTabList = (tab: Tabs) => {
   if (tab === "Video") {
     return <SelectedRecipeVideo />;
   }
+  if (tab === "Shop") {
+    return <ShoppingList />;
+  }
 };
 export const RecipeTabs = () => {
   const [selectedTab, setSelectedTab] = useState<Tabs>("Ingredients");
+  const params = useParams();
+  const [post, setPost] = useState<IRecipe[]>([]);
+
+  useEffect(() => {
+    fetchSelectedRecipe(params.id).then((values) => {
+      const linked = params.id;
+      Number(linked);
+      setPost(values[Number(linked)]);
+    });
+  }, []);
+  const navigate = useNavigate();
+  const navigateToShopList = (id: string | undefined) => {
+    navigate(`/shoppinglist/${id}`);
+  };
 
   return (
     <>
@@ -59,6 +81,25 @@ export const RecipeTabs = () => {
             }}
             type={selectedTab === "Video" ? "btnTabActive" : "btnTabUnactive"}
           />
+        </div>
+        <div className={style.tabContainer}>
+          <img className={style.ico} src={shopList} alt="shopList"></img>
+          {post
+            ? post.map((item) => {
+                const clickPost = () => {
+                  navigateToShopList(item.id);
+                };
+                return (
+                  <Button
+                    label={"Добавить в шоппинг лист"}
+                    onClick={clickPost}
+                    type={
+                      selectedTab === "Shop" ? "btnTabActive" : "btnTabUnactive"
+                    }
+                  />
+                );
+              })
+            : ""}
         </div>
       </div>
       {getTabList(selectedTab)}

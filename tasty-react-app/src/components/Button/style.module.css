@@ -25,9 +25,16 @@
   line-height: 26px;
   margin-left: 280px;
 }
-.btnBuy {
+.btnBuy,
+.btnSave,
+.btnShop {
   margin-left: 0px;
   margin-top: 20px;
+  font-weight: 500;
+  font-size: 18px;
+}
+.btnShop {
+  height: 50px;
 }
 .btnDelete {
   width: 32px;
@@ -35,13 +42,6 @@
   margin: 0px;
   border-radius: 0px;
   margin-right: 10px;
-}
-.btnSave {
-  margin: 20px 0px 0px 0px;
-  height: 50px;
-  width: 230px;
-  font-weight: 500;
-  font-size: 18px;
 }
 .btnTabActive {
   margin-left: 0;
@@ -55,14 +55,6 @@
   width: 200px;
   height: 40px;
   border-radius: 2px;
-}
-.btnShop {
-  margin-top: 20px;
-  margin-left: 60px;
-  font-weight: 500;
-  font-size: 18px;
-  height: 50px;
-  width: 230px;
 }
 .btnShowMore {
   margin: 0;
@@ -122,8 +114,7 @@
   box-shadow: 1px 1px 5px 1px rgba(255, 255, 255, 0.5),
     -1px -1px 5px 1px rgba(116, 125, 136, 0.5),
     inset -1px -1px 5px 1px rgba(255, 255, 255, 0.2),
-    /* inset 4px 4px 6px 0 rgba(0, 0, 0, 0.5); */ inset 1px 1px 5px 2px
-      rgb(92, 64, 51, 0.3);
+    inset 1px 1px 5px 2px rgb(92, 64, 51, 0.3);
 }
 
 @media (max-width: 768px) {

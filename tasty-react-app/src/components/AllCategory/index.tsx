@@ -9,7 +9,6 @@ import { loadMorePosts } from "../../redux/actions/category";
 import { IPost } from "../../types/post";
 import { fetchSelectedCategory } from "../../api/recipe";
 import { Input } from "../Input";
-import { NotificationManager } from "react-notifications";
 import style from "./style.module.css";
 
 export const AllCategory = () => {
