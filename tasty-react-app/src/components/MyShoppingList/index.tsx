@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
-import { setLocalItem } from "../../redux/actions/category";
+import { setLocalItems } from "../../redux/actions/category";
 import { TState } from "../../redux/store";
 import { Button } from "../Button";
 import { Header } from "../Header";
@@ -13,8 +13,8 @@ export const MyShoppingList = () => {
   const dispatch = useDispatch();
   const { isDark } = useContext(Context);
 
-  const localItem = useSelector(
-    (state: TState) => state.categoryReducer.localItem
+  const localItems = useSelector(
+    (state: TState) => state.categoryReducer.localItems
   );
 
   let shopArray = [];
@@ -22,10 +22,10 @@ export const MyShoppingList = () => {
   useEffect(() => {
     if (isList) {
       shopArray = JSON.parse(isList);
-      shopArray = shopArray.map((item: string[]) => {
-        return item;
-      });
-      dispatch(setLocalItem(shopArray));
+      // shopArray = shopArray.map((item: string[]) => {
+      //   return item;
+      // });
+      dispatch(setLocalItems(shopArray));
     }
   }, []);
 
@@ -36,10 +36,10 @@ export const MyShoppingList = () => {
     navigate(-1);
   };
   const clickDelete = (ingredient: string) => {
-    const newList: string[] | undefined = localItem?.filter((item) => {
+    const newList: string[] | undefined = localItems?.filter((item) => {
       return item !== ingredient;
     });
-    dispatch(setLocalItem(newList));
+    dispatch(setLocalItems(newList));
     localStorage.setItem("shopList", JSON.stringify(newList));
   };
   return (
@@ -50,7 +50,7 @@ export const MyShoppingList = () => {
       </div>
       <h2 className={style.title}>Мой шоппинг лист</h2>
       <div className={style.container}>
-        {localItem.map((item) => {
+        {localItems.map((item) => {
           const deleteItem = () => {
             clickDelete(item);
           };

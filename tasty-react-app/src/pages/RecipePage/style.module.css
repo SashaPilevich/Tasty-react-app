@@ -1,6 +1,14 @@
-.btnContainer {
-  padding-top: 30px;
-  margin-right: 17%;
+.forBtnBack {
+  position: relative;
+  left: 7%;
+}
+.forBtnShopList {
+  position: relative;
+  left: 65%;
+  top: 10px;
+}
+.btnPanel {
+  display: flex;
 }
 @media (max-width: 700px) {
   .btnContainer {

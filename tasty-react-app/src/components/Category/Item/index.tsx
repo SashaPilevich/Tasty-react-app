@@ -62,8 +62,10 @@ export const ItemOfCategory = (props: IProps) => {
       {!props.isSelected ? (
         <div className={style.back}>
           {back
-            ? back.map((item) => {
-                return <img className={style.imgCont} src={item}></img>;
+            ? back.map((item, index) => {
+                return (
+                  <img className={style.imgCont} src={item} key={index}></img>
+                );
               })
             : ""}
           <p className={style.textCont}>{props.title}</p>

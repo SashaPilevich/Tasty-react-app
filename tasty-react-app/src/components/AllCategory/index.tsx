@@ -5,14 +5,21 @@ import { CategoryList } from "../Category/List";
 import { Preloader } from "../Preloader";
 import { useDispatch, useSelector } from "react-redux";
 import { TState } from "../../redux/store";
-import { loadMorePosts } from "../../redux/actions/category";
+import {
+  loadAppCategories,
+  loadMorePosts,
+  setAllCategories,
+  setShowLoadMore,
+} from "../../redux/actions/category";
 import { IPost } from "../../types/post";
 import { fetchSelectedCategory } from "../../api/recipe";
 import { Input } from "../Input";
 import style from "./style.module.css";
+import { Container } from "../Container";
 
 export const AllCategory = () => {
   const [searchText, setSearchText] = useState("");
+  const [isFind, setIsFind] = useState(true);
 
   const categories = useSelector(
     (state: TState) => state.categoryReducer.allCategories
@@ -26,9 +33,7 @@ export const AllCategory = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const backToMain = () => {
-    navigate("/");
-  };
+
   const loadMore = () => {
     dispatch(loadMorePosts() as any);
   };
@@ -36,33 +41,31 @@ export const AllCategory = () => {
   const hangleSearchText: ChangeEventHandler<HTMLInputElement> = (event) => {
     const text = event.target.value;
     setSearchText(text);
-    let isList = localStorage.getItem("item");
+    let isList = localStorage.getItem("items");
     let arrList = [];
     if (isList) {
       arrList = JSON.parse(isList);
-      arrList = arrList.map((item: IPost) => {
-        return item;
-      });
     }
-    arrList.filter((item: IPost) => {
-      if (text === item.title.toLowerCase().substring(0, 3)) {
-        fetchSelectedCategory(item.id).then((values) => {
-          if (item.id) {
-            searchItems.push(values[item.id]);
-            navigate(`/selected_category/${item.id}`);
-          }
-          return searchItems;
-        });
-        return searchItems;
+    searchItems = arrList.filter((item: IPost) => {
+      if (text === item.title.toLowerCase()) {
+        searchItems.push(item);
+        setIsFind(true);
+        dispatch(setShowLoadMore(false));
+        return dispatch(setAllCategories(searchItems));
       }
-      if (text.length >= 4 && searchItems.length === 0) {
-        navigate("/recipenotfound");
+      if (searchItems.length === 0) {
+        setIsFind(false);
       }
     });
+
+    if (text.length === 0) {
+      setIsFind(true);
+      dispatch(loadAppCategories(1) as any);
+    }
   };
 
   return (
-    <>
+    <Container>
       <div className={style.infoPanel}>
         <div className={style.forInput}>
           <Input
@@ -72,6 +75,7 @@ export const AllCategory = () => {
             placeholder=" Найди свой рецепт..."
           />
         </div>
+        {isFind ? "" : <h2 className={style.notFind}>Ничего не найдено...</h2>}
         <h2 className={style.title}>КАТЕГОРИИ РЕЦЕПТОВ</h2>
       </div>
       {!isLoading ? (
@@ -83,13 +87,11 @@ export const AllCategory = () => {
               onClick={loadMore}
               type="btnCategory"
             />
-          ) : (
-            <Button label={"Выйти"} onClick={backToMain} type="btnCategory" />
-          )}
+          ) : null}
         </div>
       ) : (
         <Preloader />
       )}
-    </>
+    </Container>
   );
 };

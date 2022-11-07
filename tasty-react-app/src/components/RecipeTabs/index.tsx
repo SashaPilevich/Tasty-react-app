@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "../Button";
 import style from "./style.module.css";
 import food from "./shop.png";
@@ -8,10 +8,9 @@ import shopList from "./shoplist.png";
 import { SelectedRecipe } from "../SelectedRecipe";
 import { SelectedRecipeInstruction } from "../SelectedRecipeInstruction";
 import { SelectedRecipeVideo } from "../SelectedRecipeVideo";
-import { useParams, useNavigate } from "react-router-dom";
-import { fetchSelectedRecipe } from "../../api/recipe";
-import { IRecipe } from "../../types/post";
-import { ShoppingList } from "../ShoppingList";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { TState } from "../../redux/store";
 
 type Tabs = "Ingredients" | "Instruction" | "Video" | "Shop";
 export const getTabList = (tab: Tabs) => {
@@ -25,21 +24,14 @@ export const getTabList = (tab: Tabs) => {
     return <SelectedRecipeVideo />;
   }
   if (tab === "Shop") {
-    return <ShoppingList />;
+    return <SelectedRecipeVideo />;
   }
 };
 export const RecipeTabs = () => {
   const [selectedTab, setSelectedTab] = useState<Tabs>("Ingredients");
-  const params = useParams();
-  const [post, setPost] = useState<IRecipe[]>([]);
-
-  useEffect(() => {
-    fetchSelectedRecipe(params.id).then((values) => {
-      const linked = params.id;
-      Number(linked);
-      setPost(values[Number(linked)]);
-    });
-  }, []);
+  const ingredients = useSelector(
+    (state: TState) => state.categoryReducer.ingredients
+  );
   const navigate = useNavigate();
   const navigateToShopList = (id: string | undefined) => {
     navigate(`/shoppinglist/${id}`);
@@ -84,8 +76,8 @@ export const RecipeTabs = () => {
         </div>
         <div className={style.tabContainer}>
           <img className={style.ico} src={shopList} alt="shopList"></img>
-          {post
-            ? post.map((item) => {
+          {ingredients
+            ? ingredients.map((item) => {
                 const clickPost = () => {
                   navigateToShopList(item.id);
                 };

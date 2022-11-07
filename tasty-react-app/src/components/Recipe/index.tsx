@@ -8,6 +8,11 @@ import { NotificationManager } from "react-notifications";
 import { Context } from "../../App";
 import { useDispatch } from "react-redux";
 import { loadShop } from "../../redux/actions/category";
+import { IngredientForShop } from "../IngredientForShop";
+
+function unique(arr: string[]) {
+  return Array.from(new Set(arr));
+}
 
 interface IProps extends IRecipe {
   onClickDelete?: (ingredient: string) => void;
@@ -16,9 +21,6 @@ interface IProps extends IRecipe {
 export const Recipe = (props: IProps) => {
   const [image, setImage] = useState(props.name);
   const [ingredients, setIngredients] = useState(props.ingredients);
-  const [instructions, setInstructions] = useState(props.instructions);
-  const [video, setVideo] = useState(props.video);
-  const [quantity, setQuantity] = useState(props.quantity);
   const { isDark } = useContext(Context);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,14 +39,14 @@ export const Recipe = (props: IProps) => {
   if (shopList) {
     myShopList = JSON.parse(shopList);
   }
-  function unique(arr: string[]) {
-    return Array.from(new Set(arr));
-  }
+
   const clickSave = () => {
-    ingredients?.map((item) => {
-      myShopList.push(item);
-      return myShopList;
-    });
+    if (ingredients) {
+      ingredients.forEach((item) => {
+        myShopList.push(item);
+        return myShopList;
+      });
+    }
     NotificationManager.success(
       "Все ингредиенты сохранены в вашем шоппинг листе"
     );
@@ -63,25 +65,12 @@ export const Recipe = (props: IProps) => {
                 const deleteItem = () => {
                   clickDelete(item);
                 };
-
                 return (
-                  <div className={style.controlIngredient}>
-                    <p
-                      className={`${style.itemIngredientsInShop} ${
-                        isDark
-                          ? style.darkItemInShop
-                          : style.itemIngredientsInShop
-                      }`}
-                    >
-                      {item}
-                    </p>
-                    <Button label="X" onClick={deleteItem} type="btnDelete" />
-                  </div>
+                  <IngredientForShop ingredient={item} onClick={deleteItem} />
                 );
               })}
               <div className={style.btnContainer}>
                 <Button
-                  // label={"Сохранить в мой шоппинг лист"}
                   label={"Сохранить"}
                   onClick={clickSave}
                   type="btnSave"
@@ -110,26 +99,29 @@ export const Recipe = (props: IProps) => {
 
         {ingredients ? (
           <div className={style.containerIngredients}>
-            <div className={style.ingredients}>
-              {props.onClickDelete
-                ? ""
-                : ingredients?.map((item) => {
-                    return (
-                      <div className={style.ingredientsItem}>
-                        <p
-                          className={`${style.itemIngredients} ${
-                            isDark ? style.darkItem : style.itemIngredients
-                          }`}
-                        >
-                          {item}
-                        </p>
-                      </div>
-                    );
-                  })}
-            </div>
+            {props.onClickDelete ? (
+              ""
+            ) : (
+              <div className={style.ingredients}>
+                {ingredients?.map((item) => {
+                  return (
+                    <div className={style.ingredientsItem}>
+                      <p
+                        className={`${style.itemIngredients} ${
+                          isDark ? style.darkItem : style.itemIngredients
+                        }`}
+                      >
+                        {item}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
             <div className={style.quantity}>
-              {quantity
-                ? quantity.map((item) => {
+              {props.quantity
+                ? props.quantity.map((item) => {
                     return <p className={style.itemQuantity}>{item}</p>;
                   })
                 : ""}
@@ -138,10 +130,10 @@ export const Recipe = (props: IProps) => {
         ) : (
           ""
         )}
-        {instructions ? (
+        {props.instructions ? (
           <div className={style.instructionsContainer}>
-            {instructions
-              ? instructions.map((item) => {
+            {props.instructions
+              ? props.instructions.map((item) => {
                   return (
                     <p
                       className={`${style.itemInstructions} ${
@@ -159,7 +151,7 @@ export const Recipe = (props: IProps) => {
         )}
 
         <div className={style.videoContainer}>
-          {video ? (
+          {props.video ? (
             <iframe
               className={style.video}
               src={props.video}

@@ -17,7 +17,6 @@ import { Error } from "../pages/Error";
 import { MyShoppingList } from "../components/MyShoppingList";
 import { ShopPage } from "../pages/ShopPage";
 import { DeliveryPage } from "../pages/DeliveryPage";
-import { RecipeNotFound } from "../pages/RecipeNotFound";
 
 export const RootRouter = () => {
   return (
@@ -33,7 +32,6 @@ export const RootRouter = () => {
       <Route path="/shoppinglist/:id" element={<ShoppingList />} />
       <Route path="/myshoplist" element={<MyShoppingList />} />
       <Route path="/shop" element={<ShopPage />} />
-      <Route path="/recipenotfound" element={<RecipeNotFound />} />
       <Route path="/delivery" element={<DeliveryPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/registration" element={<RegistrationPage />} />

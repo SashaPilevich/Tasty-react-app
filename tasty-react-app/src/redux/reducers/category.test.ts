@@ -84,7 +84,7 @@ describe("Category Reducer:", () => {
     expect(
       categoryReducer(defaultState, {
         type: ACTIONS.SET_SELECTED_CATEGORY,
-        selectedCategory: [
+        recipiesOfSelectedCategory: [
           {
             id: 1,
             name: "https://i.ibb.co/GMwZdBW/pancakes.jpg",
@@ -103,7 +103,7 @@ describe("Category Reducer:", () => {
       })
     ).toEqual({
       ...defaultState,
-      selectCategory: [
+      recipiesOfSelectedCategory: [
         {
           id: 1,
           name: "https://i.ibb.co/GMwZdBW/pancakes.jpg",
@@ -128,29 +128,29 @@ describe("Category Reducer:", () => {
       })
     ).toEqual({
       ...defaultState,
-      selectCategory: undefined,
+      recipiesOfSelectedCategory: undefined,
     });
   });
-  test("ACTIONS.SET_LOCAL_ITEM:при передаче объекта возвращает его", () => {
+  test("ACTIONS.SET_LOCAL_ITEMS:при передаче объекта возвращает его", () => {
     expect(
       categoryReducer(defaultState, {
-        type: ACTIONS.SET_LOCAL_ITEM,
-        products: ["Молоко", "Авокадо"],
+        type: ACTIONS.SET_LOCAL_ITEMS,
+        productsFromLocal: ["Молоко", "Авокадо"],
       })
     ).toEqual({ ...defaultState, localItem: ["Молоко", "Авокадо"] });
   });
-  test("ACTIONS.SET_LOCAL_ITEM:если объект не передан то возвращает значение по умолчанию", () => {
+  test("ACTIONS.SET_LOCAL_ITEMS:если объект не передан то возвращает значение по умолчанию", () => {
     expect(
       categoryReducer(defaultState, {
-        type: ACTIONS.SET_LOCAL_ITEM,
+        type: ACTIONS.SET_LOCAL_ITEMS,
       })
-    ).toEqual({ ...defaultState, localItem: undefined });
+    ).toEqual({ ...defaultState, localItems: undefined });
   });
-  test("ACTIONS.SET_SHOP_ITEM:при передаче объекта возвращает его", () => {
+  test("ACTIONS.SET_SHOP_ITEMS:при передаче объекта возвращает его", () => {
     expect(
       categoryReducer(defaultState, {
-        type: ACTIONS.SET_SHOP_ITEM,
-        product: [
+        type: ACTIONS.SET_SHOP_ITEMS,
+        productsFromShop: [
           {
             title: "Молоко",
             image: "https://i.ibb.co/4SvFZN6/image.png",
@@ -161,7 +161,7 @@ describe("Category Reducer:", () => {
       })
     ).toEqual({
       ...defaultState,
-      shopItem: [
+      shopItems: [
         {
           title: "Молоко",
           image: "https://i.ibb.co/4SvFZN6/image.png",
@@ -171,14 +171,14 @@ describe("Category Reducer:", () => {
       ],
     });
   });
-  test("ACTIONS.SET_SHOP_ITEM:если объект не передан то возвращает значение по умолчанию", () => {
+  test("ACTIONS.SET_SHOP_ITEMS:если объект не передан то возвращает значение по умолчанию", () => {
     expect(
       categoryReducer(defaultState, {
-        type: ACTIONS.SET_SHOP_ITEM,
+        type: ACTIONS.SET_SHOP_ITEMS,
       })
     ).toEqual({
       ...defaultState,
-      shopItem: undefined,
+      shopItems: undefined,
     });
   });
   test("ACTIONS.SET_LIKED_RECIPE:при нажатии на like возвращает like true", () => {

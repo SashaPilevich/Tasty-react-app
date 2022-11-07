@@ -9,8 +9,17 @@
   margin: 0px 0px 20px 0px;
   padding-top: 50px;
 }
-.btnContainer {
-  padding-top: 17px;
+.forBtnBack {
+  position: relative;
+  left: 7%;
+}
+.forBtnShopList {
+  position: relative;
+  left: 65%;
+  top: 10px;
+}
+.btnPanel {
+  display: flex;
 }
 .container {
   background-attachment: fixed;

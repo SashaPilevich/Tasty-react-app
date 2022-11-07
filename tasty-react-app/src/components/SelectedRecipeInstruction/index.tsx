@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { fetchSelectedRecipe } from "../../api/recipe";
 import { Context } from "../../App";
 import { IRecipe } from "../../types/post";
+import { Button } from "../Button";
 import { Recipe } from "../Recipe";
 import style from "./style.module.css";
 
@@ -24,13 +25,15 @@ export const SelectedRecipeInstruction = () => {
         {post
           ? post.map((item) => {
               return (
-                <Recipe
-                  key={item.id}
-                  id={item.id}
-                  name={item.name}
-                  title={item.title}
-                  instructions={item.instructions}
-                />
+                <div key={item.id}>
+                  <Recipe
+                    key={item.id}
+                    id={item.id}
+                    name={item.name}
+                    title={item.title}
+                    instructions={item.instructions}
+                  />
+                </div>
               );
             })
           : ""}

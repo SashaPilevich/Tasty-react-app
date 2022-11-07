@@ -10,10 +10,10 @@ export const setAllCategories = (categories: IPost[]) => {
     categories,
   };
 };
-export const setSelectedCategory = (selectedCategory: IPost[]) => {
+export const setSelectedCategory = (recipiesOfSelectedCategory: IPost[]) => {
   return {
     type: ACTIONS.SET_SELECTED_CATEGORY,
-    selectedCategory,
+    recipiesOfSelectedCategory,
   };
 };
 export const setIsLoading = (isLoading: boolean) => {
@@ -29,12 +29,12 @@ export const likeRecipes = (recipes: IPost) => {
 export const saveRecipes = (recipes: IPost) => {
   return { type: ACTIONS.SET_SAVE_RECIPE, recipes };
 };
-export const setShopItem = (product: IShop[]) => {
-  return { type: ACTIONS.SET_SHOP_ITEM, product };
+export const setShopItems = (productsFromShop: IShop[]) => {
+  return { type: ACTIONS.SET_SHOP_ITEMS, productsFromShop };
 };
 
-export const setLocalItem = (products: string[]) => {
-  return { type: ACTIONS.SET_LOCAL_ITEM, products };
+export const setLocalItems = (productsFromLocal: string[]) => {
+  return { type: ACTIONS.SET_LOCAL_ITEMS, productsFromLocal };
 };
 
 export const setShowLoadMore = (showLoadMore: boolean) => {
@@ -49,6 +49,12 @@ export const setPage = (page: number) => {
     page,
   };
 };
+export const setIngredients = (ingredients: IRecipe[]) => {
+  return {
+    type: ACTIONS.SET_INGREDIENTS,
+    ingredients,
+  };
+};
 
 export const loadAppCategories = (page: number) => {
   return (dispatch: Dispatch, getState: () => TState) => {
@@ -61,13 +67,13 @@ export const loadAppCategories = (page: number) => {
           dispatch(setShowLoadMore(false));
         }
         localStorage.setItem(
-          "item",
+          "items",
           JSON.stringify(
             values[page].concat(values[page + 1], values[page + 2])
           )
         );
         dispatch(setAllCategories(values[page]));
-        dispatch(setPage(page + 1)); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        dispatch(setPage(page + 1)); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!}
       })
       .finally(() => {
         dispatch(setIsLoading(false));
@@ -78,7 +84,7 @@ export const loadAppCategories = (page: number) => {
 export const loadMorePosts = () => {
   return (dispatch: Dispatch, getState: () => TState) => {
     const allCategories = getState().categoryReducer.allCategories;
-    const page = getState().categoryReducer.setPage;
+    const page = getState().categoryReducer.page;
     const promise = fetchAllCategory(page);
     promise.then((values) => {
       dispatch(setAllCategories(allCategories.concat(values[page])));
@@ -98,7 +104,7 @@ export const loadShop = () => {
       if (shopList) {
         myShopList = JSON.parse(shopList);
       }
-      const newShopItem = myShopList.map((ingredient: string) => {
+      const shopItems = myShopList.map((ingredient: string) => {
         const findShopItem = values.find((item: IShop) => {
           if (item.title === ingredient) {
             return item;
@@ -109,7 +115,7 @@ export const loadShop = () => {
         return findShopItem;
       });
 
-      dispatch(setShopItem(newShopItem));
+      dispatch(setShopItems(shopItems));
     });
   };
 };

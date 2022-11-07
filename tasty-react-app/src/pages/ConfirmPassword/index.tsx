@@ -83,29 +83,21 @@ export const ConfirmPassword = () => {
         <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
           Пожалуйста введите новый пароль
         </p>
-        {showPassword ? (
-          <div className={style.inputPasswordShow} onClick={openPassword}>
-            <Input
-              uniqType="inputForRegistration"
-              label="Новый пароль"
-              onChange={handlePassword}
-              value={password}
-              error={passwordError}
-              type="password"
-            />
-          </div>
-        ) : (
-          <div className={style.inputPasswordClose} onClick={closePassword}>
-            <Input
-              uniqType="inputForRegistration"
-              label="Новый пароль"
-              onChange={handlePassword}
-              value={password}
-              error={passwordError}
-              type="text"
-            />
-          </div>
-        )}
+        <div
+          className={
+            showPassword ? style.inputPasswordShow : style.inputPasswordClose
+          }
+          onClick={showPassword ? openPassword : closePassword}
+        >
+          <Input
+            uniqType="inputForRegistration"
+            label="Пароль"
+            onChange={handlePassword}
+            value={password}
+            error={passwordError}
+            type={showPassword ? "password" : "text"}
+          />
+        </div>
         <div className={style.inputContainer}>
           <Input
             uniqType="inputForRegistration"

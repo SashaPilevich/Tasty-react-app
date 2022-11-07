@@ -2,11 +2,15 @@
   width: 100%;
   height: 40px;
   background: transparent;
+  position: relative;
+  z-index: 10;
 }
 .headerMax {
   width: 100%;
   height: 40px;
   background: goldenrod;
+  position: relative;
+  z-index: 9;
 }
 .visible {
   height: 100%;
@@ -75,7 +79,7 @@
   background-color: white;
   transition: all 0.2s ease-in-out;
   transform: rotate(-45deg) translate(35px, 35px);
-  z-index: 100;
+  z-index: 10;
 }
 
 .navbar {
@@ -95,14 +99,14 @@
 @keyframes checked-anim {
   0% {
     width: 3000px;
-    height: 140px;
+    height: 150px;
     background-color: transparent;
     top: 0px;
   }
   100% {
     top: 40px;
     width: 100%;
-    height: 140px;
+    height: 150px;
     border-radius: 0;
   }
 }
@@ -111,7 +115,7 @@
     background-color: goldenrod;
     top: 40px;
     width: 100%;
-    height: 140px;
+    height: 150px;
   }
   100% {
     background-color: transparent;

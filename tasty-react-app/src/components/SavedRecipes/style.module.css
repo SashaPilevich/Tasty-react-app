@@ -1,0 +1,19 @@
+.main,
+.darkMain {
+  background: linear-gradient(
+      360deg,
+      rgba(69, 70, 64, 0.6) 0%,
+      rgba(69, 70, 64, 0.6) 100%
+    ),
+    url("./backForShop.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 230px;
+  position: absolute;
+  width: 100%;
+  top: 0px;
+}
+.darkMain {
+  background: #282c34;
+}

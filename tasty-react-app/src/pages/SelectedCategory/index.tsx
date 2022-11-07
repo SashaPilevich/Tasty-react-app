@@ -11,7 +11,7 @@ import { MainContainer } from "../../components/MainContainer";
 
 export const SelectedCategory = () => {
   const selectedCategory = useSelector(
-    (state: TState) => state.categoryReducer.selectCategory
+    (state: TState) => state.categoryReducer.recipiesOfSelectedCategory
   );
 
   const dispatch = useDispatch();

@@ -10,6 +10,9 @@ import { Like } from "../../assets";
 import { loadAppCategories } from "../../redux/actions/category";
 import { SavedRecipe } from "../SavedRecipes";
 import { Container } from "../Container";
+import { useNavigate } from "react-router-dom";
+import { MainContainer } from "../MainContainer";
+import { Header } from "../Header";
 
 type UsersTabs = "Selected Category" | "Saved Recipies" | "Liked Recipies";
 export const getUsersTabList = (tab: UsersTabs) => {
@@ -27,6 +30,7 @@ export const getUsersTabList = (tab: UsersTabs) => {
 export const UsersTabs = () => {
   const dispatch = useDispatch();
   const { user } = useContext(Context);
+
   const [selectedTab, setSelectedTab] =
     useState<UsersTabs>("Selected Category");
   useEffect(() => {
@@ -38,7 +42,7 @@ export const UsersTabs = () => {
   }
 
   return (
-    <Container>
+    <>
       <div className={style.container}>
         <div className={style.tabContainer}>
           <Button
@@ -86,6 +90,6 @@ export const UsersTabs = () => {
         </div>
       </div>
       {getUsersTabList(selectedTab)}
-    </Container>
+    </>
   );
 };

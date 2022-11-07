@@ -11,11 +11,23 @@ export const RecipePage = () => {
   const navigateBack = () => {
     navigate(-1);
   };
+  const goToShopList = () => {
+    navigate("/myshoplist");
+  };
   return (
     <MainContainer>
       <Header />
-      <div className={style.btnContainer}>
-        <Button label={"Назад"} onClick={navigateBack} type="btnBack" />
+      <div className={style.btnPanel}>
+        <div className={style.forBtnBack}>
+          <Button label={"Назад"} onClick={navigateBack} type="btnBack" />
+        </div>
+        <div className={style.forBtnShopList}>
+          <Button
+            label={"Шоппинг лист"}
+            onClick={goToShopList}
+            type="btnShopList"
+          />
+        </div>
       </div>
       <RecipeTabs />
     </MainContainer>

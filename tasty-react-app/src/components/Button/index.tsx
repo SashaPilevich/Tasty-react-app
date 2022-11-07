@@ -17,7 +17,8 @@ interface IButton {
     | "btnCategory"
     | "btnDelete"
     | "btnSave"
-    | "btnBuy";
+    | "btnBuy"
+    | "btnShopList";
 }
 
 const getButtonStyle = (
@@ -33,6 +34,7 @@ const getButtonStyle = (
     | "btnDelete"
     | "btnSave"
     | "btnBuy"
+    | "btnShopList"
 ) => {
   if (type === "logOut") {
     return style.logOut;
@@ -66,6 +68,9 @@ const getButtonStyle = (
   }
   if (type === "btnBuy") {
     return style.btnBuy;
+  }
+  if (type === "btnShopList") {
+    return style.btnShopList;
   }
 };
 

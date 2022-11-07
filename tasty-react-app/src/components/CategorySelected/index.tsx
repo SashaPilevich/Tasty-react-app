@@ -3,6 +3,8 @@ import style from "./style.module.css";
 import { ItemOfCategory } from "../Category/Item";
 import { Button } from "../Button";
 import { useNavigate } from "react-router-dom";
+import { MainContainer } from "../MainContainer";
+import { LikedRecipes } from "../LikedRecipes";
 
 export interface IProps {
   posts: IPost[];
@@ -14,19 +16,37 @@ export const CategorySelected = (props: IProps) => {
   const backToAllPost = () => {
     navigate("/category");
   };
+  const goToShopList = () => {
+    navigate("/myshoplist");
+  };
   const navigateToSelectedRecipe = (id: string | undefined) => {
     navigate(`/selected_recipe/${id}`);
   };
 
   return (
     <div className={style.mainContainer}>
-      {props.isLikeSave ? null : (
-        <div className={style.forBtnBack}>
-          <Button label={"Назад"} onClick={backToAllPost} type="btnBack" />
+      {props.isLikeSave ? (
+        ""
+      ) : (
+        <div className={style.btnPanel}>
+          <div className={style.forBtnBack}>
+            <Button label={"Назад"} onClick={backToAllPost} type="btnBack" />
+          </div>
+          <div className={style.forBtnShopList}>
+            <Button
+              label={"Шоппинг лист"}
+              onClick={goToShopList}
+              type="btnShopList"
+            />
+          </div>
         </div>
       )}
 
-      <div className={style.container}>
+      <div
+        className={`${
+          props.isLikeSave ? style.LikeSaveContainer : style.container
+        }`}
+      >
         {props.posts.map((item) => {
           const clickPost = () => {
             navigateToSelectedRecipe(item.id);

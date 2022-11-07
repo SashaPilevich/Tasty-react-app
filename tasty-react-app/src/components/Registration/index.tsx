@@ -153,33 +153,23 @@ export const Registration = () => {
             />
           </div>
 
-          {showPassword ? (
-            <div className={style.inputPasswordShow} onClick={openPassword}>
-              <Input
-                uniqType="inputForRegistration"
-                label="Пароль"
-                onChange={handlePassword}
-                value={password}
-                error={passwordError}
-                onBlur={handlePasswordBlur}
-                onFocus={handlePasswordFocus}
-                type="password"
-              />
-            </div>
-          ) : (
-            <div className={style.inputPasswordClose} onClick={closePassword}>
-              <Input
-                uniqType="inputForRegistration"
-                label="Пароль"
-                onChange={handlePassword}
-                value={password}
-                error={passwordError}
-                onBlur={handlePasswordBlur}
-                onFocus={handlePasswordFocus}
-                type="text"
-              />
-            </div>
-          )}
+          <div
+            className={
+              showPassword ? style.inputPasswordShow : style.inputPasswordClose
+            }
+            onClick={showPassword ? openPassword : closePassword}
+          >
+            <Input
+              uniqType="inputForRegistration"
+              label="Пароль"
+              onChange={handlePassword}
+              value={password}
+              error={passwordError}
+              onBlur={handlePasswordBlur}
+              onFocus={handlePasswordFocus}
+              type={showPassword ? "password" : "text"}
+            />
+          </div>
 
           <div className={style.inputContainer}>
             <Input

@@ -54,6 +54,8 @@
 }
 .btnContainer {
   padding-top: 17px;
+  position: relative;
+  right: 37%;
 }
 @media (max-width: 1200px) {
   .container {

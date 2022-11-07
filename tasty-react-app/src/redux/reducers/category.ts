@@ -7,22 +7,24 @@ export interface ICategoryState {
   isLoading: boolean;
   likedRecipes: IPost[];
   savedRecipes: IPost[];
-  selectCategory: IPost[];
-  shopItem: IShop[];
-  localItem: string[];
+  recipiesOfSelectedCategory: IPost[];
+  shopItems: IShop[];
+  localItems: string[];
   showLoadMore: boolean;
-  setPage: number;
+  page: number;
+  ingredients: IRecipe[];
 }
 export const defaultState: ICategoryState = {
   allCategories: [],
   isLoading: false,
   likedRecipes: [],
   savedRecipes: [],
-  selectCategory: [],
-  shopItem: [],
-  localItem: [],
+  recipiesOfSelectedCategory: [],
+  shopItems: [],
+  localItems: [],
   showLoadMore: true,
-  setPage: 1,
+  page: 1,
+  ingredients: [],
 };
 
 export const categoryReducer = (state = defaultState, action: AnyAction) => {
@@ -43,25 +45,25 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
         ...state,
         showLoadMore: action.showLoadMore,
       };
-    case ACTIONS.SET_LOCAL_ITEM:
+    case ACTIONS.SET_LOCAL_ITEMS:
       return {
         ...state,
-        localItem: action.products,
+        localItems: action.productsFromLocal,
       };
     case ACTIONS.SET_PAGE:
       return {
         ...state,
-        setPage: action.page,
+        page: action.page,
       };
 
-    case ACTIONS.SET_SHOP_ITEM:
+    case ACTIONS.SET_SHOP_ITEMS:
       return {
         ...state,
-        shopItem: action.product,
+        shopItems: action.productsFromShop,
       };
 
     case ACTIONS.SET_SELECTED_CATEGORY:
-      const newSelectedCategories = action.selectedCategory?.map(
+      const newSelectedCategories = action.recipiesOfSelectedCategory?.map(
         (post: IPost) => {
           const likedRecipes = state.likedRecipes.find((item) => {
             if (item.id === post.id) {
@@ -88,7 +90,7 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
 
       return {
         ...state,
-        selectCategory: newSelectedCategories,
+        recipiesOfSelectedCategory: newSelectedCategories,
       };
 
     case ACTIONS.SET_LIKED_RECIPE:
@@ -104,16 +106,18 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
           })
         : state.likedRecipes.concat([{ ...recipeLike, liked: true }]);
 
-      const newAllRecipeLike = state.selectCategory.map((recipe) => {
-        if (recipe.id === action.recipes.id) {
-          recipe.liked = !recipe.liked;
+      const newAllRecipeLike = state.recipiesOfSelectedCategory.map(
+        (recipe) => {
+          if (recipe.id === action.recipes.id) {
+            recipe.liked = !recipe.liked;
+          }
+          return recipe;
         }
-        return recipe;
-      });
+      );
       return {
         ...state,
         likedRecipes: newLikedRecipe,
-        selectCategory: newAllRecipeLike,
+        recipiesOfSelectedCategory: newAllRecipeLike,
       };
 
     case ACTIONS.SET_SAVE_RECIPE:
@@ -129,16 +133,23 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
           })
         : state.savedRecipes.concat([{ ...recipeSave, saved: true }]);
 
-      const newAllRecipeSave = state.selectCategory.map((recipe) => {
-        if (recipe.id === action.recipes.id) {
-          recipe.saved = !recipe.saved;
+      const newAllRecipeSave = state.recipiesOfSelectedCategory.map(
+        (recipe) => {
+          if (recipe.id === action.recipes.id) {
+            recipe.saved = !recipe.saved;
+          }
+          return recipe;
         }
-        return recipe;
-      });
+      );
       return {
         ...state,
         savedRecipes: newSaveRecipe,
-        selectCategory: newAllRecipeSave,
+        recipiesOfSelectedCategory: newAllRecipeSave,
+      };
+    case ACTIONS.SET_INGREDIENTS:
+      return {
+        ...state,
+        ingredients: action.ingredients,
       };
 
     default:

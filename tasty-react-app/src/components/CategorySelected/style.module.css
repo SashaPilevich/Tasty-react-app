@@ -4,13 +4,17 @@
   align-items: center;
   padding-top: 40px;
 }
-.container {
+.container,
+.LikeSaveContainer {
   padding-top: 50px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 70px;
   row-gap: 40px;
   margin-bottom: 50px;
+}
+.LikeSaveContainer {
+  padding-top: 170px;
 }
 .wrapper {
   width: 250px;
@@ -31,7 +35,17 @@
   color: white;
 }
 .forBtnBack {
-  margin-right: 60%;
+  position: relative;
+  right: 123%;
+}
+.forBtnShopList {
+  position: relative;
+  left: 123%;
+  top: 6px;
+}
+.btnPanel {
+  display: flex;
+  justify-content: space-between;
 }
 @media (max-width: 1280px) {
   .container {

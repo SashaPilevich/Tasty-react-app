@@ -12,8 +12,8 @@ export const Shop = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isDark } = useContext(Context);
-  const product = useSelector(
-    (state: TState) => state.categoryReducer.shopItem
+  const products = useSelector(
+    (state: TState) => state.categoryReducer.shopItems
   );
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export const Shop = () => {
   }, []);
 
   const sum = () => {
-    let result = product.reduce((summa, item) => {
+    let result = products.reduce((summa, item) => {
       return summa + item.price;
     }, 0);
     return result.toFixed(2);
@@ -29,8 +29,14 @@ export const Shop = () => {
   const navigateToDelivery = () => {
     navigate("/delivery");
   };
+  const goBack = () => {
+    navigate(-1);
+  };
   return (
     <>
+      <div className={style.forBtnBack}>
+        <Button label={"Назад"} onClick={goBack} type="btnBack" />
+      </div>
       <div className={style.fullSum}>
         <p
           className={`${style.summa} ${isDark ? style.darkItem : style.summa}`}
@@ -45,9 +51,9 @@ export const Shop = () => {
           </span>
         </p>
       </div>
-      {product ? (
+      {products ? (
         <div className={style.container}>
-          {product.map((item) => {
+          {products.map((item) => {
             return (
               <div
                 className={`${
@@ -56,15 +62,24 @@ export const Shop = () => {
                 key={item.id}
               >
                 <div className={style.productItem}>
-                  <img className={style.imgProduct} src={item.image}></img>
-                  <h4 className={style.productTitle}>{item.title}</h4>
-                  <p className={style.productQuantity}>{item.quantity}</p>
+                  <img
+                    className={style.imgProduct}
+                    src={item.image}
+                    key={item.id}
+                  ></img>
+                  <h4 className={style.productTitle} key={item.id}>
+                    {item.title}{" "}
+                  </h4>
+                  <p className={style.productQuantity} key={item.id}>
+                    {item.quantity}
+                  </p>
                 </div>
                 <div className={style.containerPrice}>
                   <p
                     className={`${style.productPrice} ${
                       isDark ? style.darkItem : style.productPrice
                     }`}
+                    key={item.id}
                   >
                     {item.price}
                     <span

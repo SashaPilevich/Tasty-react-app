@@ -19,6 +19,9 @@ export const ShoppingList = () => {
   const goBack = () => {
     navigate(-1);
   };
+  const goToShopList = () => {
+    navigate("/myshoplist");
+  };
   return (
     <div className={style.container}>
       {post.length !== 0
@@ -26,8 +29,17 @@ export const ShoppingList = () => {
             return (
               <>
                 <Header />
-                <div className={style.btnContainer}>
-                  <Button label={"Назад"} onClick={goBack} type={"btnBack"} />
+                <div className={style.btnPanel}>
+                  <div className={style.forBtnBack}>
+                    <Button label={"Назад"} onClick={goBack} type="btnBack" />
+                  </div>
+                  <div className={style.forBtnShopList}>
+                    <Button
+                      label={"Шоппинг лист"}
+                      onClick={goToShopList}
+                      type="btnShopList"
+                    />
+                  </div>
                 </div>
                 <h2 className={style.title}>Шоппинг лист</h2>
                 <Recipe
