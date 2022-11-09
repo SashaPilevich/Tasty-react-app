@@ -2,7 +2,6 @@ import { ChangeEventHandler, useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { confirmPassword } from "../../api/auth";
 import { Context } from "../../App";
-import { Button } from "../../components/Button";
 import { Container } from "../../components/Container";
 import { Header } from "../../components/Header";
 import { InfoTemplate } from "../../components/InfoTemplate";
@@ -77,40 +76,32 @@ export const ConfirmPassword = () => {
     <Container>
       <Header />
       <InfoTemplate
-        title={"New password"}
-        labelBtn={"Set password"}
+        title={"Новый пароль"}
+        labelBtn={"Сменить пароль"}
         onClick={handleConfirmPassword}
       >
         <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
-          Please enter new password
+          Пожалуйста введите новый пароль
         </p>
-        {showPassword ? (
-          <div className={style.inputPasswordShow} onClick={openPassword}>
-            <Input
-              uniqType="inputForRegistration"
-              label=" New password"
-              onChange={handlePassword}
-              value={password}
-              error={passwordError}
-              type="password"
-            />
-          </div>
-        ) : (
-          <div className={style.inputPasswordClose} onClick={closePassword}>
-            <Input
-              uniqType="inputForRegistration"
-              label=" New password"
-              onChange={handlePassword}
-              value={password}
-              error={passwordError}
-              type="text"
-            />
-          </div>
-        )}
+        <div
+          className={
+            showPassword ? style.inputPasswordShow : style.inputPasswordClose
+          }
+          onClick={showPassword ? openPassword : closePassword}
+        >
+          <Input
+            uniqType="inputForRegistration"
+            label="Пароль"
+            onChange={handlePassword}
+            value={password}
+            error={passwordError}
+            type={showPassword ? "password" : "text"}
+          />
+        </div>
         <div className={style.inputContainer}>
           <Input
             uniqType="inputForRegistration"
-            label="Confirm password"
+            label="Подтвердите пароль"
             onChange={handleConfirmNewPassword}
             value={confirmNewPassword}
             error={confirmPasswordError}

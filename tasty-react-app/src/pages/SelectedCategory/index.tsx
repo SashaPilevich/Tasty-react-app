@@ -1,39 +1,31 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchSelectedCategory } from "../../api/recipe";
-import { Context } from "../../App";
 import { CategorySelected } from "../../components/CategorySelected";
-import { Container } from "../../components/Container";
 import { Header } from "../../components/Header";
-import { UsersTabs } from "../../components/UsersTab";
-import { IPost } from "../../types/post";
 import { useSelector, useDispatch } from "react-redux";
 import { TState } from "../../redux/store";
 import { setSelectedCategory } from "../../redux/actions/category";
+import { MainContainer } from "../../components/MainContainer";
 
 export const SelectedCategory = () => {
   const selectedCategory = useSelector(
-    (state: TState) => state.categoryReducer.selectedCategory
+    (state: TState) => state.categoryReducer.recipiesOfSelectedCategory
   );
+
   const dispatch = useDispatch();
   const params: any = useParams();
   useEffect(() => {
+    dispatch(setSelectedCategory([]));
     fetchSelectedCategory(params.id).then((values) => {
       dispatch(setSelectedCategory(values[params.id]));
     });
   }, []);
-  // const [selectedCategory, setSelectedCategory] = useState<IPost[]>([]);
-
-  // useEffect(() => {
-  //   fetchSelectedCategory(params.id).then((values) => {
-  //     setSelectedCategory(values[params.id]);
-  //   });
-  // }, []);
 
   return (
-    <Container>
+    <MainContainer>
       <Header />
       <CategorySelected posts={selectedCategory} />
-    </Container>
+    </MainContainer>
   );
 };

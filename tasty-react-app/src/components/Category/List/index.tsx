@@ -19,12 +19,13 @@ export const CategoryList = (props: IProps) => {
           navigateToSelectedCategory(item.id);
         };
         return (
-          <div onClick={clickPost}>
+          <div className={style.wrapper} onClick={clickPost} key={item.id}>
             <ItemOfCategory
               key={item.id}
               id={item.id}
               name={item.name}
               title={item.title}
+              back={item.back}
             />
           </div>
         );

@@ -17,14 +17,14 @@ export const EmailConfirmed = () => {
     <Container>
       <Header />
       <InfoTemplate
-        title={"Success"}
-        labelBtn={"Login"}
+        title={"Успех!"}
+        labelBtn={"Войти"}
         onClick={navigateToLogin}
       >
-        <p className={style.text}>Email confirmed</p>
-        <p className={style.text}>Your registration is now completed</p>
+        <p className={style.text}>Email подтвержден</p>
+        <p className={style.text}>Ваша регистрация завершена</p>
       </InfoTemplate>
-      <Button label={"Go Back"} onClick={goBack} type="btnCategory" />
+      <Button label={"Назад"} onClick={goBack} type="btnCategory" />
     </Container>
   );
 };

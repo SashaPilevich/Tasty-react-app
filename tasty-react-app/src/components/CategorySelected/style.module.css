@@ -1,18 +1,22 @@
 .mainContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding-top: 50px;
+  padding-top: 40px;
 }
-.container {
+.container,
+.LikeSaveContainer {
   padding-top: 50px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 70px;
+  grid-template-columns: repeat(4, 0.2fr);
+  justify-items: center;
+  justify-content: center;
+  column-gap: 40px;
   row-gap: 40px;
   margin-bottom: 50px;
 }
-
+.LikeSaveContainer {
+  padding-top: 170px;
+}
 .wrapper {
   width: 250px;
   height: 520px;
@@ -30,4 +34,61 @@
   flex-wrap: wrap;
   padding: 20px 15px;
   color: white;
+}
+
+@media (max-width: 1280px) {
+  .container,
+  .LikeSaveContainer {
+    grid-template-columns: repeat(3, 0.3fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .LikeSaveContainer {
+    padding-top: 230px;
+  }
+}
+@media (max-width: 900px) {
+  .container,
+  .LikeSaveContainer {
+    grid-template-columns: repeat(2, 0.4fr);
+  }
+}
+@media (max-width: 768px) {
+  .LikeSaveContainer {
+    padding-top: 230px;
+  }
+}
+
+@media (max-width: 560px) {
+  .container,
+  .LikeSaveContainer {
+    grid-template-columns: 1fr;
+  }
+  .wrapper {
+    width: 55%;
+  }
+}
+@media (max-width: 500px) {
+  .wrapper {
+    width: 60%;
+  }
+}
+@media (max-width: 430px) {
+  .wrapper {
+    width: 70%;
+  }
+}
+@media (max-width: 375px) {
+  .wrapper {
+    width: 80%;
+    margin-left: 10px;
+  }
+}
+@media (max-width: 320px) {
+  .wrapper {
+    width: 80%;
+    height: 500px;
+    margin-left: 0px;
+  }
 }

@@ -1,4 +1,19 @@
-.title {
+.mainContainer {
+  background-attachment: fixed;
+
+  background: linear-gradient(
+      360deg,
+      rgba(69, 70, 64, 0.6) 0%,
+      rgba(69, 70, 64, 0.6) 100%
+    ),
+    url("../../assets/images/backForShop.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 200vh;
+}
+.title,
+.emptyList {
   font-family: "Raleway";
   font-style: normal;
   font-weight: 700;
@@ -7,31 +22,87 @@
   letter-spacing: 0.03em;
   color: goldenrod;
   text-align: center;
-  margin: 0 0 30px 0;
+  margin: 0px 0px 20px 0px;
+  padding-top: 50px;
+}
+.emptyList {
+  font-weight: 500;
+  font-size: 32px;
+  color: rgb(41, 39, 39);
+  padding-top: 10px;
+  margin-right: 10px;
 }
 .container {
-  margin-left: 36%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.containerIngredient {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 400px;
   height: 50px;
-  border: 1px solid gray;
   margin-bottom: 10px;
+  background-color: rgb(46, 43, 43, 0.5);
+  border-radius: 10px;
 }
 .ingredientsItem,
 .darkItem {
   font-family: "Raleway";
   font-weight: 400;
   font-size: 18px;
-  color: black;
+  color: white;
   text-align: left;
-  margin: 0px;
+  margin: 0px 0px 0px 5px;
 }
 .darkItem {
   color: white;
 }
 .btnContainer {
+  display: flex;
   padding-top: 17px;
-  margin-right: 17%;
+  margin-left: 100px;
+}
+@media (max-width: 1200px) {
+  .container {
+    width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .btnContainer {
+    margin-left: 80px;
+  }
+  .title {
+    text-align: center;
+    margin: 10px 0px 30px 10px;
+    font-size: 36px;
+    line-height: 100%;
+  }
+  .emptyList {
+    color: white;
+    font-size: 22px;
+  }
+}
+@media (max-width: 650px) {
+  .btnContainer {
+    margin-left: 50px;
+  }
+}
+
+@media (max-width: 560px) {
+  .btnContainer {
+    margin-left: 20px;
+  }
+}
+@media (max-width: 450px) {
+  .containerIngredient {
+    width: 90%;
+  }
+}
+@media (max-width: 320px) {
+  .btnContainer {
+    margin-left: 0px;
+  }
 }

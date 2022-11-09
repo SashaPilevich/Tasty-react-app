@@ -7,23 +7,42 @@
   margin-bottom: 10px;
   cursor: pointer;
 }
-
 .btnMain,
 .btnShop,
 .btnShowMore,
 .btnTabActive,
 .btnTabUnactive,
 .btnDelete,
-.btnSave {
+.btnSave,
+.btnBuy {
   width: 150px;
   height: 40px;
   background-color: goldenrod;
   color: white;
-  font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 26px;
+  line-height: 20px;
   margin-left: 280px;
+}
+.btnBuy,
+.btnSave,
+.btnShop,
+.btnMain {
+  margin-left: 0px;
+  margin-top: 20px;
+  font-weight: 500;
+  font-size: 18px;
+}
+.btnMain {
+  margin-left: 0px;
+  background-color: rgba(218, 165, 32, 0.7);
+}
+.btnMain:hover {
+  background-color: goldenrod;
+  border: none;
+}
+.btnShop {
+  height: 50px;
 }
 .btnDelete {
   width: 32px;
@@ -32,13 +51,8 @@
   border-radius: 0px;
   margin-right: 10px;
 }
-.btnSave {
-  margin-left: 133%;
-  height: 50px;
-  font-weight: 500;
-  font-size: 18px;
-}
-.btnTabActive {
+.btnTabActive,
+.btnTabUnactive {
   margin-left: 0;
   width: 200px;
   height: 40px;
@@ -46,24 +60,15 @@
 }
 .btnTabUnactive {
   background-color: darkgrey;
-  margin-left: 0;
-  width: 200px;
-  height: 40px;
-  border-radius: 2px;
 }
-.btnShop {
-  margin-top: 20px;
-  margin-left: 0px;
-  font-weight: 500;
-  font-size: 18px;
-  height: 50px;
-}
+
 .btnShowMore {
   margin: 0;
   width: 100px;
   height: 30px;
 }
-.btnBack {
+.btnBack,
+.btnShopList {
   width: 166px;
   height: 29px;
   border: none;
@@ -71,22 +76,33 @@
   cursor: pointer;
   background: transparent;
   font-family: "Raleway";
-  font-style: normal;
   font-weight: 700;
   font-size: 25px;
   line-height: 29px;
   letter-spacing: 0.05em;
   text-align: left;
   position: relative;
-  left: -35%;
+  padding-top: 30px;
+  z-index: 8;
 }
 .btnBack::before {
   content: "<";
   clear: both;
   display: block;
   position: absolute;
-  top: -2px;
+  top: 27px;
   left: -20px;
+}
+.btnShopList {
+  width: 200px;
+}
+.btnShopList::after {
+  content: ">";
+  clear: both;
+  display: block;
+  position: absolute;
+  top: 29px;
+  right: -20px;
 }
 .btnCategory {
   width: 180px;
@@ -116,6 +132,70 @@
   box-shadow: 1px 1px 5px 1px rgba(255, 255, 255, 0.5),
     -1px -1px 5px 1px rgba(116, 125, 136, 0.5),
     inset -1px -1px 5px 1px rgba(255, 255, 255, 0.2),
-    /* inset 4px 4px 6px 0 rgba(0, 0, 0, 0.5); */ inset 1px 1px 5px 2px
-      rgb(92, 64, 51, 0.3);
+    inset 1px 1px 5px 2px rgb(92, 64, 51, 0.3);
+}
+@media (max-width: 990px) {
+  .btnTabActive,
+  .btnTabUnactive {
+    line-height: 15px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 768px) {
+  .btnTabActive,
+  .btnTabUnactive {
+    line-height: 10px;
+    width: 300px;
+  }
+  .btnShop {
+    margin-top: 20px;
+    margin-left: 20px;
+    font-weight: 400;
+    font-size: 16px;
+    height: 50px;
+    width: 150px;
+  }
+  .btnBack,
+  .btnShopList {
+    padding-top: 0px;
+  }
+  .btnBack::before {
+    top: -3px;
+  }
+  .btnShopList::after {
+    right: -10px;
+    top: -1px;
+  }
+}
+@media (max-width: 560px) {
+  .btnBack {
+    color: transparent;
+    width: 0px;
+    height: 0px;
+  }
+  .btnBack::before {
+    content: "\00AB";
+    clear: both;
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    color: goldenrod;
+    font-size: 45px;
+  }
+  .btnShopList {
+    display: none;
+  }
+}
+
+@media (max-width: 425px) {
+  .btnMain {
+    margin-left: 0px;
+  }
+}
+@media (max-width: 365px) {
+  .btnTabActive,
+  .btnTabUnactive {
+    width: 250px;
+  }
 }

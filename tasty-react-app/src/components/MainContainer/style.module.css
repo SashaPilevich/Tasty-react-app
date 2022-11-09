@@ -1,0 +1,15 @@
+.mainContainer {
+  background: linear-gradient(
+      360deg,
+      rgba(69, 70, 64, 0.6) 0%,
+      rgba(69, 70, 64, 0.6) 100%
+    ),
+    url("../../assets/images/backForShop.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 230px;
+}
+.darkContainer {
+  background-color: #282c34;
+}

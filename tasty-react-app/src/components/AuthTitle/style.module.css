@@ -1,19 +1,12 @@
 .container {
   margin-bottom: 50px;
 }
-span {
-  font-family: "Raleway";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 45px;
-  line-height: 145.2%;
-  letter-spacing: 0.03em;
-  color: #254050;
-}
 .active_link,
-.darkActiveLink {
+.darkActiveLink,
+span,
+.unactive,
+.darkUnactive {
   font-family: "Raleway";
-  font-style: normal;
   font-weight: 700;
   font-size: 45px;
   line-height: 145.2%;
@@ -21,19 +14,21 @@ span {
   color: goldenrod;
   text-decoration: underline;
 }
-.darkActiveLink {
-  color: goldenrod;
+span {
+  color: #254050;
 }
 .unactive,
 .darkUnactive {
-  font-family: "Raleway";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 45px;
-  line-height: 145.2%;
-  letter-spacing: 0.03em;
   color: #75869b;
 }
-.darkUnactive {
-  color: darkgrey;
+@media (max-width: 500px) {
+  .active_link,
+  .darkActiveLink,
+  .unactive,
+  .darkUnactive,
+  span {
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 30px;
+  }
 }

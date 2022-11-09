@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Button } from "../Button";
 import style from "./style.module.css";
-import food from "./food.png";
-import note from "./note.png";
-import movie from "./movie.png";
+import { shopList, food, note, movie } from "../../assets";
 import { SelectedRecipe } from "../SelectedRecipe";
 import { SelectedRecipeInstruction } from "../SelectedRecipeInstruction";
 import { SelectedRecipeVideo } from "../SelectedRecipeVideo";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { TState } from "../../redux/store";
 
-type Tabs = "Ingredients" | "Instruction" | "Video";
+type Tabs = "Ingredients" | "Instruction" | "Video" | "Shop";
 export const getTabList = (tab: Tabs) => {
   if (tab === "Ingredients") {
     return <SelectedRecipe />;
@@ -19,9 +20,17 @@ export const getTabList = (tab: Tabs) => {
   if (tab === "Video") {
     return <SelectedRecipeVideo />;
   }
+  if (tab === "Shop") {
+    return <SelectedRecipeVideo />;
+  }
 };
 export const RecipeTabs = () => {
   const [selectedTab, setSelectedTab] = useState<Tabs>("Ingredients");
+  const recipe = useSelector((state: TState) => state.categoryReducer.recipe);
+  const navigate = useNavigate();
+  const navigateToShopList = (id: string | undefined) => {
+    navigate(`/shoppinglist/${id}`);
+  };
 
   return (
     <>
@@ -59,6 +68,26 @@ export const RecipeTabs = () => {
             }}
             type={selectedTab === "Video" ? "btnTabActive" : "btnTabUnactive"}
           />
+        </div>
+        <div className={style.tabContainer}>
+          <img className={style.ico} src={shopList} alt="shopList"></img>
+          {recipe
+            ? recipe.map((item) => {
+                const clickPost = () => {
+                  navigateToShopList(item.id);
+                };
+                return (
+                  <Button
+                    label={"Добавить в список ингредиентов"}
+                    onClick={clickPost}
+                    type={
+                      selectedTab === "Shop" ? "btnTabActive" : "btnTabUnactive"
+                    }
+                    key={item.id}
+                  />
+                );
+              })
+            : ""}
         </div>
       </div>
       {getTabList(selectedTab)}

@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/Button";
-import { Container } from "../../components/Container";
 import { Header } from "../../components/Header";
+import { MainContainer } from "../../components/MainContainer";
 import { RecipeTabs } from "../../components/RecipeTabs";
-import style from "./style.module.css";
+import { ButtonPanel } from "../../components/ButtonPanel";
 
 export const RecipePage = () => {
   const navigate = useNavigate();
@@ -11,12 +10,10 @@ export const RecipePage = () => {
     navigate(-1);
   };
   return (
-    <Container>
+    <MainContainer>
       <Header />
-      <div className={style.btnContainer}>
-        <Button label={"Back"} onClick={navigateBack} type="btnBack" />
-      </div>
+      <ButtonPanel onClick={navigateBack} />
       <RecipeTabs />
-    </Container>
+    </MainContainer>
   );
 };

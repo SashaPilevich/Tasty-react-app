@@ -1,6 +1,6 @@
-import style from "./style.module.css";
 import { ChangeEventHandler, useContext } from "react";
 import { Context } from "../../App";
+import style from "./style.module.css";
 
 interface Input {
   placeholder?: string;
@@ -9,13 +9,7 @@ interface Input {
   type?: string;
   label?: string;
   id?: string;
-  uniqType:
-    | "burgerMenu"
-    | "primary"
-    | "inputForRegistration"
-    | "checkbox"
-    | "delivery"
-    | "radio";
+  uniqType: "burgerMenu" | "inputForRegistration" | "delivery" | "radio";
   refObj?: any;
   error?: string;
   onFocus?: () => void;
@@ -25,26 +19,13 @@ interface Input {
   forRadio?: string;
 }
 const getInputStyle = (
-  uniqType:
-    | "burgerMenu"
-    | "primary"
-    | "inputForRegistration"
-    | "checkbox"
-    | "delivery"
-    | "radio"
+  uniqType: "burgerMenu" | "inputForRegistration" | "delivery" | "radio"
 ) => {
   if (uniqType === "burgerMenu") {
     return style.burgerMenu;
   }
-
-  if (uniqType === "primary") {
-    return style.primary;
-  }
   if (uniqType === "inputForRegistration") {
     return style.inputForRegistration;
-  }
-  if (uniqType === "checkbox") {
-    return style.checkbox;
   }
   if (uniqType === "delivery") {
     return style.delivery;

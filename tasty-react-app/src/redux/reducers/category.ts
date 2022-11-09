@@ -7,20 +7,24 @@ export interface ICategoryState {
   isLoading: boolean;
   likedRecipes: IPost[];
   savedRecipes: IPost[];
-  selectedCategory: IPost[];
-  shopItem: IShop[];
-  localItem: string[];
+  recipiesOfSelectedCategory: IPost[];
+  shopItems: IShop[];
+  localItems: string[];
   showLoadMore: boolean;
+  page: number;
+  recipe: IRecipe[];
 }
 export const defaultState: ICategoryState = {
   allCategories: [],
   isLoading: false,
   likedRecipes: [],
   savedRecipes: [],
-  selectedCategory: [],
-  shopItem: [],
-  localItem: [],
+  recipiesOfSelectedCategory: [],
+  shopItems: [],
+  localItems: [],
   showLoadMore: true,
+  page: 1,
+  recipe: [],
 };
 
 export const categoryReducer = (state = defaultState, action: AnyAction) => {
@@ -41,31 +45,25 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
         ...state,
         showLoadMore: action.showLoadMore,
       };
-    case ACTIONS.SET_LOCAL_ITEM:
+    case ACTIONS.SET_LOCAL_ITEMS:
       return {
         ...state,
-        localItem: action.products,
+        localItems: action.productsFromLocal,
+      };
+    case ACTIONS.SET_PAGE:
+      return {
+        ...state,
+        page: action.page,
       };
 
-    case ACTIONS.SET_SHOP_ITEM:
-      const selectShopItem = action.product;
-      const newShopItem = state.localItem.map((ingredient: string) => {
-        console.log(ingredient);
-        const newselectShopItem = selectShopItem.find((item: IShop) => {
-          if (item.title === ingredient) {
-            return item;
-          }
-        });
-
-        return newselectShopItem;
-      });
+    case ACTIONS.SET_SHOP_ITEMS:
       return {
         ...state,
-        shopItem: newShopItem,
+        shopItems: action.productsFromShop,
       };
 
     case ACTIONS.SET_SELECTED_CATEGORY:
-      const newSelectedCategories = action.selectedCategory.map(
+      const newSelectedCategories = action.recipiesOfSelectedCategory?.map(
         (post: IPost) => {
           const likedRecipes = state.likedRecipes.find((item) => {
             if (item.id === post.id) {
@@ -92,7 +90,7 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
 
       return {
         ...state,
-        selectedCategory: newSelectedCategories,
+        recipiesOfSelectedCategory: newSelectedCategories,
       };
 
     case ACTIONS.SET_LIKED_RECIPE:
@@ -108,16 +106,18 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
           })
         : state.likedRecipes.concat([{ ...recipeLike, liked: true }]);
 
-      const newAllRecipeLike = state.selectedCategory.map((recipe) => {
-        if (recipe.id === action.recipes.id) {
-          recipe.liked = !recipe.liked;
+      const newAllRecipeLike = state.recipiesOfSelectedCategory.map(
+        (recipe) => {
+          if (recipe.id === action.recipes.id) {
+            recipe.liked = !recipe.liked;
+          }
+          return recipe;
         }
-        return recipe;
-      });
+      );
       return {
         ...state,
         likedRecipes: newLikedRecipe,
-        selectedCategory: newAllRecipeLike,
+        recipiesOfSelectedCategory: newAllRecipeLike,
       };
 
     case ACTIONS.SET_SAVE_RECIPE:
@@ -133,16 +133,23 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
           })
         : state.savedRecipes.concat([{ ...recipeSave, saved: true }]);
 
-      const newAllRecipeSave = state.selectedCategory.map((recipe) => {
-        if (recipe.id === action.recipes.id) {
-          recipe.saved = !recipe.saved;
+      const newAllRecipeSave = state.recipiesOfSelectedCategory.map(
+        (recipe) => {
+          if (recipe.id === action.recipes.id) {
+            recipe.saved = !recipe.saved;
+          }
+          return recipe;
         }
-        return recipe;
-      });
+      );
       return {
         ...state,
         savedRecipes: newSaveRecipe,
-        selectedCategory: newAllRecipeSave,
+        recipiesOfSelectedCategory: newAllRecipeSave,
+      };
+    case ACTIONS.SET_RECIPE:
+      return {
+        ...state,
+        recipe: action.recipe,
       };
 
     default:

@@ -1,11 +1,10 @@
-import { SetStateAction, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
-import { setLocalItem } from "../../redux/actions/category";
+import { setLocalItems } from "../../redux/actions/category";
 import { TState } from "../../redux/store";
 import { Button } from "../Button";
-import { Container } from "../Container";
 import { Header } from "../Header";
 import style from "./style.module.css";
 
@@ -14,20 +13,18 @@ export const MyShoppingList = () => {
   const dispatch = useDispatch();
   const { isDark } = useContext(Context);
 
-  const localItem = useSelector(
-    (state: TState) => state.categoryReducer.localItem
+  const localItems = useSelector(
+    (state: TState) => state.categoryReducer.localItems
   );
+  const [isEmpty, setIsEmpty] = useState(false);
 
   let shopArray = [];
   let isList = localStorage.getItem("shopList");
-
   useEffect(() => {
     if (isList) {
       shopArray = JSON.parse(isList);
-      shopArray = shopArray.map((item: string[]) => {
-        return item;
-      });
-      dispatch(setLocalItem(shopArray));
+      dispatch(setLocalItems(shopArray));
+      setIsEmpty(true);
     }
   }, []);
 
@@ -38,37 +35,43 @@ export const MyShoppingList = () => {
     navigate(-1);
   };
   const clickDelete = (ingredient: string) => {
-    const newList: string[] | undefined = localItem?.filter((item) => {
+    const newList: string[] | undefined = localItems?.filter((item) => {
       return item !== ingredient;
     });
-    dispatch(setLocalItem(newList));
+    dispatch(setLocalItems(newList));
     localStorage.setItem("shopList", JSON.stringify(newList));
   };
   return (
-    <Container>
+    <div className={style.mainContainer}>
       <Header />
       <div className={style.btnContainer}>
-        <Button label={"Back"} onClick={goBack} type={"btnBack"} />
+        <Button label={"Назад"} onClick={goBack} type={"btnBack"} />
       </div>
-      <h2 className={style.title}>My shopping list</h2>
-      {localItem.map((item) => {
-        const deleteItem = () => {
-          clickDelete(item);
-        };
-        return (
-          <div className={style.container}>
-            <p
-              className={`${style.ingredientsItem} ${
-                isDark ? style.darkItem : style.ingredientsItem
-              }`}
-            >
-              {item}
-            </p>
-            <Button label="X" onClick={deleteItem} type="btnDelete" />
-          </div>
-        );
-      })}
-      <Button label={"BUY"} onClick={clickBuy} type="btnShop" />
-    </Container>
+      <h2 className={style.title}>Мой шоппинг лист</h2>
+      {isEmpty ? (
+        <div className={style.container}>
+          {localItems.map((item, index) => {
+            const deleteItem = () => {
+              clickDelete(item);
+            };
+            return (
+              <div className={style.containerIngredient} key={index}>
+                <p
+                  className={`${style.ingredientsItem} ${
+                    isDark ? style.darkItem : style.ingredientsItem
+                  }`}
+                >
+                  {item}
+                </p>
+                <Button label="X" onClick={deleteItem} type="btnDelete" />
+              </div>
+            );
+          })}
+          <Button label={"Купить"} onClick={clickBuy} type="btnBuy" />
+        </div>
+      ) : (
+        <h3 className={style.emptyList}>Ваш список пуст...</h3>
+      )}
+    </div>
   );
 };

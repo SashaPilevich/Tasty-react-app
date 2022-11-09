@@ -1,46 +1,48 @@
-import { MouseEvent, MouseEventHandler, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchSelectedRecipe } from "../../api/recipe";
-
-import { TState } from "../../redux/store";
-import { IPost, IRecipe } from "../../types/post";
-import { Button } from "../Button";
-import { Container } from "../Container";
+import { IRecipe } from "../../types/post";
 import { Header } from "../Header";
 import { Recipe } from "../Recipe";
+import { ButtonPanel } from "../ButtonPanel";
 import style from "./style.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setRecipe } from "../../redux/actions/category";
+import { TState } from "../../redux/store";
 
 export const ShoppingList = () => {
   const navigate = useNavigate();
   const params = useParams();
-  const [post, setPost] = useState<IRecipe[]>([]);
+  const dispatch = useDispatch();
+  const recipe = useSelector((state: TState) => state.categoryReducer.recipe);
+
   useEffect(() => {
+    dispatch(setRecipe([]));
     fetchSelectedRecipe(params.id).then((values) => {
-      setPost(values[Number(params.id)]);
+      const linked = params.id;
+      Number(linked);
+      dispatch(setRecipe(values[Number(linked)]));
     });
   }, []);
   const goBack = () => {
     navigate(-1);
   };
   return (
-    <div>
-      {post.length !== 0
-        ? post.map((item) => {
+    <div className={style.container}>
+      {recipe.length !== 0
+        ? recipe.map((item) => {
             return (
-              <Container>
+              <div key={item.id}>
                 <Header />
-                <div className={style.btnContainer}>
-                  <Button label={"Back"} onClick={goBack} type={"btnBack"} />
-                </div>
-                <h2 className={style.title}>Shopping list</h2>
+                <ButtonPanel onClick={goBack} />
+                <h2 className={style.title}>Список ингредиентов</h2>
                 <Recipe
                   key={item.id}
                   id={item.id}
                   ingredients={item.ingredients}
                   onClickDelete={() => {}}
                 />
-              </Container>
+              </div>
             );
           })
         : ""}

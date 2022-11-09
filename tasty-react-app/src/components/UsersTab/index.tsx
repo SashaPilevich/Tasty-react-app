@@ -1,25 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { fetchSelectedCategory } from "../../api/recipe";
 import { Context } from "../../App";
-import { SelectedCategory } from "../../pages/SelectedCategory";
-import { IPost } from "../../types/post";
 import { AllCategory } from "../AllCategory";
 import { Button } from "../Button";
-import { CategorySelected } from "../CategorySelected";
-import style from "./style.module.css";
-import save from "./save.svg";
-import like from "./like.svg";
 import { LikedRecipes } from "../LikedRecipes";
-import { useSelector, useDispatch } from "react-redux";
-import { Like } from "../../assets";
-import {
-  loadAppCategories,
-  setSelectedCategory,
-} from "../../redux/actions/category";
-import { TState } from "../../redux/store";
+import { useDispatch } from "react-redux";
+import { Like, saveMain } from "../../assets";
+import { loadAppCategories } from "../../redux/actions/category";
 import { SavedRecipe } from "../SavedRecipes";
-import { Container } from "../Container";
+import style from "./style.module.css";
 
 type UsersTabs = "Selected Category" | "Saved Recipies" | "Liked Recipies";
 export const getUsersTabList = (tab: UsersTabs) => {
@@ -37,10 +25,11 @@ export const getUsersTabList = (tab: UsersTabs) => {
 export const UsersTabs = () => {
   const dispatch = useDispatch();
   const { user } = useContext(Context);
+
   const [selectedTab, setSelectedTab] =
     useState<UsersTabs>("Selected Category");
   useEffect(() => {
-    dispatch(loadAppCategories() as any);
+    dispatch(loadAppCategories(1) as any);
   }, []);
 
   if (!user) {
@@ -48,10 +37,9 @@ export const UsersTabs = () => {
   }
 
   return (
-    <Container>
+    <>
       <div className={style.container}>
         <div className={style.tabContainer}>
-          {/* <img className={style.ico} src={food} alt="food"></img> */}
           <Button
             label={"Все категории"}
             onClick={() => {
@@ -65,7 +53,7 @@ export const UsersTabs = () => {
           />
         </div>
         <div className={style.tabContainer}>
-          <img className={style.ico} src={save} alt="save"></img>
+          <img className={style.ico} src={saveMain} alt="save"></img>
           <Button
             label={"Сохранённые рецепты"}
             onClick={() => {
@@ -79,8 +67,10 @@ export const UsersTabs = () => {
           />
         </div>
         <div className={style.tabContainer}>
-          <Like fill={"rgb(94.509804%,76.862746%,5.882353%)"} />
-          {/* <img className={style.ico} src={like} alt="like"></img> */}
+          <Like
+            className={style.like}
+            fill={"rgb(94.509804%,76.862746%,5.882353%)"}
+          />
           <Button
             label={"Понравившиеся рецепты"}
             onClick={() => {
@@ -95,6 +85,6 @@ export const UsersTabs = () => {
         </div>
       </div>
       {getUsersTabList(selectedTab)}
-    </Container>
+    </>
   );
 };
