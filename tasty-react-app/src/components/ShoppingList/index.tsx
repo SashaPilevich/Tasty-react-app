@@ -2,53 +2,47 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchSelectedRecipe } from "../../api/recipe";
 import { IRecipe } from "../../types/post";
-import { Button } from "../Button";
 import { Header } from "../Header";
 import { Recipe } from "../Recipe";
+import { ButtonPanel } from "../ButtonPanel";
 import style from "./style.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { setRecipe } from "../../redux/actions/category";
+import { TState } from "../../redux/store";
 
 export const ShoppingList = () => {
   const navigate = useNavigate();
   const params = useParams();
-  const [post, setPost] = useState<IRecipe[]>([]);
+  const dispatch = useDispatch();
+  const recipe = useSelector((state: TState) => state.categoryReducer.recipe);
+
   useEffect(() => {
+    dispatch(setRecipe([]));
     fetchSelectedRecipe(params.id).then((values) => {
-      setPost(values[Number(params.id)]);
+      const linked = params.id;
+      Number(linked);
+      dispatch(setRecipe(values[Number(linked)]));
     });
   }, []);
   const goBack = () => {
     navigate(-1);
   };
-  const goToShopList = () => {
-    navigate("/myshoplist");
-  };
   return (
     <div className={style.container}>
-      {post.length !== 0
-        ? post.map((item) => {
+      {recipe.length !== 0
+        ? recipe.map((item) => {
             return (
-              <>
+              <div key={item.id}>
                 <Header />
-                <div className={style.btnPanel}>
-                  <div className={style.forBtnBack}>
-                    <Button label={"Назад"} onClick={goBack} type="btnBack" />
-                  </div>
-                  <div className={style.forBtnShopList}>
-                    <Button
-                      label={"Шоппинг лист"}
-                      onClick={goToShopList}
-                      type="btnShopList"
-                    />
-                  </div>
-                </div>
-                <h2 className={style.title}>Шоппинг лист</h2>
+                <ButtonPanel onClick={goBack} />
+                <h2 className={style.title}>Список ингредиентов</h2>
                 <Recipe
                   key={item.id}
                   id={item.id}
                   ingredients={item.ingredients}
                   onClickDelete={() => {}}
                 />
-              </>
+              </div>
             );
           })
         : ""}

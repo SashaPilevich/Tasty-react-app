@@ -7,9 +7,9 @@
   margin-bottom: 40px;
 }
 .forBtnBack {
-  position: relative;
-  left: -37%;
-  top: 25px;
+  display: flex;
+  margin-left: 100px;
+  padding-top: 10px;
 }
 .containerItem,
 .darkContainerItem {
@@ -90,60 +90,61 @@
   .container {
     grid-template-columns: repeat(3, 1fr);
     row-gap: 60px;
-    /* margin-left: 100px; */
     padding-top: 50px;
     margin-bottom: 40px;
   }
 }
 @media (max-width: 800px) {
-  .mainContainer {
-    width: 100%;
-  }
   .containerItem {
-    width: 80%;
+    width: 70%;
   }
   .container {
     grid-template-columns: repeat(2, 1fr);
-    row-gap: 60px;
-    /* margin-left: 100px; */
-    padding-top: 50px;
-    margin-bottom: 40px;
   }
 }
-@media (max-width: 800px) {
-  .mainContainer {
-    width: 100%;
+
+@media (max-width: 768px) {
+  .forBtnBack {
+    margin-left: 100px;
   }
-  .containerItem {
-    width: 60%;
-  }
-  .container {
-    grid-template-columns: repeat(2, 1fr);
-    justify-items: center;
-    row-gap: 60px;
-    margin-left: 0px;
-    padding-top: 50px;
-    margin-bottom: 40px;
+}
+@media (max-width: 675px) {
+  .forBtnBack {
+    margin-left: 60px;
   }
 }
 @media (max-width: 630px) {
-  .mainContainer {
-    width: 100%;
-  }
   .containerItem {
     width: 60%;
   }
   .container {
     grid-template-columns: 1fr;
     justify-items: center;
-    row-gap: 60px;
     margin-left: 0px;
-    padding-top: 50px;
-    margin-bottom: 40px;
+  }
+}
+@media (max-width: 560px) {
+  .forBtnBack {
+    margin-left: 20px;
+  }
+}
+@media (max-width: 425px) {
+  .fullSum {
+    padding-top: 20px;
+    margin-right: 60px;
   }
 }
 @media (max-width: 400px) {
   .containerItem {
     width: 70%;
+  }
+}
+
+@media (max-width: 320px) {
+  .forBtnBack {
+    margin-left: 0px;
+  }
+  .fullSum {
+    margin-right: 30px;
   }
 }

@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
-import { Button } from "../../components/Button";
 import { Container } from "../../components/Container";
 import { Header } from "../../components/Header";
 import { InfoTemplate } from "../../components/InfoTemplate";

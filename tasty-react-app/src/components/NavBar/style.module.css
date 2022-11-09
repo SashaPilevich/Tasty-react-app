@@ -105,10 +105,25 @@ ul {
   }
   .logOut {
     font-size: 16px;
+    margin-left: 27px;
   }
   .postsPanel {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+  }
+  .loginToggle {
+    padding: 7px;
+  }
+  .logoutImage {
+    display: none;
+  }
+}
+
+@media (max-width: 350px) {
+  .postsPanel {
+    margin-left: 1px;
+    margin-right: 3px;
     font-size: 16px;
   }
 }

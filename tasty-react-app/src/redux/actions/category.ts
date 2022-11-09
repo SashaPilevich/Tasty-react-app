@@ -49,10 +49,10 @@ export const setPage = (page: number) => {
     page,
   };
 };
-export const setIngredients = (ingredients: IRecipe[]) => {
+export const setRecipe = (recipe: IRecipe[]) => {
   return {
-    type: ACTIONS.SET_INGREDIENTS,
-    ingredients,
+    type: ACTIONS.SET_RECIPE,
+    recipe,
   };
 };
 
@@ -73,7 +73,7 @@ export const loadAppCategories = (page: number) => {
           )
         );
         dispatch(setAllCategories(values[page]));
-        dispatch(setPage(page + 1)); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!}
+        dispatch(setPage(page + 1));
       })
       .finally(() => {
         dispatch(setIsLoading(false));

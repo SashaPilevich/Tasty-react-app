@@ -21,7 +21,7 @@
   margin: auto 0;
   width: 25px;
   height: 25px;
-  background: url("show.png") no-repeat;
+  background: url("../../assets/images/show.png") no-repeat;
   background-position: right;
   background-size: cover;
   cursor: pointer;
@@ -38,7 +38,7 @@
   margin: auto 0;
   width: 25px;
   height: 25px;
-  background: url("close.png") no-repeat;
+  background: url("../../assets/images/close.png") no-repeat;
   background-size: cover;
   cursor: pointer;
 }

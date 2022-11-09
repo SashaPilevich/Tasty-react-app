@@ -1,54 +1,103 @@
 .container {
-  background-image: url("./back.jpg");
+  background: linear-gradient(
+      360deg,
+      rgba(69, 70, 64, 0.4) 0%,
+      rgba(69, 70, 64, 0.4) 100%
+    ),
+    url("../../assets/images/backForShop.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
   height: 850px;
-  display: flex;
-  flex-direction: column;
 }
-.title {
+
+.titleContainer {
+  padding-top: 150px;
+  margin-left: 250px;
+  text-align: left;
+  z-index: 2;
+}
+.titleContainer > .titleInner {
+  display: inline-block;
+}
+.titleInner {
+  display: inline-block;
+  animation: inner-left 1s 1s ease both;
+}
+
+@keyframes text-clip {
+  from {
+    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+  }
+  to {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+@keyframes outer-left {
+  from {
+    transform: translateX(50%);
+  }
+  to {
+    transform: none;
+  }
+}
+.tasty,
+.about {
+  animation: outer-left 1s 1s cubic-bezier(0.5, 0, 0.1, 1) both;
+}
+.tastyInner {
   font-family: "Poppins", "sans-serif";
   font-style: normal;
-  font-weight: 700;
-  font-size: 60px;
-  line-height: 74px;
-  color: rgb(234, 172, 16);
-  margin-bottom: 50px;
-  padding-top: 240px;
-  margin-left: 280px;
-  text-align: left;
+  font-weight: 800;
+  font-size: 70px;
+  color: goldenrod;
+  display: inline-block;
+  animation: text-clip 1s 0s cubic-bezier(0.5, 0, 0.1, 1) both;
 }
-.textAbout {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 26px;
-  width: 500px;
-  margin-left: 280px;
+
+.about {
+  width: 600px;
   text-align: left;
-  color: #ffffff;
-  margin-bottom: 50px;
+  display: inline-block;
+}
+.aboutInner {
+  animation: text-clip 1s 0s cubic-bezier(0.5, 0, 0.1, 1) both;
+  font-family: "Raleway", "sans-serif";
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  color: white;
+  margin-bottom: 70px;
+
+  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
+    1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.titleContainer {
+  animation: outer-left 1s 1s ease both;
+}
+
+.tasty > .tastyInner {
+  display: inline-block;
 }
 
 @media (max-width: 768px) {
-  .title,
-  .textAbout {
+  .titleContainer {
     margin-left: 150px;
   }
-  .textAbout {
+  .about {
     width: 300px;
   }
 }
 @media (max-width: 600px) {
-  .textAbout {
+  .about {
     width: 200px;
     font-size: 14px;
   }
 }
-@media (max-width: 425px) {
-  .title,
-  .textAbout {
-    margin-left: 50px;
+@media (max-width: 426px) {
+  .titleContainer {
+    margin-left: 30px;
   }
 }

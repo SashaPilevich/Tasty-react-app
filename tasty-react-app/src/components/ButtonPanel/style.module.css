@@ -1,0 +1,56 @@
+.forBtnBack {
+  margin-left: 100px;
+}
+.forBtnShopList {
+  margin-right: 100px;
+}
+.btnPanel {
+  display: flex;
+  justify-content: space-between;
+}
+.ico {
+  display: none;
+}
+@media (max-width: 768px) {
+  .btnPanel {
+    padding-top: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .forBtnBack {
+    margin-left: 80px;
+  }
+  .forBtnShopList {
+    margin-right: 80px;
+  }
+}
+@media (max-width: 650px) {
+  .forBtnBack {
+    margin-left: 50px;
+  }
+  .forBtnShopList {
+    margin-right: 50px;
+  }
+  .btnPanel {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 560px) {
+  .btnPanel {
+    margin-bottom: 10px;
+  }
+  .forBtnBack {
+    margin-left: 20px;
+  }
+  .forBtnShopList {
+    margin-right: 20px;
+  }
+  .ico {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 0px;
+  }
+}

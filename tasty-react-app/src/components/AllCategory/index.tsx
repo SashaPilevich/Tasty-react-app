@@ -12,15 +12,15 @@ import {
   setShowLoadMore,
 } from "../../redux/actions/category";
 import { IPost } from "../../types/post";
-import { fetchSelectedCategory } from "../../api/recipe";
 import { Input } from "../Input";
-import style from "./style.module.css";
 import { Container } from "../Container";
+import style from "./style.module.css";
 
 export const AllCategory = () => {
+  const dispatch = useDispatch();
   const [searchText, setSearchText] = useState("");
   const [isFind, setIsFind] = useState(true);
-
+  const [enterWord, setEnterWord] = useState(false);
   const categories = useSelector(
     (state: TState) => state.categoryReducer.allCategories
   );
@@ -31,9 +31,6 @@ export const AllCategory = () => {
     (state: TState) => state.categoryReducer.showLoadMore
   );
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const loadMore = () => {
     dispatch(loadMorePosts() as any);
   };
@@ -41,6 +38,7 @@ export const AllCategory = () => {
   const hangleSearchText: ChangeEventHandler<HTMLInputElement> = (event) => {
     const text = event.target.value;
     setSearchText(text);
+    setEnterWord(true);
     let isList = localStorage.getItem("items");
     let arrList = [];
     if (isList) {
@@ -57,17 +55,29 @@ export const AllCategory = () => {
         setIsFind(false);
       }
     });
-
     if (text.length === 0) {
       setIsFind(true);
+      setEnterWord(false);
       dispatch(loadAppCategories(1) as any);
     }
   };
+  const closeIcon = () => {
+    setSearchText("");
+    setIsFind(true);
+    dispatch(loadAppCategories(1) as any);
+    setEnterWord(false);
+  };
+  const showIcon = () => {
+    setEnterWord(false);
+  };
 
   return (
-    <Container>
+    <>
       <div className={style.infoPanel}>
-        <div className={style.forInput}>
+        <div
+          className={`${enterWord ? style.show : style.close}`}
+          onClick={enterWord ? closeIcon : showIcon}
+        >
           <Input
             value={searchText}
             onChange={hangleSearchText}
@@ -92,6 +102,6 @@ export const AllCategory = () => {
       ) : (
         <Preloader />
       )}
-    </Container>
+    </>
   );
 };

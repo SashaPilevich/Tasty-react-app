@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { Button } from "../Button";
 import style from "./style.module.css";
-import food from "./shop.png";
-import note from "./note.png";
-import movie from "./movie.png";
-import shopList from "./shoplist.png";
+import { shopList, food, note, movie } from "../../assets";
 import { SelectedRecipe } from "../SelectedRecipe";
 import { SelectedRecipeInstruction } from "../SelectedRecipeInstruction";
 import { SelectedRecipeVideo } from "../SelectedRecipeVideo";
@@ -29,9 +26,7 @@ export const getTabList = (tab: Tabs) => {
 };
 export const RecipeTabs = () => {
   const [selectedTab, setSelectedTab] = useState<Tabs>("Ingredients");
-  const ingredients = useSelector(
-    (state: TState) => state.categoryReducer.ingredients
-  );
+  const recipe = useSelector((state: TState) => state.categoryReducer.recipe);
   const navigate = useNavigate();
   const navigateToShopList = (id: string | undefined) => {
     navigate(`/shoppinglist/${id}`);
@@ -76,18 +71,19 @@ export const RecipeTabs = () => {
         </div>
         <div className={style.tabContainer}>
           <img className={style.ico} src={shopList} alt="shopList"></img>
-          {ingredients
-            ? ingredients.map((item) => {
+          {recipe
+            ? recipe.map((item) => {
                 const clickPost = () => {
                   navigateToShopList(item.id);
                 };
                 return (
                   <Button
-                    label={"Добавить в шоппинг лист"}
+                    label={"Добавить в список ингредиентов"}
                     onClick={clickPost}
                     type={
                       selectedTab === "Shop" ? "btnTabActive" : "btnTabUnactive"
                     }
+                    key={item.id}
                   />
                 );
               })

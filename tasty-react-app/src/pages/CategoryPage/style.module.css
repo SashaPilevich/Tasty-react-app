@@ -6,7 +6,32 @@
   color: white;
 }
 .forBtnBack {
-  position: relative;
-  left: -37%;
-  top: 15px;
+  margin-left: 100px;
+  display: flex;
+}
+@media (max-width: 768px) {
+  .forBtnBack {
+    margin-bottom: 40px;
+  }
+}
+@media (max-width: 670px) {
+  .forBtnBack {
+    margin-left: 60px;
+  }
+}
+@media (max-width: 560px) {
+  .forBtnBack {
+    margin-left: 20px;
+  }
+}
+@media (max-width: 460px) {
+  .forBtnBack {
+    margin-left: 20px;
+    margin-bottom: 80px;
+  }
+}
+@media (max-width: 375px) {
+  .forBtnBack {
+    margin-left: 1px;
+  }
 }

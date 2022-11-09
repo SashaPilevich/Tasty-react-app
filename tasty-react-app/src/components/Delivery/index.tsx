@@ -2,20 +2,24 @@ import { ChangeEventHandler, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../Button";
 import { Input } from "../Input";
-import style from "./style.module.css";
 import { NotificationManager } from "react-notifications";
 import {
   validateAddress,
   validatePhoneNumber,
   validateRequired,
 } from "../../utils/validation";
+import style from "./style.module.css";
+import { useDispatch } from "react-redux";
+import { setLocalItems, setShopItems } from "../../redux/actions/category";
 
 export const Delivery = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const submit = () => {
     NotificationManager.success("Ваш заказ оформлен.Ожидайте звонка менеджера");
     navigate("/category");
     localStorage.removeItem("shopList");
+    dispatch(setLocalItems([]));
   };
   const [citySt, setCitySt] = useState("");
   const [houseApartment, setHouseApartment] = useState("");

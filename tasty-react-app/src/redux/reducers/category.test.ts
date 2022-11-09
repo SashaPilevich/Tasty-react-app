@@ -71,14 +71,14 @@ describe("Category Reducer:", () => {
         type: ACTIONS.SET_PAGE,
         page: 2,
       })
-    ).toEqual({ ...defaultState, setPage: 2 });
+    ).toEqual({ ...defaultState, page: 2 });
   });
   test("ACTIONS.SET_PAGE: если значение не передано,то вернет undefined", () => {
     expect(
       categoryReducer(defaultState, {
         type: ACTIONS.SET_PAGE,
       })
-    ).toEqual({ ...defaultState, setPage: undefined });
+    ).toEqual({ ...defaultState, page: undefined });
   });
   test("ACTIONS.SET_SELECTED_CATEGORY:при передаче объекта возвращает его ", () => {
     expect(
@@ -137,7 +137,7 @@ describe("Category Reducer:", () => {
         type: ACTIONS.SET_LOCAL_ITEMS,
         productsFromLocal: ["Молоко", "Авокадо"],
       })
-    ).toEqual({ ...defaultState, localItem: ["Молоко", "Авокадо"] });
+    ).toEqual({ ...defaultState, localItems: ["Молоко", "Авокадо"] });
   });
   test("ACTIONS.SET_LOCAL_ITEMS:если объект не передан то возвращает значение по умолчанию", () => {
     expect(

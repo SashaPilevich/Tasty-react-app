@@ -1,7 +1,6 @@
-import style from "./style.module.css";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { NavBar } from "../NavBar";
-import { Context } from "../../App";
+import style from "./style.module.css";
 
 export const Header = () => {
   const [clickMenu, setClickMenu] = useState(false);

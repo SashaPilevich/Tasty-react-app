@@ -2,17 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../../App";
 import { AllCategory } from "../AllCategory";
 import { Button } from "../Button";
-import style from "./style.module.css";
-import save from "./save.svg";
 import { LikedRecipes } from "../LikedRecipes";
 import { useDispatch } from "react-redux";
-import { Like } from "../../assets";
+import { Like, saveMain } from "../../assets";
 import { loadAppCategories } from "../../redux/actions/category";
 import { SavedRecipe } from "../SavedRecipes";
-import { Container } from "../Container";
-import { useNavigate } from "react-router-dom";
-import { MainContainer } from "../MainContainer";
-import { Header } from "../Header";
+import style from "./style.module.css";
 
 type UsersTabs = "Selected Category" | "Saved Recipies" | "Liked Recipies";
 export const getUsersTabList = (tab: UsersTabs) => {
@@ -58,7 +53,7 @@ export const UsersTabs = () => {
           />
         </div>
         <div className={style.tabContainer}>
-          <img className={style.ico} src={save} alt="save"></img>
+          <img className={style.ico} src={saveMain} alt="save"></img>
           <Button
             label={"Сохранённые рецепты"}
             onClick={() => {

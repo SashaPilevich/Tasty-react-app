@@ -1,5 +1,5 @@
 import style from "./style.module.css";
-import { Like, picture1, Save } from "../../../assets";
+import { Like, picture, Save, time, kcal } from "../../../assets";
 import { IPost } from "../../../types/post";
 import {
   MouseEventHandler,
@@ -7,8 +7,7 @@ import {
   useContext,
   useState,
 } from "react";
-import time from "./time.png";
-import kcal from "./kcal.png";
+
 import { Context } from "../../../App";
 import { useDispatch } from "react-redux";
 import { likeRecipes, saveRecipes } from "../../../redux/actions/category";
@@ -19,13 +18,13 @@ interface IProps extends IPost {
   isCategory?: boolean;
 }
 export const ItemOfCategory = (props: IProps) => {
+  const dispatch = useDispatch();
   const [image, setImage] = useState(props.name);
   const [back, setBack] = useState(props.back);
   const { user } = useContext(Context);
-  const dispatch = useDispatch();
   const { isLarge, ...post } = props;
   const handleError: ReactEventHandler<HTMLImageElement> = () => {
-    setImage(picture1);
+    setImage(picture);
   };
   const handleLikeItem: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
@@ -53,7 +52,7 @@ export const ItemOfCategory = (props: IProps) => {
             onError={handleError}
           />
         ) : (
-          <img className={style.image} src={picture1} alt={props.title} />
+          <img className={style.image} src={picture} alt={props.title} />
         )}
         <p className={` ${props.isSelected ? style.selectedText : style.text}`}>
           {props.title}
@@ -64,11 +63,11 @@ export const ItemOfCategory = (props: IProps) => {
           {back
             ? back.map((item, index) => {
                 return (
-                  <img className={style.imgCont} src={item} key={index}></img>
+                  <img className={style.imgBack} src={item} key={index}></img>
                 );
               })
             : ""}
-          <p className={style.textCont}>{props.title}</p>
+          <p className={style.textBack}>{props.title}</p>
         </div>
       ) : (
         ""

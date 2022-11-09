@@ -2,8 +2,14 @@
 .darkContainer {
   background-color: #f9f6ee;
   padding: 0 0 350px 0;
-  height: 200vh;
+  height: 400vh;
 }
 .darkContainer {
   background-color: #282c34;
+}
+@media (max-width: 630px) {
+  .container,
+  .darkContainer {
+    height: 500vh;
+  }
 }

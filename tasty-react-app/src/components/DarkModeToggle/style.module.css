@@ -31,7 +31,7 @@
 }
 .slider:before {
   content: "";
-  background-image: url(./moon.svg);
+  background-image: url("../../assets/images/moon.svg");
   background-repeat: no-repeat;
   background-position: center;
   position: absolute;
@@ -45,7 +45,7 @@
   transition: 0.4s;
 }
 input:checked + .slider:before {
-  background-image: url(./moon-dark.svg);
+  background-image: url("../../assets/images/moon-dark.svg");
   background-color: #ffffff;
   -webkit-transform: translateX(17px);
   -ms-transform: translateX(17px);

@@ -5,7 +5,6 @@ import { Context } from "../../App";
 import { loadShop } from "../../redux/actions/category";
 import { TState } from "../../redux/store";
 import { Button } from "../Button";
-import { MainContainer } from "../MainContainer";
 import style from "./style.module.css";
 
 export const Shop = () => {
@@ -61,7 +60,7 @@ export const Shop = () => {
                 }`}
                 key={item.id}
               >
-                <div className={style.productItem}>
+                <div className={style.productItem} key={item.id}>
                   <img
                     className={style.imgProduct}
                     src={item.image}
@@ -74,7 +73,7 @@ export const Shop = () => {
                     {item.quantity}
                   </p>
                 </div>
-                <div className={style.containerPrice}>
+                <div className={style.containerPrice} key={item.id}>
                   <p
                     className={`${style.productPrice} ${
                       isDark ? style.darkItem : style.productPrice
@@ -86,6 +85,7 @@ export const Shop = () => {
                       className={`${style.sum} ${
                         isDark ? style.darkItem : style.sum
                       }`}
+                      key={item.id}
                     >
                       руб.
                     </span>

@@ -12,7 +12,7 @@ export interface ICategoryState {
   localItems: string[];
   showLoadMore: boolean;
   page: number;
-  ingredients: IRecipe[];
+  recipe: IRecipe[];
 }
 export const defaultState: ICategoryState = {
   allCategories: [],
@@ -24,7 +24,7 @@ export const defaultState: ICategoryState = {
   localItems: [],
   showLoadMore: true,
   page: 1,
-  ingredients: [],
+  recipe: [],
 };
 
 export const categoryReducer = (state = defaultState, action: AnyAction) => {
@@ -146,10 +146,10 @@ export const categoryReducer = (state = defaultState, action: AnyAction) => {
         savedRecipes: newSaveRecipe,
         recipiesOfSelectedCategory: newAllRecipeSave,
       };
-    case ACTIONS.SET_INGREDIENTS:
+    case ACTIONS.SET_RECIPE:
       return {
         ...state,
-        ingredients: action.ingredients,
+        recipe: action.recipe,
       };
 
     default:

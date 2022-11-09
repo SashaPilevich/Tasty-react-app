@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../App";
 import { DarkModeToggle } from "../DarkModeToggle";
-import img from "./Iconlogout.svg";
+import { iconLogOut } from "../../assets";
 import style from "./style.module.css";
 
 export const NavBar = () => {
@@ -27,18 +27,18 @@ export const NavBar = () => {
         <div className={style.container}>
           <div className={style.postsPanel}>
             <div className={style.allPosts}>
-              <Link to="/category">All categories</Link>
-              <Link to="/myshoplist">My shopping list</Link>
+              <Link to="/category">Все категории</Link>
+              <Link to="/myshoplist">Мой шоппинг лист</Link>
             </div>
           </div>
           <div className={style.loginToggle}>
             <DarkModeToggle inputChecked={isDark} onChange={handleOnChange} />
             <button className={style.logOut} onClick={logOut}>
-              Log out
+              Выйти
             </button>
             <img
               className={style.logoutImage}
-              src={img}
+              src={iconLogOut}
               alt="icon logout"
             ></img>
           </div>
@@ -47,13 +47,13 @@ export const NavBar = () => {
         <div className={style.linkContainer}>
           <ul>
             <li className={style.link}>
-              <Link to="/category">All Categories</Link>
+              <Link to="/category">Все категории</Link>
             </li>
             <li className={style.link}>
-              <Link to="/login">Login</Link>
+              <Link to="/login">Войти</Link>
             </li>
             <li className={style.link}>
-              <Link to="/registration">Registration</Link>
+              <Link to="/registration">Регистрация</Link>
             </li>
           </ul>
           <div className={style.dark}>

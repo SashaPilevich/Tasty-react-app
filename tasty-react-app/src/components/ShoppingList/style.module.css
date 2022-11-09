@@ -9,27 +9,15 @@
   margin: 0px 0px 20px 0px;
   padding-top: 50px;
 }
-.forBtnBack {
-  position: relative;
-  left: 7%;
-}
-.forBtnShopList {
-  position: relative;
-  left: 65%;
-  top: 10px;
-}
-.btnPanel {
-  display: flex;
-}
+
 .container {
-  background-attachment: fixed;
   background: linear-gradient(
       360deg,
       rgba(69, 70, 64, 0.6) 0%,
       rgba(69, 70, 64, 0.6) 100%
     ),
-    url("./backForShop.jpg");
-  background-position: center;
+    url("../../assets/images/backForShop.jpg");
+  background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 200vh;
@@ -39,26 +27,11 @@
     width: 100%;
   }
 }
-@media (max-width: 700px) {
-  .btnContainer {
-    margin-left: 30px;
-  }
-}
-@media (max-width: 520px) {
-  .btnContainer {
-    padding-top: 17px;
-    margin-left: 40px;
-  }
-}
-@media (max-width: 450px) {
-  .btnContainer {
-    padding-top: 17px;
-    margin-left: 60px;
-  }
-}
-@media (max-width: 375px) {
-  .btnContainer {
-    padding-top: 17px;
-    margin-left: 80px;
+@media (max-width: 768px) {
+  .title {
+    text-align: center;
+    margin: 10px 0px 30px 10px;
+    font-size: 36px;
+    line-height: 100%;
   }
 }

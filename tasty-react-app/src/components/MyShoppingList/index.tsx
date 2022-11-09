@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
@@ -16,16 +16,15 @@ export const MyShoppingList = () => {
   const localItems = useSelector(
     (state: TState) => state.categoryReducer.localItems
   );
+  const [isEmpty, setIsEmpty] = useState(false);
 
   let shopArray = [];
   let isList = localStorage.getItem("shopList");
   useEffect(() => {
     if (isList) {
       shopArray = JSON.parse(isList);
-      // shopArray = shopArray.map((item: string[]) => {
-      //   return item;
-      // });
       dispatch(setLocalItems(shopArray));
+      setIsEmpty(true);
     }
   }, []);
 
@@ -49,26 +48,30 @@ export const MyShoppingList = () => {
         <Button label={"Назад"} onClick={goBack} type={"btnBack"} />
       </div>
       <h2 className={style.title}>Мой шоппинг лист</h2>
-      <div className={style.container}>
-        {localItems.map((item) => {
-          const deleteItem = () => {
-            clickDelete(item);
-          };
-          return (
-            <div className={style.containerIngredient}>
-              <p
-                className={`${style.ingredientsItem} ${
-                  isDark ? style.darkItem : style.ingredientsItem
-                }`}
-              >
-                {item}
-              </p>
-              <Button label="X" onClick={deleteItem} type="btnDelete" />
-            </div>
-          );
-        })}
-        <Button label={"Купить"} onClick={clickBuy} type="btnBuy" />
-      </div>
+      {isEmpty ? (
+        <div className={style.container}>
+          {localItems.map((item, index) => {
+            const deleteItem = () => {
+              clickDelete(item);
+            };
+            return (
+              <div className={style.containerIngredient} key={index}>
+                <p
+                  className={`${style.ingredientsItem} ${
+                    isDark ? style.darkItem : style.ingredientsItem
+                  }`}
+                >
+                  {item}
+                </p>
+                <Button label="X" onClick={deleteItem} type="btnDelete" />
+              </div>
+            );
+          })}
+          <Button label={"Купить"} onClick={clickBuy} type="btnBuy" />
+        </div>
+      ) : (
+        <h3 className={style.emptyList}>Ваш список пуст...</h3>
+      )}
     </div>
   );
 };

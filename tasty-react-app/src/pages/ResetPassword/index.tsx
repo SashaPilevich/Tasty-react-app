@@ -6,9 +6,9 @@ import { Container } from "../../components/Container";
 import { Header } from "../../components/Header";
 import { InfoTemplate } from "../../components/InfoTemplate";
 import { Input } from "../../components/Input";
-import style from "./style.module.css";
 import { NotificationManager } from "react-notifications";
 import { validateEmail } from "../../utils/validation";
+import style from "./style.module.css";
 
 export const ResetPassword = () => {
   const { isDark } = useContext(Context);

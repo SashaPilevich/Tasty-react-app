@@ -4,7 +4,6 @@ import {
   useContext,
   useState,
 } from "react";
-import style from "./style.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "../Button";
 import { Input } from "../Input";
@@ -15,6 +14,7 @@ import { validateEmail, validatePassword } from "../../utils/validation";
 import { TState } from "../../redux/store";
 import { setError } from "../../redux/actions/auth";
 import { setIsLoading } from "../../redux/actions/category";
+import style from "./style.module.css";
 
 export const Login = () => {
   const error = useSelector((state: TState) => state.authReducer.setError);

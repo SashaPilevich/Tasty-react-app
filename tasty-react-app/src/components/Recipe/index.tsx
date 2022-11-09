@@ -1,5 +1,4 @@
-import style from "./style.module.css";
-import { picture1 } from "../../assets/";
+import { picture } from "../../assets/";
 import { ReactEventHandler, useContext, useState } from "react";
 import { IRecipe } from "../../types/post";
 import { Button } from "../Button";
@@ -9,6 +8,7 @@ import { Context } from "../../App";
 import { useDispatch } from "react-redux";
 import { loadShop } from "../../redux/actions/category";
 import { IngredientForShop } from "../IngredientForShop";
+import style from "./style.module.css";
 
 function unique(arr: string[]) {
   return Array.from(new Set(arr));
@@ -25,7 +25,7 @@ export const Recipe = (props: IProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleError: ReactEventHandler<HTMLImageElement> = () => {
-    setImage(picture1);
+    setImage(picture);
   };
   const clickDelete = (ingredient: string) => {
     const newList: string[] | undefined = ingredients?.filter((item) => {
@@ -44,7 +44,6 @@ export const Recipe = (props: IProps) => {
     if (ingredients) {
       ingredients.forEach((item) => {
         myShopList.push(item);
-        return myShopList;
       });
     }
     NotificationManager.success(
@@ -61,12 +60,16 @@ export const Recipe = (props: IProps) => {
         <div className={style.ingredientsShop}>
           {props.onClickDelete ? (
             <>
-              {ingredients.map((item) => {
+              {ingredients.map((item, index) => {
                 const deleteItem = () => {
                   clickDelete(item);
                 };
                 return (
-                  <IngredientForShop ingredient={item} onClick={deleteItem} />
+                  <IngredientForShop
+                    ingredient={item}
+                    onClick={deleteItem}
+                    key={index}
+                  />
                 );
               })}
               <div className={style.btnContainer}>
@@ -103,10 +106,11 @@ export const Recipe = (props: IProps) => {
               ""
             ) : (
               <div className={style.ingredients}>
-                {ingredients?.map((item) => {
+                {ingredients?.map((item, index) => {
                   return (
-                    <div className={style.ingredientsItem}>
+                    <div key={index}>
                       <p
+                        key={index}
                         className={`${style.itemIngredients} ${
                           isDark ? style.darkItem : style.itemIngredients
                         }`}
@@ -121,8 +125,12 @@ export const Recipe = (props: IProps) => {
 
             <div className={style.quantity}>
               {props.quantity
-                ? props.quantity.map((item) => {
-                    return <p className={style.itemQuantity}>{item}</p>;
+                ? props.quantity.map((item, index) => {
+                    return (
+                      <p className={style.itemQuantity} key={index}>
+                        {item}
+                      </p>
+                    );
                   })
                 : ""}
             </div>
@@ -133,12 +141,15 @@ export const Recipe = (props: IProps) => {
         {props.instructions ? (
           <div className={style.instructionsContainer}>
             {props.instructions
-              ? props.instructions.map((item) => {
+              ? props.instructions.map((item, index) => {
                   return (
                     <p
-                      className={`${style.itemInstructions} ${
-                        isDark ? style.darkItem : style.itemInstructions
+                      className={`${
+                        isDark
+                          ? style.darkItemInstructions
+                          : style.itemInstructions
                       }`}
+                      key={index}
                     >
                       {item}
                     </p>

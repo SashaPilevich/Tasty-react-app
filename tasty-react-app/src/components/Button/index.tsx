@@ -75,7 +75,6 @@ const getButtonStyle = (
 };
 
 export const Button = (props: IButton) => {
-  const { isDark } = useContext(Context);
   return (
     <button
       className={`${style.button} ${getButtonStyle(props.type)}`}

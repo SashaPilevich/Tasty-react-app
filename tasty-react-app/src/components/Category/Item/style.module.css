@@ -1,7 +1,7 @@
 .container {
   width: 300px;
   height: 450px;
-  padding: 0 0px 0px 0px;
+  padding: 0px;
   margin-bottom: 20px;
   margin-right: 20px;
   box-shadow: 1px 1px 5px 2px rgb(92, 64, 51, 0.3);
@@ -94,13 +94,12 @@
   margin: 0 auto;
   border-radius: 10px 10px 0px 0px;
 }
-.imgCont {
+.imgBack {
   width: 125px;
   height: 170px;
   margin-right: 0px;
   padding-top: 10px;
 }
-
 .selectedImage:hover {
   transition: opacity 2s linear;
   animation: img 0.7s linear 1;
@@ -116,7 +115,7 @@
 }
 .text,
 .selectedText,
-.textCont {
+.textBack {
   height: 30px;
   font-family: "Raleway";
   line-height: 19px;
@@ -128,7 +127,7 @@
   text-align: center;
   margin: 0;
 }
-.textCont {
+.textBack {
   height: 20px;
   grid-column-start: 1;
   grid-column-end: 3;
@@ -146,7 +145,6 @@
   color: #4f4f4f;
   margin-bottom: 5px;
 }
-
 .info {
   display: flex;
 }
@@ -224,7 +222,7 @@
     width: 100%;
     height: 350px;
   }
-  .imgCont {
+  .imgBack {
     width: 90%;
   }
   .selectedItem {
@@ -251,12 +249,13 @@
     width: 100%;
   }
 }
-@media (max-width: 768px) {
-  .container {
-    width: 90%;
-    margin: 0 auto;
-  }
-  .selectedItem {
+
+@media (max-width: 560px) {
+  .selectedFront {
     width: 100%;
+  }
+  .info {
+    justify-content: center;
+    margin-right: 25px;
   }
 }

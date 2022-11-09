@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import style from "./style.module.css";
 import { Button } from "../Button";
 import { Context } from "../../App";
+import style from "./style.module.css";
 
 interface IIngredientForShop {
   ingredient: string;

@@ -1,6 +1,6 @@
 .container,
 .darkContainer {
-  width: 100%;
+  width: 90%;
   height: 700px;
   padding: 20px 15px;
   margin-left: 40px;
@@ -11,30 +11,23 @@
 @media (max-width: 1200px) {
   .container,
   .darkContainer {
-    width: 90%;
     margin-left: 30px;
+    width: 90%;
   }
 }
-@media (max-width: 1200px) {
-  .container,
-  .darkContainer {
-    width: 90%;
-    padding: 0px;
-    margin-left: 30px;
-  }
-}
+
 @media (max-width: 700px) {
   .container,
   .darkContainer {
     width: 90%;
-    margin-left: 30px;
+    margin-left: 20px;
   }
 }
 @media (max-width: 525px) {
   .container,
   .darkContainer {
     width: 90%;
-    margin-left: 20px;
+    margin-left: 0px;
     height: 600px;
   }
 }

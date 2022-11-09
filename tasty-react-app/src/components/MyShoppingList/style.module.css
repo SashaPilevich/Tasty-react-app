@@ -6,13 +6,14 @@
       rgba(69, 70, 64, 0.6) 0%,
       rgba(69, 70, 64, 0.6) 100%
     ),
-    url("./backForShop.jpg");
+    url("../../assets/images/backForShop.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 200vh;
 }
-.title {
+.title,
+.emptyList {
   font-family: "Raleway";
   font-style: normal;
   font-weight: 700;
@@ -23,6 +24,13 @@
   text-align: center;
   margin: 0px 0px 20px 0px;
   padding-top: 50px;
+}
+.emptyList {
+  font-weight: 500;
+  font-size: 32px;
+  color: rgb(41, 39, 39);
+  padding-top: 10px;
+  margin-right: 10px;
 }
 .container {
   display: flex;
@@ -53,38 +61,48 @@
   color: white;
 }
 .btnContainer {
+  display: flex;
   padding-top: 17px;
-  position: relative;
-  right: 37%;
+  margin-left: 100px;
 }
 @media (max-width: 1200px) {
   .container {
     width: 100%;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .btnContainer {
-    margin-left: 30px;
+    margin-left: 80px;
+  }
+  .title {
+    text-align: center;
+    margin: 10px 0px 30px 10px;
+    font-size: 36px;
+    line-height: 100%;
+  }
+  .emptyList {
+    color: white;
+    font-size: 22px;
   }
 }
-@media (max-width: 520px) {
+@media (max-width: 650px) {
   .btnContainer {
-    padding-top: 17px;
-    margin-left: 40px;
+    margin-left: 50px;
+  }
+}
+
+@media (max-width: 560px) {
+  .btnContainer {
+    margin-left: 20px;
   }
 }
 @media (max-width: 450px) {
   .containerIngredient {
     width: 90%;
   }
-  .btnContainer {
-    padding-top: 17px;
-    margin-left: 60px;
-  }
 }
-@media (max-width: 375px) {
+@media (max-width: 320px) {
   .btnContainer {
-    padding-top: 17px;
-    margin-left: 80px;
+    margin-left: 0px;
   }
 }

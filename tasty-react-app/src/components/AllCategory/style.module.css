@@ -5,49 +5,97 @@
 }
 .title,
 .notFind {
-  font-family: "Raleway";
+  font-family: "Raleway", "sans-serif";
   font-weight: 700;
   font-size: 45px;
   line-height: 145.2%;
   letter-spacing: 0.03em;
   color: rgb(241, 178, 16);
   text-align: left;
-  margin: 10px 0px 30px 0px;
-  margin-left: 140px;
+  margin: 10px 0px 30px 140px;
 }
 .notFind {
   font-weight: 500;
   font-size: 32px;
   color: gray;
 }
-
-.forInput {
+.show {
+  margin-left: 57%;
+  position: relative;
+}
+.show:before {
+  content: "X";
+  clear: both;
+  display: block;
+  width: 30px;
+  height: 30px;
+  top: 45px;
+  right: 170px;
+  position: absolute;
+  color: goldenrod;
+  cursor: pointer;
+}
+.close {
   margin-left: 57%;
 }
+
 @media (max-width: 1200px) {
   .title {
-    margin: 10px 0px 30px 30px;
-  }
-  .forInput {
-    margin-left: 57%;
+    margin-left: 80px;
   }
 }
 @media (max-width: 1024px) {
   .title {
-    margin: 10px 0px 30px 60px;
+    margin-left: 60px;
+  }
+  .show::before {
+    right: 75px;
   }
 }
 @media (max-width: 768px) {
-  .forInput {
-    margin-left: 45%;
+  .notFind {
+    font-weight: 400;
+    font-size: 28px;
+    text-align: center;
+    margin-left: 0px;
+    margin-bottom: 20px;
+  }
+  .close,
+  .show {
+    margin-left: -3%;
+  }
+  .show::before {
+    right: 280px;
+    top: 40px;
+  }
+  .title {
+    text-align: center;
+    margin-left: 10px;
+    font-size: 36px;
+    line-height: 100%;
   }
 }
 @media (max-width: 630px) {
-  .forInput {
+  .close,
+  .show {
     margin-left: 0%;
   }
+  .show::before {
+    right: 110px;
+    top: 39px;
+  }
   .title {
-    margin: 10px 0px 30px 0px;
-    text-align: center;
+    margin: 20px 0px 30px 0px;
+    font-size: 24px;
+  }
+}
+@media (max-width: 376px) {
+  .show::before {
+    right: 85px;
+  }
+}
+@media (max-width: 321px) {
+  .show::before {
+    right: 60px;
   }
 }
