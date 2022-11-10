@@ -45,7 +45,7 @@ export const AllCategory = () => {
       arrList = JSON.parse(isList);
     }
     searchItems = arrList.filter((item: IPost) => {
-      if (text === item.title.toLowerCase()) {
+      if (text.toLowerCase() === item.title.toLowerCase()) {
         searchItems.push(item);
         setIsFind(true);
         dispatch(setShowLoadMore(false));
