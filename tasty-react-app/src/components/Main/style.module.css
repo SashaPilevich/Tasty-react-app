@@ -17,81 +17,103 @@
   text-align: left;
   z-index: 2;
 }
-.titleContainer > .titleInner {
-  display: inline-block;
-}
-.titleInner {
-  display: inline-block;
-  animation: inner-left 1s 1s ease both;
+
+@keyframes blur {
+  0% {
+    text-shadow: 0 0 100px goldenrod;
+    opacity: 0;
+  }
+  5% {
+    text-shadow: 0 0 90px goldenrod;
+  }
+  15% {
+    opacity: 1;
+  }
+  20% {
+    text-shadow: 0 0 0px goldenrod;
+  }
+  80% {
+    text-shadow: 0 0 0px goldenrod;
+  }
+  85% {
+    opacity: 1;
+  }
+  95% {
+    text-shadow: 0 0 90px goldenrod;
+  }
+  100% {
+    text-shadow: 0 0 100px goldenrod;
+    opacity: 0;
+  }
 }
 
-@keyframes text-clip {
-  from {
-    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+@keyframes blurText {
+  0% {
+    text-shadow: 0 0 100px white;
+    opacity: 0;
   }
-  to {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  5% {
+    text-shadow: 0 0 90px white;
+  }
+  15% {
+    opacity: 1;
+  }
+  20% {
+    text-shadow: 0 0 0px white;
+  }
+  80% {
+    text-shadow: 0 0 0px white;
+  }
+  85% {
+    opacity: 1;
+  }
+  95% {
+    text-shadow: 0 0 90px white;
+  }
+  100% {
+    text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
+      1px 1px 1px rgba(0, 0, 0, 0.5);
+    opacity: 0;
   }
 }
 
-@keyframes outer-left {
-  from {
-    transform: translateX(50%);
-  }
-  to {
-    transform: none;
-  }
-}
-.tasty,
-.about {
-  animation: outer-left 1s 1s cubic-bezier(0.5, 0, 0.1, 1) both;
-}
 .tastyInner {
   font-family: "Poppins", "sans-serif";
   font-style: normal;
   font-weight: 800;
   font-size: 70px;
-  color: goldenrod;
-  display: inline-block;
-  animation: text-clip 1s 0s cubic-bezier(0.5, 0, 0.1, 1) both;
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+  color: transparent;
+  -webkit-animation: blur 10s ease-out infinite;
+  animation: blur 10s ease-out infinite;
 }
 
-.about {
+.aboutInner {
   width: 600px;
   text-align: left;
-  display: inline-block;
-}
-.aboutInner {
-  animation: text-clip 1s 0s cubic-bezier(0.5, 0, 0.1, 1) both;
   font-family: "Raleway", "sans-serif";
   font-weight: 500;
   font-size: 18px;
   line-height: 26px;
-  color: white;
   margin-bottom: 70px;
-
-  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
-    1px 1px 1px rgba(0, 0, 0, 0.5);
-}
-
-.titleContainer {
-  animation: outer-left 1s 1s ease both;
-}
-
-.tasty > .tastyInner {
-  display: inline-block;
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+  color: transparent;
+  -webkit-animation: blurText 10s ease-out infinite;
+  animation: blurText 10s ease-out infinite;
 }
 
 @media (max-width: 768px) {
   .titleContainer {
     margin-left: 150px;
   }
-  .about {
+  .aboutInner {
     width: 300px;
   }
 }
 @media (max-width: 600px) {
-  .about {
+  .aboutInner {
     width: 200px;
     font-size: 14px;
   }
