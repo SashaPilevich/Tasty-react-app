@@ -10,22 +10,18 @@ export const Main = () => {
   return (
     <div className={style.container}>
       <div className={style.titleContainer}>
-        <div className={style.titleInner}>
-          <div className={style.tasty}>
-            <h2 className={style.tastyInner}>TASTY</h2>
-          </div>
-          <div className={style.about}>
-            <p className={style.aboutInner}>
-              Приложение TASTY позволяет найти самые разнообразные простые,
-              полезные и вкусные рецепты,а также вы сможете мгновенно заказать
-              доставку необходимых ингредиентов для выбранного блюда.
-            </p>
-            <Button
-              label="Готовить"
-              onClick={navigateToCategory}
-              type="btnMain"
-            />
-          </div>
+        <h2 className={style.tastyInner}>TASTY</h2>
+        <p className={style.aboutInner}>
+          Приложение TASTY позволяет найти самые разнообразные простые, полезные
+          и вкусные рецепты,а также вы сможете мгновенно заказать доставку
+          необходимых ингредиентов для выбранного блюда.
+        </p>
+        <div className={style.forBtn}>
+          <Button
+            label="Готовить"
+            onClick={navigateToCategory}
+            type="btnMain"
+          />
         </div>
       </div>
     </div>
