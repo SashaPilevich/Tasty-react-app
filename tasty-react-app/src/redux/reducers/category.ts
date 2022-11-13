@@ -13,6 +13,7 @@ export interface ICategoryState {
   showLoadMore: boolean;
   page: number;
   recipe: IRecipe[];
+  totalPrice: number;
 }
 export const defaultState: ICategoryState = {
   allCategories: [],
@@ -25,10 +26,20 @@ export const defaultState: ICategoryState = {
   showLoadMore: true,
   page: 1,
   recipe: [],
+  totalPrice: 0,
 };
 
 export const categoryReducer = (state = defaultState, action: AnyAction) => {
   switch (action.type) {
+    case ACTIONS.SET_TOTAL_PRICE:
+      const fullPrice = state.shopItems.reduce((sum: number, item: IShop) => {
+        return sum + item.price * item.count;
+      }, 0);
+
+      return {
+        ...state,
+        totalPrice: fullPrice.toFixed(2),
+      };
     case ACTIONS.SET_ALL_CATEGORIES:
       return {
         ...state,

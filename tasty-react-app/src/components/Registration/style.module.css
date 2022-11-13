@@ -86,6 +86,13 @@
     width: 20px;
     height: 20px;
   }
+  .text,
+  .darkText,
+  .linkLogin,
+  .darkLinkLogin {
+    font-size: 20px;
+    text-align: center;
+  }
 }
 
 @media (max-width: 630px) {

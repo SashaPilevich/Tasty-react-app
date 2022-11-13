@@ -26,15 +26,15 @@ export const Activation = () => {
         children={
           <>
             <p
-              className={`${style.textActivation} ${
-                isDark ? style.darkTextActivation : ""
+              className={`${
+                isDark ? style.darkTextActivation : style.textActivation
               }`}
             >
               Ваша регистрация завершена
             </p>
             <p
-              className={`${style.textActivation} ${
-                isDark ? style.darkTextActivation : ""
+              className={`${
+                isDark ? style.darkTextActivation : style.textActivation
               }`}
             >
               Теперь вы можете залогиниться

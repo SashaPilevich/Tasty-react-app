@@ -1,0 +1,9 @@
+.counter {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 30px;
+  width: 200px;
+  border: 1px solid gray;
+  border-radius: 13px;
+}

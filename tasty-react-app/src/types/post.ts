@@ -19,9 +19,10 @@ export interface IRecipe {
   delete?: boolean;
 }
 export interface IShop {
-  id?: number;
+  id: number;
   title: string;
   price: number;
   quantity: string;
   image: string;
+  count: number;
 }

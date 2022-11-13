@@ -10,7 +10,8 @@
   padding-top: 50px;
 }
 
-.container {
+.container,
+.darkContainer {
   background: linear-gradient(
       360deg,
       rgba(69, 70, 64, 0.6) 0%,
@@ -22,8 +23,12 @@
   background-size: cover;
   height: 200vh;
 }
+.darkContainer {
+  background: #282c34;
+}
 @media (max-width: 1200px) {
-  .container {
+  .container,
+  .darkContainer {
     width: 100%;
   }
 }
@@ -33,5 +38,15 @@
     margin: 10px 0px 30px 10px;
     font-size: 36px;
     line-height: 100%;
+  }
+}
+@media (max-width: 560px) {
+  .title {
+    font-size: 32px;
+  }
+}
+@media (max-width: 425px) {
+  .title {
+    font-size: 28px;
   }
 }

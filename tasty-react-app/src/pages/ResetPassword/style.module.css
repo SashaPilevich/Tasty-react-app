@@ -8,7 +8,6 @@
 .text,
 .darkText {
   font-family: "Raleway";
-  font-weight: 500;
   font-size: 25px;
   line-height: 134%;
   letter-spacing: 0.03em;
@@ -19,4 +18,13 @@
 }
 .inputContainer {
   text-align: left;
+}
+@media (max-width: 768px) {
+  .text,
+  .darkText,
+  .linkLogin,
+  .darkLinkLogin {
+    font-size: 20px;
+    text-align: center;
+  }
 }

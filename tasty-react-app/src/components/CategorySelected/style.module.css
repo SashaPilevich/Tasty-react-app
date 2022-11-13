@@ -19,7 +19,7 @@
 }
 .wrapper {
   width: 250px;
-  height: 520px;
+  height: 510px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,6 +47,9 @@
   .LikeSaveContainer {
     padding-top: 230px;
   }
+  .wrapper {
+    height: 500px;
+  }
 }
 @media (max-width: 900px) {
   .container,
@@ -64,6 +67,7 @@
   .container,
   .LikeSaveContainer {
     grid-template-columns: 1fr;
+    row-gap: 0px;
   }
   .wrapper {
     width: 55%;
@@ -76,19 +80,19 @@
 }
 @media (max-width: 430px) {
   .wrapper {
-    width: 70%;
+    width: 65%;
   }
 }
-@media (max-width: 375px) {
+@media (max-width: 386px) {
   .wrapper {
-    width: 80%;
+    width: 75%;
     margin-left: 10px;
+    height: 510px;
   }
 }
 @media (max-width: 320px) {
   .wrapper {
     width: 80%;
-    height: 500px;
     margin-left: 0px;
   }
 }

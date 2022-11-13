@@ -21,13 +21,13 @@ export const RegisterSuccess = () => {
         onClick={navigateToHome}
         labelBtn={"На главную"}
       >
-        <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
+        <p className={`${isDark ? style.darkText : style.text}`}>
           Пожалуйста активируйте ваш аккаунт
         </p>
-        <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
+        <p className={`${isDark ? style.darkText : style.text}`}>
           по ссылке на почте{" "}
         </p>
-        <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
+        <p className={`${isDark ? style.darkText : style.text}`}>
           Пожалуйста,проверьте ваш email
         </p>
       </InfoTemplate>

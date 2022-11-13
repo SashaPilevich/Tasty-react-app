@@ -157,13 +157,11 @@ export const Login = () => {
         </div>
         <p className={style.textError}>{error}</p>
         <Button type="btnCategory" onClick={() => {}} label={"Войти"} />
-        <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
+        <p className={`${isDark ? style.darkText : style.text}`}>
           Забыли пароль?{" "}
           <Link
             to="/resetpassword"
-            className={`${style.linkLogin} ${
-              isDark ? style.darkLinkLogin : ""
-            }`}
+            className={`${isDark ? style.darkLinkLogin : style.linkLogin}`}
           >
             Сбросить пароль
           </Link>

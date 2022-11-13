@@ -12,7 +12,11 @@ export const IngredientForShop = (props: IIngredientForShop) => {
   const { isDark } = useContext(Context);
 
   return (
-    <div className={style.controlIngredient}>
+    <div
+      className={`${
+        isDark ? style.darkControlIngredient : style.controlIngredient
+      }`}
+    >
       <p
         className={`${style.itemIngredientsInShop} ${
           isDark ? style.darkItemInShop : style.itemIngredientsInShop

@@ -13,3 +13,10 @@
 .darkTextActivation {
   color: white;
 }
+@media (max-width: 768px) {
+  .textActivation,
+  .darkTextActivation {
+    font-size: 20px;
+    text-align: center;
+  }
+}
