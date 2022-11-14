@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap");
 
-.deleteBtn,
-.active {
+.deleteBtn {
   position: relative;
   width: 80px;
   height: 35px;
@@ -50,7 +49,7 @@
 }
 .deleteBtn .deleteText {
   position: absolute;
-  right: 10px;
+  right: 4px;
   color: white;
   font-size: 12px;
   transition: 0.5s;
@@ -174,7 +173,7 @@
     width: 75%;
   }
   .container {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 28%);
     row-gap: 60px;
     padding-top: 50px;
     margin-bottom: 40px;
@@ -185,7 +184,22 @@
     font-weight: 700;
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
+  .container {
+    grid-template-columns: repeat(3, 32%);
+  }
+}
+@media (max-width: 1050px) {
+  .container {
+    grid-template-columns: repeat(3, 34%);
+  }
+}
+@media (max-width: 980px) {
+  .container {
+    grid-template-columns: repeat(3, 36%);
+  }
+}
+@media (max-width: 880px) {
   .containerItem {
     width: 70%;
   }
@@ -204,19 +218,25 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 780px) {
   .forBtnBack {
     margin-left: 100px;
+  }
+  .container {
+    grid-template-columns: repeat(2, 55%);
   }
 }
 @media (max-width: 675px) {
   .forBtnBack {
     margin-left: 60px;
   }
+  .container {
+    grid-template-columns: repeat(2, 60%);
+  }
 }
 @media (max-width: 630px) {
   .containerItem {
-    width: 60%;
+    width: 45%;
   }
   .container {
     grid-template-columns: 1fr;
@@ -224,17 +244,33 @@
     margin-left: 0px;
   }
 }
-@media (max-width: 560px) {
+@media (max-width: 540px) {
   .forBtnBack {
     margin-left: 20px;
+  }
+  .containerItem {
+    width: 50%;
+  }
+}
+@media (max-width: 480px) {
+  .containerItem {
+    width: 55%;
   }
 }
 @media (max-width: 426px) {
   .fullSum {
     padding-top: 30px;
   }
+  .containerItem {
+    width: 58%;
+  }
 }
 @media (max-width: 400px) {
+  .containerItem {
+    width: 63%;
+  }
+}
+@media (max-width: 360px) {
   .containerItem {
     width: 70%;
   }
@@ -243,5 +279,8 @@
 @media (max-width: 320px) {
   .forBtnBack {
     margin-left: 0px;
+  }
+  .containerItem {
+    width: 74%;
   }
 }
