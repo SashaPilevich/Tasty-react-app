@@ -70,29 +70,44 @@
     row-gap: 0px;
   }
   .wrapper {
-    width: 55%;
+    width: 50%;
   }
 }
 @media (max-width: 500px) {
   .wrapper {
+    width: 55%;
+  }
+}
+@media (max-width: 460px) {
+  .wrapper {
     width: 60%;
   }
 }
-@media (max-width: 430px) {
+@media (max-width: 421px) {
   .wrapper {
     width: 65%;
-  }
-}
-@media (max-width: 386px) {
-  .wrapper {
-    width: 75%;
     margin-left: 10px;
     height: 510px;
   }
 }
-@media (max-width: 320px) {
+@media (max-width: 395px) {
+  .wrapper {
+    width: 70%;
+    margin-left: 0px;
+  }
+}
+@media (max-width: 360px) {
+  .wrapper {
+    width: 75%;
+  }
+}
+@media (max-width: 340px) {
+  .wrapper {
+    width: 77%;
+  }
+}
+@media (max-width: 327px) {
   .wrapper {
     width: 80%;
-    margin-left: 0px;
   }
 }
