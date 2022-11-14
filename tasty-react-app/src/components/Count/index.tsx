@@ -8,10 +8,13 @@ interface ICount {
 export const Count = (props: ICount) => {
   return (
     <div className={style.counter}>
-      <button onClick={() => props.decrement(props.id)}>-</button>
-      <p>{props.count}</p>
-
-      <button onClick={() => props.increment(props.id)}>+</button>
+      <button className={style.btn} onClick={() => props.decrement(props.id)}>
+        -
+      </button>
+      <p className={style.count}>{props.count}</p>
+      <button className={style.btn} onClick={() => props.increment(props.id)}>
+        +
+      </button>
     </div>
   );
 };

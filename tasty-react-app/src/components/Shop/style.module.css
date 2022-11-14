@@ -1,8 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap");
+
+.deleteBtn,
+.active {
+  position: relative;
+  width: 80px;
+  height: 35px;
+  background: goldenrod;
+  border-radius: 0px 5px 0px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.deleteBtn .delete {
+  position: absolute;
+  top: 12px;
+  left: 6px;
+  width: 18px;
+  height: 16px;
+  display: inline-block;
+  background: #fff;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+.deleteBtn:hover .delete {
+  transform: scale(1.2) rotate(60deg) translateY(10px);
+}
+
+.deleteBtn .delete::before {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: -3px;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  box-shadow: 12px -2px 0 goldenrod, 12px -3px 0 goldenrod,
+    15px -1px 0 goldenrod, 6px -2px 0 #fff;
+  transition: 0.5s;
+}
+.deleteBtn:hover .delete::before {
+  transform: rotate(-90deg) translateX(50%) translateY(-10px);
+}
+.deleteBtn .deleteText {
+  position: absolute;
+  right: 10px;
+  color: white;
+  font-size: 12px;
+  transition: 0.5s;
+}
+.deleteBtn:hover .deleteText {
+  transform: translateX(-50px) translateY(-5px) scale(0);
+}
+
+.deleteBtn:hover .deleteText,
+.active .deleteText {
+  transform: translateX(-50px) translateY(-5px) scale(0);
+}
+
 .container {
   display: grid;
-  grid-template-columns: repeat(4, 20%);
+  grid-template-columns: repeat(4, 23%);
   justify-content: center;
-  row-gap: 30px;
+  row-gap: 50px;
   margin-left: 70px;
   padding-top: 120px;
   margin-bottom: 40px;
@@ -12,81 +78,92 @@
   margin-left: 100px;
   padding-top: 10px;
 }
-.containerItem,
-.darkContainerItem {
-  width: 200px;
-
-  /* border-radius: 13px;
-  box-shadow: 1px 1px 5px 2px rgb(92, 64, 51, 0.3);
-  background-color: #f9f6ee; */
+.fullSum {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 80px;
+}
+.summa,
+.totalPrice {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 25px;
+  color: goldenrod;
+  text-decoration: none;
+  margin: 0px;
+}
+.totalPrice {
+  font-weight: 800;
 }
 
+.containerItem,
 .darkContainerItem {
-  color: gray;
+  width: 230px;
+  height: 340px;
+  border-radius: 13px;
+  box-shadow: 1px 1px 5px 2px rgb(92, 64, 51, 0.3);
+  background-color: rgba(250, 247, 239, 0.9);
+}
+.darkContainerItem {
+  background-color: rgba(57, 62, 74, 0.2);
 }
 .imageContainer {
   width: 100%;
+  height: 180px;
 }
 .imgProduct {
   width: 130px;
-  height: 150px;
-  padding: 10px;
+  height: 120px;
+  margin: 0 auto;
+  padding-top: 40px;
   margin-right: 0px;
 }
 .containerPrice {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
   padding: 16px 0px 0px;
 }
 
 .productTitle,
 .productPrice,
 .sum,
-.productQuantity {
-  font-family: Arial, Helvetica, sans-serif;
+.productQuantity,
+.darkProductTitle,
+.darkProductPrice,
+.darkSum,
+.darkProductQuantity {
+  font-family: "Raleway";
   font-weight: 400;
+  font-size: 16px;
+  color: rgb(114, 110, 110);
+  margin: 0px 0px 8px 0px;
+  text-decoration: none;
+}
+.productTitle,
+.darkProductTitle {
+  height: 20px;
   font-size: 18px;
-  color: goldenrod;
-  margin: 0px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
 }
 .productPrice,
+.darkProductPrice {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
 .sum,
-.productQuantity {
-  font-size: 16px;
-  color: rgb(57, 56, 56);
-  text-decoration: none;
+.productQuantity,
+.darkSum,
+.darkProductQuantity {
+  font-size: 14px;
+}
+.darkProductTitle,
+.darkProductPrice,
+.darkSum,
+.darkProductQuantity {
+  color: rgba(255, 255, 255, 0.7);
 }
 .forBtnDelete {
   display: flex;
   justify-content: flex-end;
-}
-
-.byn,
-.summa,
-.sumByn,
-.darkItem {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  color: gray;
-  text-align: left;
-  margin-bottom: 8px;
-  margin-top: 0px;
-  text-decoration: none;
-}
-.summa {
-  font-weight: 600;
-  font-size: 20px;
-  color: goldenrod;
-}
-
-.fullSum {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 80px;
 }
 
 @media (max-width: 1300px) {
@@ -94,13 +171,18 @@
     width: 100%;
   }
   .containerItem {
-    width: 80%;
+    width: 75%;
   }
   .container {
     grid-template-columns: repeat(3, 1fr);
     row-gap: 60px;
     padding-top: 50px;
     margin-bottom: 40px;
+  }
+  .summa,
+  .totalPrice {
+    font-size: 22px;
+    font-weight: 700;
   }
 }
 @media (max-width: 800px) {
@@ -109,6 +191,16 @@
   }
   .container {
     grid-template-columns: repeat(2, 1fr);
+    margin-left: 110px;
+    padding-top: 70px;
+  }
+  .summa,
+  .totalPrice {
+    font-size: 20px;
+  }
+  .fullSum {
+    justify-content: center;
+    margin: 0px;
   }
 }
 
@@ -137,10 +229,9 @@
     margin-left: 20px;
   }
 }
-@media (max-width: 425px) {
+@media (max-width: 426px) {
   .fullSum {
-    padding-top: 20px;
-    margin-right: 60px;
+    padding-top: 30px;
   }
 }
 @media (max-width: 400px) {
@@ -152,8 +243,5 @@
 @media (max-width: 320px) {
   .forBtnBack {
     margin-left: 0px;
-  }
-  .fullSum {
-    margin-right: 30px;
   }
 }

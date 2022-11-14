@@ -8,15 +8,23 @@ import {
   setTotalPrice,
 } from "../../redux/actions/category";
 import { TState } from "../../redux/store";
+import { IShop } from "../../types/post";
 import { Button } from "../Button";
 import { Count } from "../Count";
 import style from "./style.module.css";
-
+const sum = (productsList: IShop[]) => {
+  let result = productsList.reduce((summa, item) => {
+    return summa + item.price;
+  }, 0);
+  return result;
+};
 export const Shop = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isDark } = useContext(Context);
   const [count, setCount] = useState(1);
+  const [isDelete, setIsDelete] = useState("deleteBtn");
+
   const products = useSelector(
     (state: TState) => state.categoryReducer.shopItems
   );
@@ -34,48 +42,31 @@ export const Shop = () => {
   const goBack = () => {
     navigate(-1);
   };
+
   const deleteItem = (id: number) => {
-    const basket = products.filter((item) => {
+    const newProducts = products.filter((item) => {
       return item.id !== id;
     });
-    dispatch(setShopItems(basket));
-    dispatch(
-      setTotalPrice(
-        basket.reduce((sum, item) => {
-          return sum + item.price * item.count;
-        }, 0)
-      )
-    );
+    dispatch(setShopItems(newProducts));
+    dispatch(setTotalPrice(sum(newProducts)));
     setCount(1);
+    setIsDelete("active");
   };
   const increment = (id: number) => {
-    console.log("hello");
-    products.map((item) => {
+    products.forEach((item) => {
       if (item.id === id) {
         ++item.count;
-        dispatch(
-          setTotalPrice(
-            products.reduce((sum, item) => {
-              return sum + item.price * item.count;
-            }, 0)
-          )
-        );
+        dispatch(setTotalPrice(sum(products)));
       }
       setCount(item.count + 1);
     });
   };
   const decrement = (id: number) => {
     if (count !== 0) {
-      products.map((item) => {
+      products.forEach((item) => {
         if (item.id === id) {
           --item.count;
-          dispatch(
-            setTotalPrice(
-              products.reduce((sum, item) => {
-                return sum + item.price * item.count;
-              }, 0)
-            )
-          );
+          dispatch(setTotalPrice(sum(products)));
         }
         setCount(item.count - 1);
       });
@@ -88,17 +79,9 @@ export const Shop = () => {
         <Button label={"Назад"} onClick={goBack} type="btnBack" />
       </div>
       <div className={style.fullSum}>
-        <p
-          className={`${style.summa} ${isDark ? style.darkItem : style.summa}`}
-        >
-          Общая сумма {totalPrice}
-          <span
-            className={`${style.summa} ${
-              isDark ? style.darkItem : style.summa
-            }`}
-          >
-            руб.
-          </span>
+        <p className={style.summa}>
+          Общая сумма <span className={style.totalPrice}>{totalPrice}</span>
+          <span className={style.summa}>руб.</span>
         </p>
       </div>
       {products ? (
@@ -114,33 +97,44 @@ export const Shop = () => {
                 }`}
               >
                 <div className={style.forBtnDelete}>
-                  <Button
-                    label={"X"}
+                  <button
+                    className={style.deleteBtn}
                     onClick={clickDelete}
-                    type={"btnDelete"}
-                  />
+                    key={item.id}
+                  >
+                    <span className={style.delete}></span>
+                    <p className={style.deleteText}>Удалить</p>
+                  </button>
                 </div>
                 <div className={style.imageContainer}>
                   <img className={style.imgProduct} src={item.image}></img>
                 </div>
                 <div className={style.containerPrice}>
-                  <h4 className={style.productTitle}>{item.title} </h4>
+                  <h4
+                    className={`${
+                      isDark ? style.darkProductTitle : style.productTitle
+                    }`}
+                  >
+                    {item.title}{" "}
+                  </h4>
                   <p
-                    className={`${style.productPrice} ${
-                      isDark ? style.darkItem : style.productPrice
+                    className={`${
+                      isDark ? style.darkProductPrice : style.productPrice
                     }`}
                   >
                     {item.price}
 
-                    <span
-                      className={`${style.sum} ${
-                        isDark ? style.darkItem : style.sum
-                      }`}
-                    >
+                    <span className={`${isDark ? style.darkSum : style.sum}`}>
                       руб.
                     </span>
                   </p>
-                  <p className={style.productQuantity}>{item.quantity}</p>
+                  <p
+                    className={`${
+                      isDark ? style.darkProductQuantity : style.productQuantity
+                    }`}
+                  >
+                    {item.quantity}
+                  </p>
                   <Count
                     count={item.count}
                     id={item.id}
