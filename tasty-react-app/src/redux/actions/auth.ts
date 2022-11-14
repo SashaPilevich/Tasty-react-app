@@ -35,7 +35,7 @@ export const registerUserAction = (
         .then((json) => {
           if (isOk) {
             NotificationManager.success(
-              "Please activate your account with the activation link in the email!Please, check your email."
+              "Пожалуйста активируйте ваш аккаунт по ссылке высланной на почту.Пожалуйста проверьте вашу почту"
             );
           } else {
             if (

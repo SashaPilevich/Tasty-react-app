@@ -40,9 +40,13 @@ export const MyShoppingList = () => {
     });
     dispatch(setLocalItems(newList));
     localStorage.setItem("shopList", JSON.stringify(newList));
+    if (newList.length === 0) {
+      localStorage.removeItem("shopList");
+      setIsEmpty(false);
+    }
   };
   return (
-    <div className={style.mainContainer}>
+    <div className={`${isDark ? style.darkContainer : style.mainContainer}`}>
       <Header />
       <div className={style.btnContainer}>
         <Button label={"Назад"} onClick={goBack} type={"btnBack"} />
@@ -55,7 +59,14 @@ export const MyShoppingList = () => {
               clickDelete(item);
             };
             return (
-              <div className={style.containerIngredient} key={index}>
+              <div
+                className={`${
+                  isDark
+                    ? style.darkContainerIngredient
+                    : style.containerIngredient
+                }`}
+                key={index}
+              >
                 <p
                   className={`${style.ingredientsItem} ${
                     isDark ? style.darkItem : style.ingredientsItem

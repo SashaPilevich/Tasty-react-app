@@ -18,9 +18,7 @@ export const InfoTemplate = ({
   const { isDark } = useContext(Context);
   return (
     <div className={style.container}>
-      <h2 className={`${style.title} ${isDark ? style.darkTitle : ""}`}>
-        {title}
-      </h2>
+      <h2 className={`${isDark ? style.darkTitle : style.title}`}>{title}</h2>
       <div className={style.textContainer}>{children}</div>
       <Button label={`${labelBtn}`} onClick={onClick} type="btnCategory" />
     </div>

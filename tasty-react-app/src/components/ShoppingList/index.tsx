@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchSelectedRecipe } from "../../api/recipe";
 import { IRecipe } from "../../types/post";
@@ -9,13 +9,14 @@ import style from "./style.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setRecipe } from "../../redux/actions/category";
 import { TState } from "../../redux/store";
+import { Context } from "../../App";
 
 export const ShoppingList = () => {
   const navigate = useNavigate();
   const params = useParams();
   const dispatch = useDispatch();
   const recipe = useSelector((state: TState) => state.categoryReducer.recipe);
-
+  const { isDark } = useContext(Context);
   useEffect(() => {
     dispatch(setRecipe([]));
     fetchSelectedRecipe(params.id).then((values) => {
@@ -28,7 +29,7 @@ export const ShoppingList = () => {
     navigate(-1);
   };
   return (
-    <div className={style.container}>
+    <div className={`${isDark ? style.darkContainer : style.container}`}>
       {recipe.length !== 0
         ? recipe.map((item) => {
             return (

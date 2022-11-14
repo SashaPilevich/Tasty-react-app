@@ -55,6 +55,12 @@ export const setRecipe = (recipe: IRecipe[]) => {
     recipe,
   };
 };
+export const setTotalPrice = (totalPrice: number) => {
+  return {
+    type: ACTIONS.SET_TOTAL_PRICE,
+    totalPrice,
+  };
+};
 
 export const loadAppCategories = (page: number) => {
   return (dispatch: Dispatch, getState: () => TState) => {
@@ -114,8 +120,12 @@ export const loadShop = () => {
 
         return findShopItem;
       });
+      const fullPrice = values.reduce((sum: number, item: IShop) => {
+        return sum + item.price * item.count;
+      }, 0);
 
       dispatch(setShopItems(shopItems));
+      dispatch(setTotalPrice(fullPrice.toFixed(2)));
     });
   };
 };

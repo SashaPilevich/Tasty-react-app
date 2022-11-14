@@ -78,15 +78,14 @@
 }
 
 .tastyInner {
-  font-family: "Poppins", "sans-serif";
-  font-style: normal;
+  font-family: "Kaushan Script", "sans-serif";
   font-weight: 800;
   font-size: 70px;
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s;
   color: transparent;
-  -webkit-animation: blur 10s ease-out infinite;
-  animation: blur 10s ease-out infinite;
+  -webkit-animation: blur 12s ease-out infinite;
+  animation: blur 12s ease-out infinite;
 }
 
 .aboutInner {
@@ -100,8 +99,8 @@
   -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
   color: transparent;
-  -webkit-animation: blurText 10s ease-out infinite;
-  animation: blurText 10s ease-out infinite;
+  -webkit-animation: blurText 12s ease-out infinite;
+  animation: blurText 12s ease-out infinite;
 }
 
 @media (max-width: 768px) {

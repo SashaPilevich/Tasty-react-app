@@ -10,3 +10,9 @@
 .darkText {
   color: white;
 }
+@media (max-width: 768px) {
+  .text,
+  .darkText {
+    font-size: 20px;
+  }
+}

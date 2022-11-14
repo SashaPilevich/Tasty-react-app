@@ -45,7 +45,7 @@ export const ResetPassword = () => {
         labelBtn="Сменить"
         onClick={sendEmail}
       >
-        <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
+        <p className={`${isDark ? style.darkText : style.text}`}>
           Пожалуйста введите email
         </p>
 
@@ -59,10 +59,10 @@ export const ResetPassword = () => {
           />
         </div>
       </InfoTemplate>
-      <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
+      <p className={`${isDark ? style.darkText : style.text}`}>
         Вернуться к{" "}
         <Link
-          className={`${style.linkLogin} ${isDark ? style.darkLinkLogin : ""}`}
+          className={`${isDark ? style.darkLinkLogin : style.linkLogin}`}
           to="/login"
         >
           авторизации

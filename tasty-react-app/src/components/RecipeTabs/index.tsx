@@ -31,6 +31,13 @@ export const RecipeTabs = () => {
   const navigateToShopList = (id: string | undefined) => {
     navigate(`/shoppinglist/${id}`);
   };
+  const clickPost = () => {
+    {
+      recipe.forEach((item) => {
+        navigateToShopList(item.id);
+      });
+    }
+  };
 
   return (
     <>
@@ -71,23 +78,12 @@ export const RecipeTabs = () => {
         </div>
         <div className={style.tabContainer}>
           <img className={style.ico} src={shopList} alt="shopList"></img>
-          {recipe
-            ? recipe.map((item) => {
-                const clickPost = () => {
-                  navigateToShopList(item.id);
-                };
-                return (
-                  <Button
-                    label={"Добавить в список ингредиентов"}
-                    onClick={clickPost}
-                    type={
-                      selectedTab === "Shop" ? "btnTabActive" : "btnTabUnactive"
-                    }
-                    key={item.id}
-                  />
-                );
-              })
-            : ""}
+
+          <Button
+            label={"Добавить в список ингредиентов"}
+            onClick={clickPost}
+            type={selectedTab === "Shop" ? "btnTabActive" : "btnTabUnactive"}
+          />
         </div>
       </div>
       {getTabList(selectedTab)}

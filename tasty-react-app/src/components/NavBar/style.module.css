@@ -73,6 +73,8 @@ ul {
   text-align: left;
   padding-top: 17px;
   margin-left: 40px;
+  position: relative;
+  z-index: 9;
 }
 @media (max-width: 670px) {
   .linkContainer {
@@ -89,7 +91,10 @@ ul {
     margin-right: 50px;
   }
 }
-@media (max-width: 520px) {
+@media (max-width: 550px) {
+  .container {
+    justify-content: center;
+  }
   .linkContainer {
     margin-left: 20px;
   }
@@ -120,10 +125,12 @@ ul {
   }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 370px) {
   .postsPanel {
-    margin-left: 1px;
-    margin-right: 3px;
+    margin: 10px;
     font-size: 16px;
+  }
+  .loginToggle {
+    padding-top: 20px;
   }
 }

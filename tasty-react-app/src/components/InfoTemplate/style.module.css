@@ -19,16 +19,21 @@
 .darkTitle {
   color: goldenrod;
 }
-.text {
-  font-family: "Raleway";
-  font-weight: 400;
-  font-size: 25px;
-  line-height: 134%;
-  letter-spacing: 0.03em;
-  color: #254050;
-  margin-bottom: 10px;
-}
+
 .textContainer {
   text-align: center;
   margin-bottom: 50px;
+}
+@media (max-width: 768px) {
+  .title,
+  .darkTitle {
+    font-size: 36px;
+  }
+}
+@media (max-width: 560px) {
+  .title,
+  .darkTitle {
+    font-size: 32px;
+    text-align: center;
+  }
 }

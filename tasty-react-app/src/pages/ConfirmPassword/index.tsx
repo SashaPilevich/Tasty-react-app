@@ -12,6 +12,7 @@ import {
   validatePassword,
   validateConfirmPassword,
 } from "../../utils/validation";
+import { Button } from "../../components/Button";
 
 export const ConfirmPassword = () => {
   const [password, setPassword] = useState("");
@@ -75,12 +76,8 @@ export const ConfirmPassword = () => {
   return (
     <Container>
       <Header />
-      <InfoTemplate
-        title={"Новый пароль"}
-        labelBtn={"Сменить пароль"}
-        onClick={handleConfirmPassword}
-      >
-        <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
+      <div className={style.container}>
+        <p className={`${isDark ? style.darkText : style.text}`}>
           Пожалуйста введите новый пароль
         </p>
         <div
@@ -110,7 +107,12 @@ export const ConfirmPassword = () => {
             type="password"
           />
         </div>
-      </InfoTemplate>
+        <Button
+          type="btnCategory"
+          onClick={handleConfirmPassword}
+          label={"Сменить"}
+        />
+      </div>
     </Container>
   );
 };

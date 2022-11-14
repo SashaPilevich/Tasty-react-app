@@ -136,8 +136,13 @@
     margin-left: 40px;
   }
 }
-@media (max-width: 375px) {
+@media (max-width: 410px) {
   .visible {
     margin-left: 20px;
+  }
+}
+@media (max-width: 370px) {
+  .visible {
+    margin-left: 10px;
   }
 }
