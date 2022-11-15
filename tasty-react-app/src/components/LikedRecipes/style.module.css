@@ -18,3 +18,70 @@
   background: #282c34;
   height: max-content;
 }
+.container {
+  border-radius: 13px;
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+      360deg,
+      rgba(69, 70, 64, 0.6) 0%,
+      rgba(69, 70, 64, 0.6) 100%
+    ),
+    url("../../assets/images/backForShop.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.modalText {
+  font-size: 26px;
+  font-family: "Raleway";
+  font-weight: 500;
+  color: white;
+  text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.1),
+    1px 1px 1px rgba(0, 0, 0, 0.5);
+  animation: blink 3s linear 1;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@media (max-width: 980px) {
+  .modalText {
+    font-size: 24px;
+  }
+}
+@media (max-width: 750px) {
+  .modalText {
+    font-size: 22px;
+  }
+}
+@media (max-width: 550px) {
+  .modalText {
+    font-size: 20px;
+  }
+}
+@media (max-width: 425px) {
+  .modalText {
+    font-size: 18px;
+  }
+}
+@media (max-width: 350px) {
+  .modalText {
+    font-size: 16px;
+  }
+}

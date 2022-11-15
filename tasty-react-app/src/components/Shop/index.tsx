@@ -23,7 +23,6 @@ export const Shop = () => {
   const dispatch = useDispatch();
   const { isDark } = useContext(Context);
   const [count, setCount] = useState(1);
-  const [isDelete, setIsDelete] = useState("deleteBtn");
 
   const products = useSelector(
     (state: TState) => state.categoryReducer.shopItems
@@ -49,28 +48,29 @@ export const Shop = () => {
     });
     dispatch(setShopItems(newProducts));
     dispatch(setTotalPrice(sum(newProducts)));
-    setCount(1);
-    setIsDelete("active");
   };
   const increment = (id: number) => {
+    console.log(count);
     products.forEach((item) => {
       if (item.id === id) {
         ++item.count;
+        setCount(item.count);
         dispatch(setTotalPrice(sum(products)));
       }
-      setCount(item.count + 1);
     });
   };
   const decrement = (id: number) => {
-    if (count !== 0) {
-      products.forEach((item) => {
-        if (item.id === id) {
+    products.forEach((item) => {
+      if (item.id === id) {
+        if (item.count - 1 >= 0) {
           --item.count;
+          setCount(item.count);
           dispatch(setTotalPrice(sum(products)));
+        } else {
+          return false;
         }
-        setCount(item.count - 1);
-      });
-    }
+      }
+    });
   };
 
   return (
