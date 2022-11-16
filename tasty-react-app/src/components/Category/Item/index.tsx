@@ -73,10 +73,18 @@ export const ItemOfCategory = (props: IProps) => {
         ""
       )}
       {props.isCategory ? (
-        <div className={style.info}>
+        <div className={`${user ? style.info : style.infoWithoutUser}`}>
           <div className={style.icons}>
-            <img className={style.ico} src={time} alt="timeToCook"></img>
-            <img className={style.ico} src={kcal} alt="timeToCook"></img>
+            <img
+              className={`${user ? style.ico : style.icoWithoutUser}`}
+              src={time}
+              alt="timeToCook"
+            ></img>
+            <img
+              className={`${user ? style.ico : style.icoWithoutUser}`}
+              src={kcal}
+              alt="timeToCook"
+            ></img>
           </div>
           <div className={style.about}>
             <span className={style.time}>{props.time}</span>

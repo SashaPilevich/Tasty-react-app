@@ -1,5 +1,4 @@
-import { MouseEventHandler, useContext } from "react";
-import { Context } from "../../App";
+import { MouseEventHandler } from "react";
 import style from "./style.module.css";
 
 interface IButton {
@@ -7,7 +6,6 @@ interface IButton {
   onClick: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   type:
-    | "logOut"
     | "btnMain"
     | "btnBack"
     | "btnShop"
@@ -23,7 +21,6 @@ interface IButton {
 
 const getButtonStyle = (
   type:
-    | "logOut"
     | "btnMain"
     | "btnBack"
     | "btnShop"
@@ -36,9 +33,6 @@ const getButtonStyle = (
     | "btnBuy"
     | "btnShopList"
 ) => {
-  if (type === "logOut") {
-    return style.logOut;
-  }
   if (type === "btnMain") {
     return style.btnMain;
   }

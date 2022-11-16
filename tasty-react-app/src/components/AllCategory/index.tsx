@@ -1,5 +1,4 @@
 import { ChangeEventHandler, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "../Button";
 import { CategoryList } from "../Category/List";
 import { Preloader } from "../Preloader";
@@ -13,7 +12,6 @@ import {
 } from "../../redux/actions/category";
 import { IPost } from "../../types/post";
 import { Input } from "../Input";
-import { Container } from "../Container";
 import style from "./style.module.css";
 
 export const AllCategory = () => {
@@ -45,7 +43,10 @@ export const AllCategory = () => {
       arrList = JSON.parse(isList);
     }
     searchItems = arrList.filter((item: IPost) => {
-      if (text.toLowerCase() === item.title.toLowerCase()) {
+      if (
+        text.toLowerCase().substring(0, 3) ===
+        item.title.toLowerCase().substring(0, 3)
+      ) {
         searchItems.push(item);
         setIsFind(true);
         dispatch(setShowLoadMore(false));

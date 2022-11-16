@@ -1,4 +1,4 @@
-import { MouseEvent, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../App";
@@ -95,13 +95,10 @@ export const Shop = () => {
                 className={`${
                   isDark ? style.darkContainerItem : style.containerItem
                 }`}
+                key={item.id}
               >
                 <div className={style.forBtnDelete}>
-                  <button
-                    className={style.deleteBtn}
-                    onClick={clickDelete}
-                    key={item.id}
-                  >
+                  <button className={style.deleteBtn} onClick={clickDelete}>
                     <span className={style.delete}></span>
                     <p className={style.deleteText}>Удалить</p>
                   </button>
