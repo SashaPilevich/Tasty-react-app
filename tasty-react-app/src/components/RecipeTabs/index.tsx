@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button } from "../Button";
-import style from "./style.module.css";
 import { shopList, food, note, movie } from "../../assets";
 import { SelectedRecipe } from "../SelectedRecipe";
 import { SelectedRecipeInstruction } from "../SelectedRecipeInstruction";
@@ -8,6 +7,7 @@ import { SelectedRecipeVideo } from "../SelectedRecipeVideo";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { TState } from "../../redux/store";
+import style from "./style.module.css";
 
 type Tabs = "Ingredients" | "Instruction" | "Video" | "Shop";
 export const getTabList = (tab: Tabs) => {

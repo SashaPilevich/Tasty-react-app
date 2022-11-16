@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Context } from "../../App";
 import { TState } from "../../redux/store";
-import { AllCategory } from "../AllCategory";
 import { CategorySelected } from "../CategorySelected";
 import { Modal } from "../Modal";
 import style from "./style.module.css";

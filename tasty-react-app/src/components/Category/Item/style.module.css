@@ -148,17 +148,25 @@
 .info {
   display: flex;
 }
+.infoWithoutUser {
+  display: flex;
+  justify-content: center;
+}
 .icons,
 .about {
   display: flex;
   flex-direction: column;
 }
-.ico {
-  width: 24px;
-  height: 24px;
-  margin-bottom: 10px;
+.ico,
+.icoWithoutUser {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 15px;
   margin-left: 30px;
   margin-right: 40px;
+}
+.icoWithoutUser {
+  margin: 0px 15px 15px 0px;
 }
 .time,
 .kcal {

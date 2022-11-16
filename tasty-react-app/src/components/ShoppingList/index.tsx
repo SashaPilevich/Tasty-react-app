@@ -1,15 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchSelectedRecipe } from "../../api/recipe";
-import { IRecipe } from "../../types/post";
 import { Header } from "../Header";
 import { Recipe } from "../Recipe";
 import { ButtonPanel } from "../ButtonPanel";
-import style from "./style.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setRecipe } from "../../redux/actions/category";
 import { TState } from "../../redux/store";
 import { Context } from "../../App";
+import style from "./style.module.css";
 
 export const ShoppingList = () => {
   const navigate = useNavigate();

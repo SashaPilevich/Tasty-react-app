@@ -22,19 +22,16 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-  margin-left: 280px;
 }
 .btnBuy,
 .btnSave,
 .btnShop,
 .btnMain {
-  margin-left: 0px;
   margin-top: 20px;
   font-weight: 500;
   font-size: 18px;
 }
 .btnMain {
-  margin-left: 0px;
   background-color: transparent;
   color: transparent;
   animation-delay: 0.3s;
@@ -48,13 +45,11 @@
 .btnDelete {
   width: 32px;
   height: 32px;
-  margin: 0px;
+  margin: 0px 10px 0px 0px;
   border-radius: 50%;
-  margin-right: 10px;
 }
 .btnTabActive,
 .btnTabUnactive {
-  margin-left: 0;
   width: 200px;
   height: 40px;
   border-radius: 2px;
@@ -63,7 +58,7 @@
   background-color: darkgrey;
 }
 .btnShowMore {
-  margin: 0;
+  margin: 0px;
   width: 100px;
   height: 30px;
 }
