@@ -1,13 +1,13 @@
 import { AuthTitle } from "../../components/AuthTitle";
 import { Container } from "../../components/Container";
 import { Header } from "../../components/Header";
-import { Registration } from "../../components/Registration";
+import { RegisterPage } from "../../components/Register";
 export const RegistrationPage = () => {
   return (
     <Container>
       <Header />
       <AuthTitle />
-      <Registration />
+      <RegisterPage />
     </Container>
   );
 };

@@ -1,45 +1,36 @@
 import { ChangeEventHandler, useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../App";
+import { auth } from "../../config/firebase";
+import logging from "../../config/logging";
+import { TState } from "../../redux/store";
 import {
-  validateConfirmPassword,
   validateEmail,
   validatePassword,
-  validateRequired,
+  validateConfirmPassword,
 } from "../../utils/validation";
 import { Button } from "../Button";
 import { Input } from "../Input";
 import { Preloader } from "../Preloader";
 import style from "./style.module.css";
-import { useSelector, useDispatch } from "react-redux";
-import { TState } from "../../redux/store";
-import { registerUserAction, setError } from "../../redux/actions/auth";
-export let errors: {
-  user: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
-export const Registration = () => {
+export const RegisterPage = () => {
   const { isDark } = useContext(Context);
-  const error = useSelector((state: TState) => state.authReducer.setError);
+  const navigate = useNavigate();
   const isLoading = useSelector(
     (state: TState) => state.categoryReducer.isLoading
   );
-  const dispatch = useDispatch();
-
-  const [user, setUser] = useState("");
-  const [userError, setUserError] = useState("");
-
-  const [email, setEmail] = useState("");
+  const [registering, setRegistering] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
   const [emailError, setEmailError] = useState("");
 
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState<string>("");
   const [passwordError, setPasswordError] = useState("");
 
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [confirm, setConfirm] = useState<string>("");
+  const [confirmError, setConfirmError] = useState("");
 
+  const [error, setError] = useState<string>("");
   const [showPassword, setShowPassword] = useState(true);
   const openPassword = () => {
     setShowPassword(false);
@@ -47,17 +38,6 @@ export const Registration = () => {
   const closePassword = () => {
     setShowPassword(true);
   };
-
-  const handleUser: ChangeEventHandler<HTMLInputElement> = (event) => {
-    const error = validateRequired(event.target.value);
-    if (error) {
-      setUserError(error);
-    } else {
-      setUserError("");
-    }
-    setUser(event.target.value);
-  };
-
   const handleEmail: ChangeEventHandler<HTMLInputElement> = (event) => {
     const error = validateEmail(event.target.value);
     if (error) {
@@ -81,28 +61,13 @@ export const Registration = () => {
   const handleConfirmPassword: ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
-    const error = validateConfirmPassword(password, confirmPassword);
+    const error = validateConfirmPassword(password, confirm);
     if (error) {
-      setConfirmPasswordError(error);
+      setConfirmError(error);
     } else {
-      setConfirmPasswordError("");
+      setConfirmError("");
     }
-    setConfirmPassword(event.target.value);
-  };
-
-  const onClickLogin = () => {
-    dispatch(setError(""));
-    errors = {
-      user: validateRequired(user),
-      email: validateEmail(email),
-      password: validatePassword(password),
-      confirmPassword: validateConfirmPassword(password, confirmPassword),
-    };
-    setUserError(errors.user);
-    setEmailError(errors.email);
-    setPasswordError(errors.password);
-    setConfirmPasswordError(errors.confirmPassword);
-    dispatch(registerUserAction(user, email, password) as any);
+    setConfirm(event.target.value);
   };
 
   const handleEmailBlur = () => {
@@ -122,11 +87,36 @@ export const Registration = () => {
   };
 
   const handleConfirmBlur = () => {
-    const error = validateConfirmPassword(password, confirmPassword);
-    setConfirmPasswordError(error);
+    const error = validateConfirmPassword(password, confirm);
+    setConfirmError(error);
   };
   const handleConfirmFocus = () => {
-    setConfirmPasswordError("");
+    setConfirmError("");
+  };
+
+  const signUpWithEmailAndPassword = () => {
+    if (password !== confirm)
+      setError("Пожалуйста,убедитесь что ваши пароли совпадают");
+    if (error !== "") setError("");
+
+    setRegistering(true);
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        logging.info(result);
+        navigate("/login");
+      })
+      .catch((error) => {
+        logging.error(error);
+        if (error.code.includes("auth/weak-password")) {
+          setError("Пожалуйста,введите более надёжный пароль");
+        } else if (error.code.includes("auth/email-already-in-use")) {
+          setError("Электронная почта уже используется");
+        } else {
+          setError("Не удалось зарегистрироваться.Попробуйте позже");
+        }
+        setRegistering(false);
+      });
   };
   return (
     <div className={style.container}>
@@ -134,19 +124,11 @@ export const Registration = () => {
         <>
           <div className={style.inputContainer}>
             <Input
-              label="Имя"
-              onChange={handleUser}
-              value={user}
-              uniqType={"inputForRegistration"}
-              error={userError}
-            />
-          </div>
-          <div className={style.inputContainer}>
-            <Input
               label="Email"
               onChange={handleEmail}
               value={email}
               uniqType={"inputForRegistration"}
+              type="email"
               error={emailError}
               onBlur={handleEmailBlur}
               onFocus={handleEmailFocus}
@@ -175,9 +157,9 @@ export const Registration = () => {
             <Input
               label="Подтвердить пароль"
               onChange={handleConfirmPassword}
-              value={confirmPassword}
+              value={confirm}
               uniqType={"inputForRegistration"}
-              error={confirmPasswordError}
+              error={confirmError}
               onBlur={handleConfirmBlur}
               onFocus={handleConfirmFocus}
               type="password"
@@ -190,7 +172,11 @@ export const Registration = () => {
           >
             {error}
           </p>
-          <Button label="Отправить" onClick={onClickLogin} type="btnCategory" />
+          <Button
+            label="Отправить"
+            onClick={() => signUpWithEmailAndPassword()}
+            type="btnCategory"
+          />
           <p className={`${style.text} ${isDark ? style.darkText : ""}`}>
             Если у вас уже есть аккаунт вы можете{" "}
             <Link

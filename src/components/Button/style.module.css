@@ -7,6 +7,18 @@
   margin-bottom: 10px;
   cursor: pointer;
 }
+.btnGoogle {
+  width: 180px;
+  height: 40px;
+  background-color: brown;
+  color: white;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+.btnGoogle:hover {
+  background-color: rgba(210, 28, 28, 0.9);
+}
 .btnMain,
 .btnShop,
 .btnShowMore,

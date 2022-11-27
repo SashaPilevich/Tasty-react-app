@@ -5,12 +5,9 @@ import { SelectedCategory } from "../pages/SelectedCategory";
 import { MainPage } from "../pages/MainPage";
 import { LoginPage } from "../pages/Login";
 import { RegistrationPage } from "../pages/RegistrationPage";
-import { RegisterSuccess } from "../pages/RegisterSuccess";
-import { Activation } from "../pages/Activation";
 import { ReactNode, useContext } from "react";
 import { Context } from "../App";
 import { ResetPassword } from "../pages/ResetPassword";
-import { ConfirmPassword } from "../pages/ConfirmPassword";
 import { SavedRecipe } from "../components/SavedRecipes";
 import { ShoppingList } from "../components/ShoppingList";
 import { Error } from "../pages/Error";
@@ -35,13 +32,7 @@ export const RootRouter = () => {
       <Route path="/delivery" element={<DeliveryPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/registration" element={<RegistrationPage />} />
-      <Route path="/registersuccess" element={<RegisterSuccess />} />
-      <Route path="/activate/:uid/:token" element={<Activation />} />
       <Route path="/resetpassword" element={<ResetPassword />} />
-      <Route
-        path="/password/reset/confirm/:uid/:token"
-        element={<ConfirmPassword />}
-      />
       <Route path="*" element={<Error />} />
     </Routes>
   );

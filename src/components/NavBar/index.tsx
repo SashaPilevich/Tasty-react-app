@@ -16,8 +16,8 @@ export const NavBar = () => {
     }
   };
   const logOut = () => {
-    navigate("/");
-    setUser(null);
+    navigate("/category");
+    setUser(false);
     localStorage.clear();
   };
 

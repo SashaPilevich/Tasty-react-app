@@ -4,22 +4,22 @@ import "react-notifications/lib/notifications.css";
 import { NotificationContainer } from "react-notifications";
 import "./App.css";
 import { RootRouter } from "./router";
-import { IUser } from "./types/auth";
-import { getUser } from "./api/auth";
 import { Preloader } from "./components/Preloader";
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
+import { auth } from "./config/firebase";
+import logging from "./config/logging";
 
 export const Context = createContext<{
   isDark: boolean;
   setIsDark: (value: boolean) => void;
-  user: IUser | null;
-  setUser: (value: IUser | null) => void;
+  user: boolean;
+  setUser: (value: boolean) => void;
 }>({
   isDark: false,
   setIsDark: () => {},
-  user: null,
-  setUser: (value: IUser | null) => {},
+  user: false,
+  setUser: () => {},
 });
 
 const access = localStorage.getItem("access");
@@ -34,30 +34,24 @@ const getInitialTheme = () => {
 
 function App() {
   const [isDark, setIsDark] = useState(getInitialTheme());
-  const [user, setUser] = useState<IUser | null>(null);
-  const [isReady, setIsReady] = useState(!access);
+  const [user, setUser] = useState<boolean>(false);
+  const [isReady, setIsReady] = useState(true);
 
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        logging.info("User detected.");
+      } else {
+        logging.info("No user detected.");
+      }
+      setIsReady(false);
+    });
+  }, []);
   useEffect(() => {
     let isOk = true;
 
     if (access) {
-      getUser()
-        .then((response) => {
-          if (response.ok) {
-            isOk = true;
-          } else {
-            isOk = false;
-          }
-          return response.json();
-        })
-        .then((json) => {
-          if (isOk) {
-            setUser(json);
-          }
-        })
-        .finally(() => {
-          setIsReady(true);
-        });
+      setUser(true);
     }
   }, []);
 
@@ -71,7 +65,7 @@ function App() {
           <Context.Provider
             value={{ isDark: isDark, setIsDark: setIsDark, user, setUser }}
           >
-            {isReady ? <RootRouter /> : <Preloader />}
+            {isReady ? <Preloader /> : <RootRouter />}
           </Context.Provider>
           <NotificationContainer />
         </BrowserRouter>
