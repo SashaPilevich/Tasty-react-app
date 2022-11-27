@@ -1,28 +1,22 @@
-import {
-  ChangeEventHandler,
-  FormEventHandler,
-  useContext,
-  useState,
-} from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { ChangeEventHandler, MouseEvent, useContext, useState } from "react";
 import { Button } from "../Button";
 import { Input } from "../Input";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../App";
-import { login, getUser } from "../../api/auth";
 import { validateEmail, validatePassword } from "../../utils/validation";
-import { TState } from "../../redux/store";
-import { setError } from "../../redux/actions/auth";
-import { setIsLoading } from "../../redux/actions/category";
+import { auth, Providers } from "../../config/firebase";
+import logging from "../../config/logging";
+import firebase from "firebase/compat/app";
 import style from "./style.module.css";
+import { SignInWithSocialMedia } from "../SignInWithSocialMedia";
 
 export const Login = () => {
-  const error = useSelector((state: TState) => state.authReducer.setError);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isDark, setUser } = useContext(Context);
-  const [email, setEmail] = useState("");
+  const [authenticating, setAuthenticating] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string>("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(true);
@@ -33,60 +27,28 @@ export const Login = () => {
   const closePassword = () => {
     setShowPassword(true);
   };
-
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
-
-    dispatch(setError(""));
-    dispatch(setIsLoading(true));
-    const errors = {
-      email: validateEmail(email),
-      password: validatePassword(password),
-    };
-    setEmailError(errors.email);
-    setPasswordError(errors.password);
-
-    const isValidForm = Object.values(errors).every((error) => error === "");
-    if (isValidForm) {
-      dispatch(setError(""));
-      let isOk = true;
-      login(email, password)
-        .then((response) => {
-          if (response.ok) {
-            isOk = true;
-          } else {
-            isOk = false;
-          }
-          return response.json();
-        })
-        .then((json) => {
-          if (isOk) {
-            localStorage.setItem("access", json.access);
-            localStorage.setItem("refresh", json.refresh);
-
-            getUser()
-              .then((response) => {
-                return response.json();
-              })
-              .then((user) => {
-                navigate("/category");
-                setUser(user);
-              });
-          } else {
-            if (
-              json.detail ===
-              "No active account found with the given credentials"
-            ) {
-              dispatch(
-                setError(
-                  "Активная учетная запись с указанными учетными данными не найдена"
-                )
-              );
-              return;
-            }
-          }
-        });
-    }
+  const signInWithEmailAndPassword = () => {
+    if (error !== "") setError("");
+    setAuthenticating(true);
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        logging.info(result);
+        setUser(true);
+        navigate("/category");
+        return result.user;
+      })
+      .then((person) => {
+        if (person) {
+          localStorage.setItem("access", person.uid);
+          localStorage.setItem("refresh", person.refreshToken);
+        }
+      })
+      .catch((error) => {
+        logging.error(error);
+        setAuthenticating(false);
+        setError("Пользователь не найден");
+      });
   };
 
   const handleEmail: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -124,49 +86,82 @@ export const Login = () => {
     setPasswordError("");
   };
 
+  const signInWithSocialMedia = (provider: firebase.auth.AuthProvider) => {
+    if (error !== "") setError("");
+    setAuthenticating(true);
+    SignInWithSocialMedia(provider)
+      .then((result) => {
+        logging.info(result);
+        setUser(true);
+        console.log(result);
+        return result.user;
+      })
+      .then((person) => {
+        if (person) {
+          setEmail(`${person.email}`);
+          navigate("/category");
+          localStorage.setItem("access", person.uid);
+          localStorage.setItem("refresh", person.refreshToken);
+        }
+      })
+      .catch((error) => {
+        logging.error(error);
+        setAuthenticating(false);
+        setError(error.message);
+      });
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div className={style.container}>
-        <div className={style.inputContainer}>
-          <Input
-            label="Email"
-            value={email}
-            onChange={handleEmail}
-            uniqType={"inputForRegistration"}
-            onBlur={handleEmailBlur}
-            onFocus={handleEmailFocus}
-            error={emailError}
-          />
-        </div>
-        <div
-          className={
-            showPassword ? style.inputPasswordShow : style.inputPasswordClose
-          }
-          onClick={showPassword ? openPassword : closePassword}
-        >
-          <Input
-            uniqType="inputForRegistration"
-            label="Пароль"
-            onChange={handlePassword}
-            value={password}
-            error={passwordError}
-            onBlur={handlePasswordBlur}
-            onFocus={handlePasswordFocus}
-            type={showPassword ? "password" : "text"}
-          />
-        </div>
-        <p className={style.textError}>{error}</p>
-        <Button type="btnCategory" onClick={() => {}} label={"Войти"} />
-        <p className={`${isDark ? style.darkText : style.text}`}>
-          Забыли пароль?{" "}
-          <Link
-            to="/resetpassword"
-            className={`${isDark ? style.darkLinkLogin : style.linkLogin}`}
-          >
-            Сбросить пароль
-          </Link>
-        </p>
+    <div className={style.container}>
+      <div className={style.inputContainer}>
+        <Input
+          label="Email"
+          value={email}
+          onChange={handleEmail}
+          uniqType={"inputForRegistration"}
+          type="email"
+          onBlur={handleEmailBlur}
+          onFocus={handleEmailFocus}
+          error={emailError}
+        />
       </div>
-    </form>
+      <div
+        className={
+          showPassword ? style.inputPasswordShow : style.inputPasswordClose
+        }
+        onClick={showPassword ? openPassword : closePassword}
+      >
+        <Input
+          uniqType="inputForRegistration"
+          label="Пароль"
+          onChange={handlePassword}
+          value={password}
+          error={passwordError}
+          onBlur={handlePasswordBlur}
+          onFocus={handlePasswordFocus}
+          type={showPassword ? "password" : "text"}
+        />
+      </div>
+      <p className={style.textError}>{error}</p>
+      <Button
+        type="btnCategory"
+        onClick={() => signInWithEmailAndPassword()}
+        label={"Войти"}
+      />
+      <Button
+        label={"Войти с помощью Google"}
+        onClick={() => signInWithSocialMedia(Providers.google)}
+        type={"btnGoogle"}
+      />
+      <p className={`${isDark ? style.darkText : style.text}`}>
+        Забыли пароль?{" "}
+        <Link
+          to="/resetpassword"
+          className={`${isDark ? style.darkLinkLogin : style.linkLogin}`}
+        >
+          Сбросить пароль
+        </Link>
+      </p>
+    </div>
   );
 };

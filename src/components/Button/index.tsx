@@ -16,7 +16,8 @@ interface IButton {
     | "btnDelete"
     | "btnSave"
     | "btnBuy"
-    | "btnShopList";
+    | "btnShopList"
+    | "btnGoogle";
 }
 
 const getButtonStyle = (
@@ -32,6 +33,7 @@ const getButtonStyle = (
     | "btnSave"
     | "btnBuy"
     | "btnShopList"
+    | "btnGoogle"
 ) => {
   if (type === "btnMain") {
     return style.btnMain;
@@ -65,6 +67,9 @@ const getButtonStyle = (
   }
   if (type === "btnShopList") {
     return style.btnShopList;
+  }
+  if (type === "btnGoogle") {
+    return style.btnGoogle;
   }
 };
 
